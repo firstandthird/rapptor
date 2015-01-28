@@ -1,3 +1,7 @@
 testValue: 123
 mongo:
   db: 'rapptor-example'
+plugins:
+  hapi-redirects:
+    redirects:
+      '/test': '/'

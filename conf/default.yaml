@@ -21,3 +21,12 @@ plugins:
   good-mongodb-viewer:
     connectionUrl: 'MONGOURL'
     endpoint: '/_logs'
+    searches:
+      Responses: 'event:log AND tags:request-errors'
+      Jobs: 'tags:agenda'
+  hapi-log-response:
+    enabled: false
+    excludeStatus: [200, 206, 304, 302, 404]
+    tags: ['request-errors']
+  hapi-redirects:
+    redirects: {}

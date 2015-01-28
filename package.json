@@ -21,6 +21,8 @@
     "good-mongodb": "0.0.2",
     "good-mongodb-viewer": "^0.6.0",
     "hapi": "^8.1.0",
+    "hapi-log-response": "0.0.1",
+    "hapi-redirects": "^0.1.0",
     "joi": "^5.1.0",
     "lodash-node": "^3.0.0"
   }
