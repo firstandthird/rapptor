@@ -1,0 +1,3 @@
+testValue: 123
+mongo:
+  db: 'rapptor-example'

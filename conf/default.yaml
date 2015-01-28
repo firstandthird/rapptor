@@ -1,0 +1,23 @@
+connection:
+  port: 80
+  address: '0.0.0.0'
+mongo:
+  host: 'localhost'
+  port: '27017'
+  db: 'rapptor-app'
+logging:
+  opsInterval: 15000
+  reporters:
+    console: false
+    mongodb:
+      - 'MONGOURL'
+      -
+         ttl: 604800
+         events:
+          request: '*'
+          log: '*'
+          error: '*'
+plugins:
+  good-mongodb-viewer:
+    connectionUrl: 'MONGOURL'
+    endpoint: '/_logs'

@@ -1,0 +1,15 @@
+connection:
+  port: 8080
+logging:
+  reporters:
+    console:
+      -
+        log: '*'
+    mongodb:
+      - 'MONGOURL'
+      -
+         ttl: 604800
+         events:
+           request: '*'
+           log: '*'
+           error: '*'

@@ -1,0 +1,27 @@
+{
+  "name": "rapptor",
+  "description": "Opinionated web framework built on top of hapi",
+  "homepage": "https://github.com/firstandthird/rapptor",
+  "author": "First+Third",
+  "version": "0.0.1",
+  "keywords": [
+    "hapi",
+    "framework",
+    "app"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/firstandthird/rapptor.git"
+  },
+  "dependencies": {
+    "aug": "^0.1.0",
+    "confi": "^0.3.1",
+    "good": "^5.1.1",
+    "good-console": "^4.1.0",
+    "good-mongodb": "0.0.2",
+    "good-mongodb-viewer": "^0.6.0",
+    "hapi": "^8.1.0",
+    "joi": "^5.1.0",
+    "lodash-node": "^3.0.0"
+  }
+}
