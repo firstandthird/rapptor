@@ -1,10 +1,14 @@
 var loadConfig = require('confi');
 var Hapi = require('hapi');
-var _ = require('lodash-node');
+var _ = require('lodash');
 var aug = require('aug');
+var fs = require('fs');
+var path = require('path');
 
 
 var Rapptor = function() {
+
+  this.cwd = process.cwd();
 
   //load up config
   this._setupConfig();
@@ -81,6 +85,24 @@ Rapptor.prototype.loadPlugin = function(key, options) {
   });
 };
 
+Rapptor.prototype._loadRoutes = function() {
+
+  var self = this;
+  var routePath = path.join(this.cwd, this.config.structure.routes);
+  if (fs.existsSync(routePath)) {
+
+    var routeObj = require('require-all')(routePath);
+
+    _.forIn(routeObj, function(routeFile) {
+      _.forIn(routeFile, function(route) {
+        self.server.route(route);
+      });
+    });
+
+  }
+
+};
+
 Rapptor.prototype.start = function() {
   var self = this;
 
@@ -88,6 +110,7 @@ Rapptor.prototype.start = function() {
     if (err) {
       throw err;
     }
+    self._loadRoutes();
     self.server.start(function() {
       self.server.log(['server', 'info'], 'Server started '+ self.server.info.uri);
     });

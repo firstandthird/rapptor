@@ -24,6 +24,7 @@
     "hapi-log-response": "0.0.1",
     "hapi-redirects": "^0.1.0",
     "joi": "^5.1.0",
-    "lodash-node": "^3.0.0"
+    "lodash": "^3.1.0",
+    "require-all": "^1.0.0"
   }
 }

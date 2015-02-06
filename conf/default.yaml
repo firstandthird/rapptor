@@ -5,6 +5,8 @@ mongo:
   host: 'localhost'
   port: '27017'
   db: 'rapptor-app'
+structure:
+  routes: 'routes'
 logging:
   opsInterval: 15000
   reporters:
