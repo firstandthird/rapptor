@@ -114,7 +114,7 @@ Rapptor.prototype._setupViews = function() {
       html: Handlebars
     },
     path: path.join(viewPath, 'pages'),
-    //isCached: (plugin.app.env == 'prod'),
+    isCached: (this.config.env == 'prod'),
     partialsPath: path.join(viewPath, 'modules'),
     helpersPath: path.join(this.cwd, this.config.structure.helpers)
   });
@@ -127,6 +127,29 @@ Rapptor.prototype._setupViews = function() {
   });
 };
 
+Rapptor.prototype._setupAssets = function() {
+
+  var self = this;
+  this.server.route({
+    path: self.config.assets.path+'/{path*}',
+    method: 'GET',
+    config: {
+      auth: false,
+      cache: {
+        //privacy: 'public',
+        //expiresIn: 1000 * 60 * 60 * 24 * 7
+      },
+      handler: {
+        directory: {
+          path: path.resolve(self.cwd, self.config.structure.assets),
+          listing: false,
+          index: false
+        }
+      }
+    }
+  });
+};
+
 Rapptor.prototype.start = function() {
   var self = this;
 
@@ -136,6 +159,7 @@ Rapptor.prototype.start = function() {
     }
     self._loadRoutes();
     self._setupViews();
+    self._setupAssets();
     self.server.start(function() {
       self.server.log(['server', 'info'], 'Server started '+ self.server.info.uri);
     });
