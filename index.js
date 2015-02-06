@@ -91,14 +91,14 @@ Rapptor.prototype._loadRoutes = function() {
   var routePath = path.join(this.cwd, this.config.structure.routes);
   if (fs.existsSync(routePath)) {
 
-    var routeObj = require('require-all')(routePath);
-
-    _.forIn(routeObj, function(routeFile) {
-      _.forIn(routeFile, function(route) {
-        self.server.route(route);
-      });
+    require('require-all')({
+      dirname: routePath,
+      resolve: function(routeObj) {
+        _.forIn(routeObj, function(route) {
+          self.server.route(route);
+        });
+      }
     });
-
   }
 
 };
