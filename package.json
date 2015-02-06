@@ -20,6 +20,8 @@
     "good-console": "^4.1.0",
     "good-mongodb": "0.0.2",
     "good-mongodb-viewer": "^0.6.0",
+    "handlebars": "^2.0.0",
+    "handlebars-layouts": "^1.1.0",
     "hapi": "^8.1.0",
     "hapi-log-response": "0.0.1",
     "hapi-redirects": "^0.1.0",

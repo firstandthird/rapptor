@@ -4,6 +4,8 @@ var _ = require('lodash');
 var aug = require('aug');
 var fs = require('fs');
 var path = require('path');
+var Handlebars = require('handlebars');
+require('handlebars-layouts')(Handlebars);
 
 
 var Rapptor = function() {
@@ -44,7 +46,7 @@ Rapptor.prototype._setupConfig = function() {
   var configStr = JSON.stringify(this.config);
   configStr = configStr.replace(/MONGOURL/g, this.config.mongo.url);
   this.config = JSON.parse(configStr);
-  console.log(JSON.stringify(this.config, null, '  '));
+  //console.log(JSON.stringify(this.config, null, '  '));
 };
 
 Rapptor.prototype._readPlugins = function() {
@@ -100,7 +102,29 @@ Rapptor.prototype._loadRoutes = function() {
       }
     });
   }
+};
 
+Rapptor.prototype._setupViews = function() {
+  var viewPath = path.join(this.cwd, this.config.structure.views);
+  if (!fs.existsSync(viewPath)) {
+    return;
+  }
+  this.server.views({
+    engines: {
+      html: Handlebars
+    },
+    path: path.join(viewPath, 'pages'),
+    //isCached: (plugin.app.env == 'prod'),
+    partialsPath: path.join(viewPath, 'modules'),
+    helpersPath: path.join(this.cwd, this.config.structure.helpers)
+  });
+
+  var layouts = this.config.views.layouts;
+  layouts.forEach(function(layout) {
+    var layoutPath = path.resolve(viewPath, layout+'.html');
+    var src = fs.readFileSync(layoutPath, 'utf8');
+    Handlebars.registerPartial(layout, src);
+  });
 };
 
 Rapptor.prototype.start = function() {
@@ -111,6 +135,7 @@ Rapptor.prototype.start = function() {
       throw err;
     }
     self._loadRoutes();
+    self._setupViews();
     self.server.start(function() {
       self.server.log(['server', 'info'], 'Server started '+ self.server.info.uri);
     });

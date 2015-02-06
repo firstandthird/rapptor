@@ -7,6 +7,8 @@ mongo:
   db: 'rapptor-app'
 structure:
   routes: 'routes'
+  views: 'public'
+  helpers: 'helpers'
 logging:
   opsInterval: 15000
   reporters:
@@ -19,6 +21,9 @@ logging:
           request: '*'
           log: '*'
           error: '*'
+views:
+  layouts:
+    - 'common/layout'
 plugins:
   good-mongodb-viewer:
     connectionUrl: 'MONGOURL'
