@@ -5,3 +5,9 @@ plugins:
   hapi-redirects:
     redirects:
       '/test': '/'
+  hapi-agenda:
+    mongoUrl: 'MONGOURL'
+    jobs: 'DIRNAME/jobs'
+    processEvery: '5 seconds'
+    every:
+      '15 seconds': 'testJob'

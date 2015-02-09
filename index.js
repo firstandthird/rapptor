@@ -45,6 +45,7 @@ Rapptor.prototype._setupConfig = function() {
   //replace MONGOURL in config
   var configStr = JSON.stringify(this.config);
   configStr = configStr.replace(/MONGOURL/g, this.config.mongo.url);
+  configStr = configStr.replace(/DIRNAME/g, this.cwd);
   this.config = JSON.parse(configStr);
   //console.log(JSON.stringify(this.config, null, '  '));
 };

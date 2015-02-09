@@ -23,6 +23,7 @@
     "handlebars": "^2.0.0",
     "handlebars-layouts": "^1.1.0",
     "hapi": "^8.1.0",
+    "hapi-agenda": "^0.5.1",
     "hapi-log-response": "0.0.1",
     "hapi-redirects": "^0.1.0",
     "joi": "^5.1.0",

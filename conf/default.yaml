@@ -40,3 +40,8 @@ plugins:
     tags: ['request-errors']
   hapi-redirects:
     redirects: {}
+  hapi-agenda:
+    mongoUrl: 'MONGOURL'
+    jobs: 'DIRNAME/jobs'
+    processEvery: '30 minutes'
+    every: {}
