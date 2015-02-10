@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "aug": "^0.1.0",
+    "catbox-mongodb": "^1.1.0",
     "confi": "^0.3.1",
     "good": "^5.1.1",
     "good-console": "^4.1.0",
