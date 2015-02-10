@@ -2,17 +2,6 @@ var Rapptor = require('../');
 
 var rapptor = new Rapptor();
 
-rapptor.server.method('getTime', function(next) {
-  return next(null, new Date());
-}, {
-  cache: {
-    expiresIn: 60 * 60 * 1000
-  },
-  generateKey: function() {
-    return 'getTimeExample';
-  }
-});
-
 rapptor.server.route({
   method: 'GET',
   path: '/', 

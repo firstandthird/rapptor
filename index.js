@@ -28,6 +28,7 @@ var Rapptor = function() {
   this.plugins = [];
   this._setupLogging();
   this._readPlugins();
+  this._loadMethods();
 
   this.server.connection(this.config.connection);
 };
@@ -155,6 +156,20 @@ Rapptor.prototype._setupAssets = function() {
       }
     }
   });
+};
+
+Rapptor.prototype._loadMethods = function() {
+
+  var self = this;
+  var methodPath = path.join(this.cwd, this.config.structure.methods);
+  if (fs.existsSync(methodPath)) {
+
+    var methods = require('require-all')(methodPath);
+
+    _.forIn(methods, function(value, key) {
+      self.server.method(key, value.method, value.options || {});
+    });
+  }
 };
 
 Rapptor.prototype.start = function() {

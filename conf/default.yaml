@@ -10,6 +10,7 @@ structure:
   assets: 'public'
   views: 'public'
   helpers: 'helpers'
+  methods: 'methods'
 logging:
   opsInterval: 15000
   reporters:
