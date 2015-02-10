@@ -4,21 +4,23 @@ mongo:
 logging:
   reporters:
     hipchat:
-      - 
-        auth_token: ''
-        room: ''
-        roomToken: ''
-        debug: true
-        notify: false
-        events:
-          log:
-            request-errors:
-              color: 'yellow'
-              notify: false
-          error:
-            '*':
-              color: 'red'
-              notify: true
+      enabled: true
+      args:
+        - 
+          auth_token: ''
+          room: ''
+          roomToken: ''
+          debug: true
+          notify: false
+          events:
+            log:
+              request-errors:
+                color: 'yellow'
+                notify: false
+            error:
+              '*':
+                color: 'red'
+                notify: true
 plugins:
   hapi-redirects:
     redirects:

@@ -3,13 +3,17 @@ connection:
 logging:
   reporters:
     console:
-      -
-        log: '*'
+      enabled: true
+      args:
+        -
+          log: '*'
     mongodb:
-      - 'MONGOURL'
-      -
-         ttl: 604800
-         events:
-           request: '*'
-           log: '*'
-           error: '*'
+      enabled: true
+      args:
+        - 'MONGOURL'
+        -
+           ttl: 604800
+           events:
+             request: '*'
+             log: '*'
+             error: '*'

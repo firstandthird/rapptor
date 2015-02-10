@@ -71,12 +71,12 @@ Rapptor.prototype._setupLogging = function() {
   var reporters = [];
 
   _.forIn(this.config.logging.reporters, function(values, key) {
-    if (values === false) {
+    if (values === false || values.enabled === false) {
       return;
     }
     reporters.push({
       reporter: require('good-'+key),
-      args: values
+      args: values.args
     });
   });
 
