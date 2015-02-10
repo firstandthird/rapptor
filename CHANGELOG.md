@@ -1,4 +1,15 @@
 
+0.0.3 / 2015-02-10
+==================
+
+  * Merge pull request #24 from firstandthird/feature/methods
+  * Loads up server methods in a directory.
+  * Merge pull request #22 from firstandthird/feature/catbox-mongo
+  * Merge branch 'master' into feature/catbox-mongo
+  * Added catbox-mongodb support.
+  * Merge pull request #21 from firstandthird/feature/hapi-agenda
+  * Added hapi-agenda support.
+
 0.0.2 / 2015-02-06
 ==================
 
