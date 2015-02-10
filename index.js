@@ -16,7 +16,13 @@ var Rapptor = function() {
   this._setupConfig();
 
   this.server = new Hapi.Server({
-    app: this.config
+    app: this.config,
+    cache: {
+      engine: require('catbox-mongodb'),
+      partition: this.config.cache.partition || this.config.mongo.db,
+      host: this.config.cache.host || this.mongoHost,
+      port: this.config.cache.port || this.mongoPort
+    }
   });
 
   this.plugins = [];
@@ -38,9 +44,9 @@ Rapptor.prototype._setupConfig = function() {
   this.config = aug(true, {}, defaultConfig, loadConfig());
 
   //mongo
-  var mongoHost = process.env.MONGO_PORT_27017_TCP_ADDR || this.config.mongo.host;
-  var mongoPort = process.env.MONGO_PORT_27017_TCP_PORT || this.config.mongo.port;
-  this.config.mongo.url = 'mongodb://'+mongoHost+':'+mongoPort+'/'+this.config.mongo.db;
+  this.mongoHost = process.env.MONGO_PORT_27017_TCP_ADDR || this.config.mongo.host;
+  this.mongoPort = process.env.MONGO_PORT_27017_TCP_PORT || this.config.mongo.port;
+  this.config.mongo.url = 'mongodb://'+this.mongoHost+':'+this.mongoPort+'/'+this.config.mongo.db;
 
   //replace MONGOURL in config
   var configStr = JSON.stringify(this.config);

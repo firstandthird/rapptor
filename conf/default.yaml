@@ -27,6 +27,8 @@ assets:
 views:
   layouts:
     - 'common/layout'
+cache:
+  partition: 'raptor-catbox'
 plugins:
   good-mongodb-viewer:
     connectionUrl: 'MONGOURL'
