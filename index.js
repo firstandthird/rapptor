@@ -44,6 +44,11 @@ Rapptor.prototype._setupConfig = function() {
   //app defaults
   this.config = aug(true, {}, defaultConfig, loadConfig());
 
+  //port
+  if (process.env.PORT) {
+    this.config.connection.port = process.env.PORT;
+  }
+
   //mongo
   this.mongoHost = process.env.MONGO_PORT_27017_TCP_ADDR || this.config.mongo.host;
   this.mongoPort = process.env.MONGO_PORT_27017_TCP_PORT || this.config.mongo.port;
