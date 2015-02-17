@@ -116,19 +116,27 @@ Rapptor.prototype._loadRoutes = function() {
 };
 
 Rapptor.prototype._setupViews = function() {
+  var self = this;
   var viewPath = path.join(this.cwd, this.config.structure.views);
   if (!fs.existsSync(viewPath)) {
     return;
   }
-  this.server.views({
+  var viewConfig = {
     engines: {
       html: Handlebars
     },
     path: path.join(viewPath, 'pages'),
-    isCached: (this.config.env == 'prod'),
-    partialsPath: path.join(viewPath, 'modules'),
-    helpersPath: path.join(this.cwd, this.config.structure.helpers)
-  });
+    isCached: (this.config.env == 'prod')
+  };
+  var partialsPath = path.join(viewPath, 'modules');
+  if (fs.existsSync(partialsPath)) {
+    viewConfig.partialsPath = partialsPath;
+  }
+  var helpersPath = path.join(this.cwd, this.config.structure.helpers);
+  if (fs.existsSync(helpersPath)) {
+    viewConfig.helpersPath = helpersPath;
+  }
+  this.server.views(viewConfig);
 
   var layouts = this.config.views.layouts;
   layouts.forEach(function(layout) {
