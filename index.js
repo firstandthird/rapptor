@@ -141,8 +141,10 @@ Rapptor.prototype._setupViews = function() {
   var layouts = this.config.views.layouts;
   layouts.forEach(function(layout) {
     var layoutPath = path.resolve(viewPath, layout+'.html');
-    var src = fs.readFileSync(layoutPath, 'utf8');
-    Handlebars.registerPartial(layout, src);
+    if (fs.existsSync(layoutPath)) {
+      var src = fs.readFileSync(layoutPath, 'utf8');
+      Handlebars.registerPartial(layout, src);
+    }
   });
 };
 
