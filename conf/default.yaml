@@ -16,13 +16,33 @@ logging:
   reporters:
     console: false
     mongodb:
-      - 'MONGOURL'
-      -
-         ttl: 604800
-         events:
-          request: '*'
-          log: '*'
-          error: '*'
+      enabled: true
+      args:
+        - 'MONGOURL'
+        -
+           ttl: 604800
+           events:
+            request: '*'
+            log: '*'
+            error: '*'
+    hipchat:
+      enabled: false
+      args:
+        - 
+          auth_token: ''
+          room: ''
+          roomToken: ''
+          debug: true
+          notify: false
+          events:
+            log:
+              request-errors:
+                color: 'yellow'
+                notify: false
+            error:
+              '*':
+                color: 'red'
+                notify: true
 assets:
   path: '/ui'
 views:
