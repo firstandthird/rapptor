@@ -146,6 +146,22 @@ Rapptor.prototype._setupViews = function() {
       Handlebars.registerPartial(layout, src);
     }
   });
+
+  this.server.ext('onPreResponse', function(request, reply) {
+    var response = request.response;
+
+    if (response.variety === 'view') {
+
+      var context = response.source.context || {};
+      context.env = self.config.env;
+
+      if (request.query.json == '1') {
+        return reply(response.source.context);
+      }
+
+    }
+    reply(response);
+  });
 };
 
 Rapptor.prototype._setupAssets = function() {

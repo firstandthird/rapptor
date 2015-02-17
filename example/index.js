@@ -7,7 +7,7 @@ rapptor.server.route({
   method: 'GET',
   path: '/', 
   handler: function(request, reply) {
-    reply('yep');
+    reply.view('test/view');
   }
 });
 
@@ -27,7 +27,7 @@ rapptor.server.route({
   handler: function(request, reply) {
     reply(Boom.badImplementation('error'));
   }
-})
+});
 
 rapptor.start();
 
