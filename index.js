@@ -167,7 +167,7 @@ Rapptor.prototype._loadMethods = function() {
     var methods = require('require-all')(methodPath);
 
     _.forIn(methods, function(value, key) {
-      self.server.method(key, value.method, value.options || {});
+      self.server.method(key, value.method.bind(self), value.options || {});
     });
   }
 };
