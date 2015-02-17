@@ -1,4 +1,14 @@
 
+0.0.4 / 2015-02-17
+==================
+
+  * Merge branch 'master' of github.com:firstandthird/rapptor
+  * Binds server methods to server.
+  * Merge pull request #23 from firstandthird/feature/hipchat
+  * updated hapi-agenda
+  * Added abled flag for reporters.
+  * Added good-hipchat support.
+
 0.0.3 / 2015-02-10
 ==================
 
