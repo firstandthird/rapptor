@@ -22,7 +22,7 @@ logging:
         -
            ttl: 604800
            events:
-            request: '*'
+            response: '*'
             log: '*'
             error: '*'
     hipchat:
