@@ -36,7 +36,7 @@ logging:
           notify: false
           events:
             log:
-              request-errors:
+              response-errors:
                 color: 'yellow'
                 notify: false
             error:
@@ -55,12 +55,12 @@ plugins:
     connectionUrl: 'MONGOURL'
     endpoint: '/_logs'
     searches:
-      Responses: 'event:log AND tags:request-errors'
+      'Response Errors': 'event:log AND tags:response-errors'
       Jobs: 'tags:agenda'
   hapi-log-response:
     enabled: false
     excludeStatus: [200, 206, 304, 302, 404]
-    tags: ['request-errors']
+    tags: ['response-errors']
   hapi-redirects:
     redirects: {}
   hapi-agenda:
