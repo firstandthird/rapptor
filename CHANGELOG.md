@@ -1,4 +1,10 @@
 
+0.0.6 / 2015-02-18
+==================
+
+  * setViewData to set view data across all routes
+
+
 0.0.5 / 2015-02-17
 ==================
 
