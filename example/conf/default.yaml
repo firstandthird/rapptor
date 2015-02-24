@@ -29,5 +29,5 @@ plugins:
     mongoUrl: 'MONGOURL'
     jobs: 'DIRNAME/jobs'
     processEvery: '5 seconds'
-    every:
-      '15 seconds': 'testJob'
+    #every:
+      #'15 seconds': 'testJob'
