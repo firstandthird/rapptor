@@ -213,7 +213,7 @@ Rapptor.prototype._loadMethods = function() {
   }
 };
 
-Rapptor.prototype.start = function() {
+Rapptor.prototype.start = function(callback) {
   var self = this;
 
   this.server.register(this.plugins, function(err) {
@@ -225,6 +225,9 @@ Rapptor.prototype.start = function() {
     self._setupAssets();
     self.server.start(function() {
       self.server.log(['server', 'info'], 'Server started '+ self.server.info.uri);
+      if (callback) {
+        callback(self.server);
+      }
     });
   });
 };
