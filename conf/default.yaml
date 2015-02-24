@@ -55,9 +55,10 @@ plugins:
     connectionUrl: 'MONGOURL'
     endpoint: '/_logs'
     searches:
-      'Response Errors': 'event:log AND tags:response-errors'
+      #'Response Errors': 'event:log AND tags:response-errors'
       Jobs: 'tags:agenda'
   hapi-log-response:
+    enabled: false
     excludeStatus: [200, 206, 304, 302, 404]
     tags: ['response-errors']
   hapi-redirects:
