@@ -1,4 +1,12 @@
 
+0.0.8 / 2015-02-24
+==================
+
+  * updated good-mongodb-viewer
+  * updated good-mongodb
+  * disable hapi-log-response and removed search
+
+
 0.0.7 / 2015-02-23
 ==================
 
