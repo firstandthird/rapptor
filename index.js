@@ -8,9 +8,11 @@ var Handlebars = require('handlebars');
 require('handlebars-layouts')(Handlebars);
 
 
-var Rapptor = function() {
+var Rapptor = function(options) {
 
-  this.cwd = process.cwd();
+  options = options || {};
+
+  this.cwd = options.cwd || process.cwd();
 
   //load up config
   this._setupConfig();
@@ -74,6 +76,15 @@ Rapptor.prototype._readPlugins = function() {
     if (value.enabled === false) {
       return;
     }
+    if (!value._nativePlugin) {
+      if (key[0] == '.') {
+        key = path.join(self.cwd, key);
+      } else {
+        key = path.join(self.cwd, 'node_modules', key);
+      }
+    }
+    delete value.enabled;
+    delete value._nativePlugin;
     self.loadPlugin(key, value);
   });
 };
