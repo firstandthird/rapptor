@@ -1,5 +1,5 @@
 var Handlebars = require('handlebars');
-var path = require('path');
+var url = require('url');
 
 module.exports = function (type, filename) {
   if (!filename) {
@@ -7,7 +7,8 @@ module.exports = function (type, filename) {
   }
 
   var cdn = this.config.assets.host || '';
-  var filePath = path.join(cdn, this.config.assets.path, this.server.methods.getAsset(filename, type));
+  var file = this.server.methods.getAsset(filename, type);
+  var filePath = url.resolve(cdn, this.config.assets.path) + '/' + file;
 
   var out = '';
   if (type == 'css') {
