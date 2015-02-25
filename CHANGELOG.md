@@ -1,4 +1,11 @@
 
+0.0.11 / 2015-02-25
+==================
+
+  * renamed hostCDN to just host
+  * add support for passing in root folder
+
+
 0.0.10 / 2015-02-24
 ==================
 
