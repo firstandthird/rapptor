@@ -1,4 +1,10 @@
 
+0.0.10 / 2015-02-24
+==================
+
+  * Merge pull request #32 from firstandthird/feature/assets
+  * Added asset helper and method.
+
 0.0.9 / 2015-02-24
 ==================
 
