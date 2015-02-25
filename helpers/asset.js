@@ -6,7 +6,7 @@ module.exports = function (type, filename) {
     return;
   }
 
-  var cdn = this.config.assets.hostCDN || '';
+  var cdn = this.config.assets.host || '';
   var filePath = path.join(cdn, this.config.assets.path, this.server.methods.getAsset(filename, type));
 
   var out = '';
