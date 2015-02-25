@@ -154,6 +154,16 @@ Rapptor.prototype._setupViews = function() {
     }
   });
 
+  var helperPath = path.join(__dirname, './helpers');
+  if (fs.existsSync(helperPath)) {
+
+    var helpers = require('require-all')(helperPath);
+
+    _.forIn(helpers, function(value, key) {
+      Handlebars.registerHelper(key, value.bind(self));
+    });
+  }
+
   this.server.ext('onPreResponse', function(request, reply) {
     var response = request.response;
 
@@ -197,6 +207,8 @@ Rapptor.prototype._setupAssets = function() {
       }
     }
   });
+
+  this.server.method('getAsset', require(path.join(__dirname, './methods/assets')).call(this));
 };
 
 Rapptor.prototype._loadMethods = function() {

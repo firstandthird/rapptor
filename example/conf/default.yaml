@@ -1,3 +1,5 @@
+connection:
+  port: 8081
 testValue: 123
 mongo:
   db: 'rapptor-example'
@@ -21,6 +23,8 @@ logging:
               '*':
                 color: 'red'
                 notify: true
+assets:
+  hostCDN: 'http://localhost:8081'
 plugins:
   hapi-redirects:
     redirects:
