@@ -181,7 +181,10 @@ Rapptor.prototype._setupViews = function() {
     if (response.variety === 'view') {
 
       var context = response.source.context || {};
-      _.defaults(context, self._viewData);
+      if (typeof this.getViewData === 'function') {
+        this.getViewData(request, context);
+      }
+      _.defaults(context, this._viewData);
       response.source.context = context;
 
       if (request.query.json == '1') {
