@@ -1,4 +1,11 @@
 
+0.0.16 / 2015-02-26
+==================
+
+  * Merge pull request #33 from firstandthird/feature/image-asset
+  * Added image-path to asset helper
+  * Added support for images in asset handler
+
 0.0.15 / 2015-02-26
 ==================
 
