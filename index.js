@@ -183,7 +183,7 @@ Rapptor.prototype._setupViews = function() {
       context.env = config.env;
 
       if (typeof this.getViewData === 'function') {
-        this.getViewData(request, context, config);
+        this.getViewData(context, request, config);
       }
       response.source.context = context;
 
