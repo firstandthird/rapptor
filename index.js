@@ -16,8 +16,6 @@ var Rapptor = function(options) {
 
   //load up config
   this._setupConfig();
-  //default view data
-  this._viewData = { env: this.config.env };
 
   this.server = new Hapi.Server({
     app: this.config,
@@ -181,7 +179,12 @@ Rapptor.prototype._setupViews = function() {
     if (response.variety === 'view') {
 
       var context = response.source.context || {};
-      _.defaults(context, self._viewData);
+      
+      context.env = config.env;
+
+      if (typeof this.getViewData === 'function') {
+        this.getViewData(context, request, config);
+      }
       response.source.context = context;
 
       if (request.query.json == '1') {
@@ -191,10 +194,6 @@ Rapptor.prototype._setupViews = function() {
     }
     reply(response);
   });
-};
-
-Rapptor.prototype.setViewData = function(fn) {
-  this._viewData = fn.call(this, this.config);
 };
 
 Rapptor.prototype._setupAssets = function() {
