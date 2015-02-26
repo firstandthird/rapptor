@@ -1,4 +1,11 @@
 
+0.0.15 / 2015-02-26
+==================
+
+  * fixing getViewData
+  * update dev good-console logging
+
+
 0.0.14 / 2015-02-26
 ==================
 
