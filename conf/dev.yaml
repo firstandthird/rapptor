@@ -7,7 +7,7 @@ logging:
       args:
         -
           log: '*'
-          response: '*'
+          error: '*'
     mongodb:
       enabled: true
       args:
