@@ -16,8 +16,6 @@ var Rapptor = function(options) {
 
   //load up config
   this._setupConfig();
-  //default view data
-  this._viewData = { env: this.config.env };
 
   this.server = new Hapi.Server({
     app: this.config,
