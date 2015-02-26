@@ -9,7 +9,7 @@ module.exports = function (type, filename) {
   var cdn = this.config.assets.host || '';
   var file;
 
-  if (type == 'image') {
+  if (type == 'image' || type == 'image-path') {
     file = filename;
   } else {
     file = this.server.methods.getAsset(filename, type);
@@ -23,6 +23,8 @@ module.exports = function (type, filename) {
   } else if (type == 'js') {
     out = '<script src="'+filePath+'"></script>';
   } else if (type == 'image') {
+    out = '<img src="'+filePath+'"/>';
+  } else if (type == 'image-path') {
     out = filePath;
   }
   return new Handlebars.SafeString(out);
