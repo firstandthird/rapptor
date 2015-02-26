@@ -7,7 +7,14 @@ module.exports = function (type, filename) {
   }
 
   var cdn = this.config.assets.host || '';
-  var file = this.server.methods.getAsset(filename, type);
+  var file;
+
+  if (type == 'image') {
+    file = filename;
+  } else {
+    file = this.server.methods.getAsset(filename, type);
+  }
+  
   var filePath = url.resolve(cdn, this.config.assets.path) + '/' + file;
 
   var out = '';
@@ -15,6 +22,8 @@ module.exports = function (type, filename) {
     out = '<link rel="stylesheet" href="'+filePath+'"/>';
   } else if (type == 'js') {
     out = '<script src="'+filePath+'"></script>';
+  } else if (type == 'image') {
+    out = filePath;
   }
   return new Handlebars.SafeString(out);
 };
