@@ -179,11 +179,11 @@ Rapptor.prototype._setupViews = function() {
     if (response.variety === 'view') {
 
       var context = response.source.context || {};
-      
-      context.env = config.env;
 
-      if (typeof this.getViewData === 'function') {
-        this.getViewData(context, request, config);
+      context.env = self.config.env;
+
+      if (typeof self.getViewData === 'function') {
+        self.getViewData(context, request, self.config);
       }
       response.source.context = context;
 
