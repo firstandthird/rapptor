@@ -72,3 +72,6 @@ plugins:
     jobs: 'DIRNAME/jobs'
     processEvery: '30 minutes'
     every: {}
+  hapi-metrics:
+    connectionUrl: 'MONGOURL'
+    collection: 'rapptor-metrics'
