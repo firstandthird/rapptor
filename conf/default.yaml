@@ -45,6 +45,8 @@ logging:
                 notify: true
 assets:
   path: '/ui'
+  compiled: '_prod'
+  mapping: '_prod/assets.json'
 views:
   layouts:
     - 'common/layout'
