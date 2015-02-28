@@ -50,6 +50,7 @@ assets:
 views:
   layouts:
     - 'common/layout'
+  errors: false
 cache:
   partition: 'raptor-catbox'
 plugins:

@@ -25,6 +25,8 @@ logging:
                 notify: true
 assets:
   host: 'http://localhost:8081'
+views:
+  errors: 'errors'
 plugins:
   hapi-redirects:
     redirects:

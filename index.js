@@ -191,7 +191,18 @@ Rapptor.prototype._setupViews = function() {
         return reply(response.source.context);
       }
 
+    } else if (response.isBoom && self.config.views.errors) {
+    
+      var payload = response.output.payload;
+
+    
+      return reply.view(self.config.views.errors, {
+        statusCode: response.output.statusCode,
+        error: payload.error,
+        message: payload.message
+      }).code(response.output.statusCode);
     }
+
     reply(response);
   });
 };
