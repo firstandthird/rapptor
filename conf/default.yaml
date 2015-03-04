@@ -73,6 +73,8 @@ plugins:
     _nativePlugin: true
     mongoUrl: 'MONGOURL'
     jobs: 'DIRNAME/jobs'
+    jsonApi: true
+    basePath: '/admin'
     processEvery: '30 minutes'
     every: {}
   hapi-metrics:
