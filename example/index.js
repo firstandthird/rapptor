@@ -7,7 +7,10 @@ rapptor.server.route({
   method: 'GET',
   path: '/', 
   handler: function(request, reply) {
-    reply.view('test/view');
+
+    request.server.plugins.metrics.add('testing', { isTest: true }, function(err, metric) {
+      reply.view('test/view');
+    });
   }
 });
 
