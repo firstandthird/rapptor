@@ -1,4 +1,17 @@
 
+0.0.19 / 2015-03-03
+==================
+
+  * Native plugin
+  * Added metrics - kinda
+
+0.0.18 / 2015-03-02
+==================
+
+  * Bumped good-hipchat
+  * Merge pull request #36 from firstandthird/feature/error-page
+  * Added error page handling
+
 0.0.17 / 2015-02-27
 ==================
 
