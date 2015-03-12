@@ -4,9 +4,6 @@ var _ = require('lodash');
 var aug = require('aug');
 var fs = require('fs');
 var path = require('path');
-var Handlebars = require('handlebars');
-require('handlebars-layouts')(Handlebars);
-
 
 var Rapptor = function(options) {
 
@@ -27,11 +24,30 @@ var Rapptor = function(options) {
     }
   });
 
+  this.server.app.config = this.config;
+
   this.plugins = [];
   this._setupLogging();
   this._readPlugins();
-  this._loadMethods();
 
+  this.loadPlugin('hapi-auto-loader', {
+    cwd: this.cwd,
+    routes: {
+      path: this.config.structure.routes,
+      base: this.config.routes.base,
+      context: this.config.routes.context
+    },
+    partials: {
+      path: this.config.structure.partials
+    },
+    helpers: {
+      path: this.config.structure.helpers
+    },
+    methods: {
+      path: this.config.structure.methods
+    }
+  });
+  
   this.server.connection(this.config.connection);
 };
 
@@ -50,6 +66,8 @@ Rapptor.prototype._setupConfig = function() {
   if (process.env.PORT) {
     this.config.connection.port = process.env.PORT;
   }
+
+  this.config.cwd = this.cwd;
 
   //mongo
   this.mongoHost = process.env.MONGO_PORT_27017_TCP_ADDR || this.config.mongo.host;
@@ -114,23 +132,6 @@ Rapptor.prototype.loadPlugin = function(key, options) {
   });
 };
 
-Rapptor.prototype._loadRoutes = function() {
-
-  var self = this;
-  var routePath = path.join(this.cwd, this.config.structure.routes);
-  if (fs.existsSync(routePath)) {
-
-    require('require-all')({
-      dirname: routePath,
-      resolve: function(routeObj) {
-        _.forIn(routeObj, function(route) {
-          self.server.route(route);
-        });
-      }
-    });
-  }
-};
-
 Rapptor.prototype._setupViews = function() {
   var self = this;
   var viewPath = path.join(this.cwd, this.config.structure.views);
@@ -139,39 +140,13 @@ Rapptor.prototype._setupViews = function() {
   }
   var viewConfig = {
     engines: {
-      html: Handlebars
+      html: this.server.app.handlebars
     },
     path: path.join(viewPath, 'pages'),
     isCached: (this.config.env == 'prod')
   };
-  var partialsPath = path.join(viewPath, 'modules');
-  if (fs.existsSync(partialsPath)) {
-    viewConfig.partialsPath = partialsPath;
-  }
-  var helpersPath = path.join(this.cwd, this.config.structure.helpers);
-  if (fs.existsSync(helpersPath)) {
-    viewConfig.helpersPath = helpersPath;
-  }
+
   this.server.views(viewConfig);
-
-  var layouts = this.config.views.layouts;
-  layouts.forEach(function(layout) {
-    var layoutPath = path.resolve(viewPath, layout+'.html');
-    if (fs.existsSync(layoutPath)) {
-      var src = fs.readFileSync(layoutPath, 'utf8');
-      Handlebars.registerPartial(layout, src);
-    }
-  });
-
-  var helperPath = path.join(__dirname, './helpers');
-  if (fs.existsSync(helperPath)) {
-
-    var helpers = require('require-all')(helperPath);
-
-    _.forIn(helpers, function(value, key) {
-      Handlebars.registerHelper(key, value.bind(self));
-    });
-  }
 
   this.server.ext('onPreResponse', function(request, reply) {
     var response = request.response;
@@ -228,22 +203,6 @@ Rapptor.prototype._setupAssets = function() {
       }
     }
   });
-
-  this.server.method('getAsset', require(path.join(__dirname, './methods/assets')).call(this));
-};
-
-Rapptor.prototype._loadMethods = function() {
-
-  var self = this;
-  var methodPath = path.join(this.cwd, this.config.structure.methods);
-  if (fs.existsSync(methodPath)) {
-
-    var methods = require('require-all')(methodPath);
-
-    _.forIn(methods, function(value, key) {
-      self.server.method(key, value.method.bind(self), value.options || {});
-    });
-  }
 };
 
 Rapptor.prototype.start = function(callback) {
@@ -253,15 +212,27 @@ Rapptor.prototype.start = function(callback) {
     if (err) {
       throw err;
     }
-    self._loadRoutes();
-    self._setupViews();
-    self._setupAssets();
-    self.server.start(function() {
-      self.server.log(['server', 'info'], 'Server started '+ self.server.info.uri);
-      if (callback) {
-        callback(self.server);
+
+    // load up rapptor budled methods and helpers
+    require('hapi-auto-loader')(self.server, {
+      cwd: __dirname,
+      routes: false,
+      partials: false
+    }, function(err) {
+      if (err) {
+        throw err;
       }
+
+      self._setupViews();
+      self._setupAssets();
+      self.server.start(function() {
+        self.server.log(['server', 'info'], 'Server started '+ self.server.info.uri);
+        if (callback) {
+          callback(self.server);
+        }
+      });
     });
+    
   });
 };
 

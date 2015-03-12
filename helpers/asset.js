@@ -1,21 +1,21 @@
-var Handlebars = require('handlebars');
 var url = require('url');
+var Handlebars = require('handlebars');
 
 module.exports = function (type, filename) {
   if (!filename) {
     return;
   }
 
-  var cdn = this.config.assets.host || '';
+  var cdn = this.app.config.assets.host || '';
   var file;
 
   if (type == 'image' || type == 'image-path') {
     file = filename;
   } else {
-    file = this.server.methods.getAsset(filename, type);
+    file = this.methods.getAsset(filename, type);
   }
   
-  var filePath = url.resolve(cdn, this.config.assets.path) + '/' + file;
+  var filePath = url.resolve(cdn, this.app.config.assets.path) + '/' + file;
 
   var out = '';
   if (type == 'css') {

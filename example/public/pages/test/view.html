@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title></title>
+{{#extend "layout"}}
+  {{#content "title"}}Example Goodness{{/content}}
+  {{#content "main"}}
     {{asset "css" "test"}}
-  </head>
-  <body>
     <h1>Hi {{env}}</h1>
 
     {{asset "js" "test"}}
@@ -13,5 +9,5 @@
     {{asset "image" "testimage.jpg"}}
 
     {{asset "image-path" "testimage.jpg"}}
-  </body>
-</html>
+  {{/content}}
+{{/extend}}

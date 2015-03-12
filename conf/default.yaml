@@ -11,6 +11,10 @@ structure:
   views: 'public'
   helpers: 'helpers'
   methods: 'methods'
+  partials: 'partials'
+routes:
+  base: '/'
+  context: {}
 logging:
   opsInterval: 15000
   reporters:

@@ -22,15 +22,14 @@
     "good-hipchat": "^0.1.1",
     "good-mongodb": "0.1.0",
     "good-mongodb-viewer": "^0.7.1",
-    "handlebars": "^2.0.0",
-    "handlebars-layouts": "^1.1.0",
-    "hapi": "^8.1.0",
+    "handlebars": "^3.0.0",
+    "hapi": "^8.3.1",
     "hapi-agenda": "^0.6.1",
     "hapi-log-response": "^0.1.0",
     "hapi-metrics": "0.0.1",
     "hapi-redirects": "^0.1.0",
     "joi": "^5.1.0",
-    "lodash": "^3.1.0",
+    "lodash": "^3.5.0",
     "require-all": "^1.0.0"
   },
   "devDependencies": {
