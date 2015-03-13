@@ -178,7 +178,7 @@ Rapptor.prototype._setupViews = function() {
       }).code(response.output.statusCode);
     }
 
-    reply(response);
+    reply.continue();
   });
 };
 
