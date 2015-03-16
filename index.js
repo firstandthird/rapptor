@@ -14,15 +14,17 @@ var Rapptor = function(options) {
   //load up config
   this._setupConfig();
 
-  this.server = new Hapi.Server({
-    app: this.config,
-    cache: {
-      engine: require('catbox-mongodb'),
-      partition: this.config.cache.partition || this.config.mongo.db,
-      host: this.config.cache.host || this.mongoHost,
-      port: this.config.cache.port || this.mongoPort
-    }
-  });
+  var serverConfig = _.cloneDeep(this.config.server);
+  serverConfig.app = this.config;
+  serverConfig.cache = {
+    engine: require('catbox-mongodb'),
+    partition: this.config.cache.partition || this.config.mongo.db,
+    host: this.config.cache.host || this.mongoHost,
+    port: this.config.cache.port || this.mongoPort
+  };
+
+
+  this.server = new Hapi.Server(serverConfig);
 
   this.server.app.config = this.config;
 

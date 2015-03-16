@@ -1,6 +1,16 @@
+server:
+  debug:
+    request:
+      - 'error'
 connection:
   port: 80
   address: '0.0.0.0'
+  routes:
+    response:
+      failAction: 'log'
+    validate:
+      options:
+        allowUnknown: true
 mongo:
   host: 'localhost'
   port: '27017'
@@ -52,8 +62,6 @@ assets:
   compiled: '_prod'
   mapping: '_prod/assets.json'
 views:
-  layouts:
-    - 'common/layout'
   errors: false
 cache:
   partition: 'raptor-catbox'
