@@ -1,4 +1,11 @@
 
+0.0.22 / 2015-03-15
+==================
+
+  * server options and additional connection options
+  * Integrated hapi-auto-loader
+
+
 0.0.21 / 2015-03-04
 ==================
 
