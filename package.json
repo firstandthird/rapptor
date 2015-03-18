@@ -28,6 +28,7 @@
     "hapi-auto-loader": "0.0.3",
     "hapi-log-response": "^0.1.0",
     "hapi-metrics": "0.0.1",
+    "hapi-output-cache": "0.0.2",
     "hapi-redirects": "^0.1.0",
     "joi": "^5.1.0",
     "lodash": "^3.5.0",
