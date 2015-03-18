@@ -1,4 +1,10 @@
 
+0.0.23 / 2015-03-18
+==================
+
+  * updated confi, split up config file
+  * Fixing path of appDefaults to be able to load rapptor from various locations
+
 0.0.22 / 2015-03-15
 ==================
 
