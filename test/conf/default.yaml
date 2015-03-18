@@ -1,0 +1,5 @@
+connection:
+  port: 7321
+testValue: '123ABC'
+assets:
+  host: 'http://localhost:7321'
