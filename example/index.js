@@ -1,7 +1,9 @@
 var Rapptor = require('../');
 var Boom = require('boom');
 
-var rapptor = new Rapptor();
+var rapptor = new Rapptor({
+  cwd: __dirname
+});
 
 rapptor.server.route({
   method: 'GET',
