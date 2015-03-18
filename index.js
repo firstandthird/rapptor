@@ -22,8 +22,7 @@ var Rapptor = function(options) {
     host: this.config.cache.host || this.mongoHost,
     port: this.config.cache.port || this.mongoPort
   };
-
-
+  
   this.server = new Hapi.Server(serverConfig);
 
   this.server.app.config = this.config;
@@ -62,7 +61,11 @@ Rapptor.prototype._setupConfig = function() {
   loadConfig.reset();
 
   //app defaults
-  this.config = aug(true, {}, defaultConfig, loadConfig());
+  var appDefaults = loadConfig({
+    path: this.cwd + '/conf'
+  });
+
+  this.config = aug(true, {}, defaultConfig, appDefaults);
 
   //port
   if (process.env.PORT) {
