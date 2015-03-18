@@ -215,7 +215,6 @@ Rapptor.prototype.start = function(callback) {
 
   this.server.register(this.plugins, function(err) {
     if (err) {
-      console.log(err);
       throw err;
     }
 
@@ -226,7 +225,6 @@ Rapptor.prototype.start = function(callback) {
       partials: false
     }, function(err) {
       if (err) {
-        console.log(err);
         throw err;
       }
 
