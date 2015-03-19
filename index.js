@@ -48,7 +48,7 @@ var Rapptor = function(options) {
       path: this.config.structure.methods
     }
   });
-  
+
   this.server.connection(this.config.connection);
 };
 
@@ -74,9 +74,7 @@ Rapptor.prototype._setupConfig = function() {
   this.config.cwd = this.cwd;
 
   //mongo
-  this.mongoHost = process.env.MONGO_PORT_27017_TCP_ADDR || this.config.mongo.host;
-  this.mongoPort = process.env.MONGO_PORT_27017_TCP_PORT || this.config.mongo.port;
-  this.config.mongo.url = 'mongodb://'+this.mongoHost+':'+this.mongoPort+'/'+this.config.mongo.db;
+  this.config.mongo.url = 'mongodb://'+this.config.mongo.host+':'+this.config.mongo.port+'/'+this.config.mongo.db;
 
   //replace MONGOURL in config
   var configStr = JSON.stringify(this.config);
@@ -171,10 +169,10 @@ Rapptor.prototype._setupViews = function() {
       }
 
     } else if (response.isBoom && self.config.views.errors) {
-    
+
       var payload = response.output.payload;
 
-    
+
       return reply.view(self.config.views.errors, {
         statusCode: response.output.statusCode,
         error: payload.error,
@@ -236,7 +234,7 @@ Rapptor.prototype.start = function(callback) {
         }
       });
     });
-    
+
   });
 };
 

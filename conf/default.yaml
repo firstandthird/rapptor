@@ -1,3 +1,4 @@
+name: 'rapptor'
 server:
   debug:
     request:
@@ -12,9 +13,9 @@ connection:
       options:
         allowUnknown: true
 mongo:
-  host: 'localhost'
-  port: '27017'
-  db: 'rapptor-app'
+  host: "{{default ENV.MONGO_PORT_27017_TCP_ADDR 'localhost'}}"
+  port: "{{default ENV.MONGO_PORT_27017_TCP_PORT 27017}}"
+  db: '{{name}}-app'
 structure:
   routes: 'routes'
   assets: 'public'
@@ -32,4 +33,4 @@ assets:
 views:
   errors: false
 cache:
-  partition: 'raptor-catbox'
+  partition: '{{name}}-catbox'
