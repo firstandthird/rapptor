@@ -13,9 +13,7 @@ connection:
       options:
         allowUnknown: true
 mongo:
-  host: "{{default ENV.MONGO_PORT_27017_TCP_ADDR 'localhost'}}"
-  port: "{{default ENV.MONGO_PORT_27017_TCP_PORT 27017}}"
-  db: '{{name}}-app'
+  url: "mongodb://{{default ENV.MONGO_PORT_27017_TCP_ADDR 'localhost'}}:{{default ENV.MONGO_PORT_27017_TCP_PORT 27017}}/{{name}}-app"
 structure:
   routes: 'routes'
   assets: 'public'

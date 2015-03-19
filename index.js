@@ -73,9 +73,6 @@ Rapptor.prototype._setupConfig = function() {
 
   this.config.cwd = this.cwd;
 
-  //mongo
-  this.config.mongo.url = 'mongodb://'+this.config.mongo.host+':'+this.config.mongo.port+'/'+this.config.mongo.db;
-
   //replace MONGOURL in config
   var configStr = JSON.stringify(this.config);
   configStr = configStr.replace(/MONGOURL/g, this.config.mongo.url);
