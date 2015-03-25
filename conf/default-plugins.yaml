@@ -25,6 +25,6 @@ plugins:
   hapi-metrics:
     _nativePlugin: true
     connectionUrl: 'MONGOURL'
-    collection: 'rapptor-metrics'
+    collection: '{{name}}-metrics'
   hapi-output-cache:
     _nativePlugin: true
