@@ -1,4 +1,15 @@
 
+0.0.25 / 2015-03-26
+==================
+
+  * updated hapi-output-cache
+  * Bumped hapi to 8.4.0
+  * Changed plugin enabled flag
+  * Added a bunch of default helpers and some docs for them.
+  * Removed the other mongo config nonsense.
+  * Updated confi and switched configs to use {{name}}. Also have mongo config use ENV if available.
+
+
 0.0.24 / 2015-03-18
 ==================
 
