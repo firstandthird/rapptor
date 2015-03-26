@@ -88,6 +88,7 @@ Rapptor.prototype._readPlugins = function() {
 
   var self = this;
   _.forIn(this.config.plugins, function(value, key) {
+    value = value || {};
     if (value._enabled === false) {
       return;
     }

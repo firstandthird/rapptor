@@ -21,3 +21,6 @@ logging:
              response: '*'
              log: '*'
              error: '*'
+plugins:
+  hapi-output-cache:
+    enabled: false
