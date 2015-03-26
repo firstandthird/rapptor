@@ -1,4 +1,11 @@
 
+0.0.26 / 2015-03-26
+==================
+
+  * fixed if config had no value
+  * renamed cache partition to {{name}}-cache
+
+
 0.0.25 / 2015-03-26
 ==================
 
