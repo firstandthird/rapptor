@@ -6,16 +6,16 @@ module.exports = function (type, filename) {
     return;
   }
 
-  var cdn = this.app.config.assets.host || '';
+  var cdn = this._server.app.config.assets.host || '';
   var file;
 
   if (type == 'image' || type == 'image-path') {
     file = filename;
   } else {
-    file = this.methods.getAsset(filename, type);
+    file = this._server.methods.getAsset(filename, type);
   }
-  
-  var filePath = url.resolve(cdn, this.app.config.assets.path) + '/' + file;
+
+  var filePath = url.resolve(cdn, this._server.app.config.assets.path) + '/' + file;
 
   var out = '';
   if (type == 'css') {
@@ -27,5 +27,6 @@ module.exports = function (type, filename) {
   } else if (type == 'image-path') {
     out = filePath;
   }
+  
   return new Handlebars.SafeString(out);
 };
