@@ -31,4 +31,4 @@ assets:
 views:
   errors: false
 cache:
-  partition: '{{name}}-catbox'
+  partition: '{{name}}-cache'
