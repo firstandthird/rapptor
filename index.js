@@ -88,7 +88,7 @@ Rapptor.prototype._readPlugins = function() {
 
   var self = this;
   _.forIn(this.config.plugins, function(value, key) {
-    if (value.enabled === false) {
+    if (value._enabled === false) {
       return;
     }
     if (!value._nativePlugin) {
@@ -98,7 +98,7 @@ Rapptor.prototype._readPlugins = function() {
         key = path.join(self.cwd, 'node_modules', key);
       }
     }
-    delete value.enabled;
+    delete value._enabled;
     delete value._nativePlugin;
     self.loadPlugin(key, value);
   });

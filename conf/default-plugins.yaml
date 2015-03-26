@@ -8,7 +8,7 @@ plugins:
       Jobs: 'tags:agenda'
   hapi-log-response:
     _nativePlugin: true
-    enabled: false
+    _enabled: false
     excludeStatus: [200, 206, 304, 302, 404]
     tags: ['response-errors']
   hapi-redirects:
