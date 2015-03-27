@@ -55,16 +55,12 @@ var Rapptor = function(options) {
 Rapptor.prototype._setupConfig = function() {
 
   //rapptor defaults
-  var defaultConfig = loadConfig({
-    path: __dirname + '/conf'
+  this.config = loadConfig({
+    path: [
+      __dirname + '/conf',
+      this.cwd + '/conf'
+    ]
   });
-
-  //app defaults
-  var appDefaults = loadConfig({
-    path: this.cwd + '/conf'
-  });
-
-  this.config = aug(true, {}, defaultConfig, appDefaults);
 
   //port
   if (process.env.PORT) {
