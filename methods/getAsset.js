@@ -5,7 +5,7 @@ var assets = {};
 module.exports = {
   method: function(basename, type) {
     if (this.app.config.assets.mapping) {
-      var assetPath = path.join(this.app.config.cwd, this.config.structure.assets, this.app.config.assets.mapping);
+      var assetPath = path.join(this.app.config.cwd, this.app.config.structure.assets, this.app.config.assets.mapping);
       if (fs.existsSync(assetPath)) {
         assets = require(assetPath);
       }
