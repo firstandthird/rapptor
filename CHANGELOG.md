@@ -1,4 +1,9 @@
 
+0.0.27 / 2015-03-26
+==================
+
+  * Asset helper now uses this._server
+
 0.0.26 / 2015-03-26
 ==================
 
@@ -179,4 +184,3 @@
   * loadRoutes from routes directory
   * set up hapi-redirects
   * initial work
-
