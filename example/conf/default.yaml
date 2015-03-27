@@ -1,5 +1,5 @@
 connection:
-  port: 8081
+  port: "{{default ENV.PORT 8081}}"
 testValue: 123
 mongo:
   db: 'rapptor-example'
@@ -8,7 +8,7 @@ logging:
     hipchat:
       enabled: true
       args:
-        - 
+        -
           auth_token: ''
           room: ''
           roomToken: ''

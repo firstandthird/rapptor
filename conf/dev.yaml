@@ -1,5 +1,3 @@
-connection:
-  port: 8080
 assets:
   compiled: '_dev'
   mapping: null
