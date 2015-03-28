@@ -1,4 +1,12 @@
 
+0.0.31 / 2015-03-28
+==================
+
+  * BREAKING: return err back on start callback.  Fixes #54
+  * Correct host and port.
+  * Parses mongourl for plugins like catbox-mongodb that insist on taking each param.
+
+
 0.0.30 / 2015-03-27
 ==================
 
