@@ -20,8 +20,8 @@ var Rapptor = function(options) {
   serverConfig.cache = {
     engine: require('catbox-mongodb'),
     partition: this.config.cache.partition || this.config.mongo.db,
-    host: this.config.cache.host || this.config.mongo.params.host,
-    port: this.config.cache.port || this.config.mongo.params.port,
+    host: this.config.cache.host || this.config.mongo.params.hosts[0].host,
+    port: this.config.cache.port || this.config.mongo.params.hosts[0].port,
     username: this.config.cache.username || this.config.mongo.params.username,
     password: this.config.cache.password || this.config.mongo.params.password
   };
