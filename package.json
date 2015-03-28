@@ -32,6 +32,7 @@
     "hapi-redirects": "0.1.0",
     "joi": "5.1.0",
     "lodash": "3.5.0",
+    "mongodb-uri": "0.9.7",
     "require-all": "1.0.0"
   },
   "devDependencies": {
