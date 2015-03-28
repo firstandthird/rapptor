@@ -4,6 +4,7 @@ var _ = require('lodash');
 var aug = require('aug');
 var fs = require('fs');
 var path = require('path');
+var mongodbUri = require('mongodb-uri');
 
 var Rapptor = function(options) {
 
@@ -19,8 +20,10 @@ var Rapptor = function(options) {
   serverConfig.cache = {
     engine: require('catbox-mongodb'),
     partition: this.config.cache.partition || this.config.mongo.db,
-    host: this.config.cache.host || this.mongoHost,
-    port: this.config.cache.port || this.mongoPort
+    host: this.config.cache.host || this.config.mongo.params.host,
+    port: this.config.cache.port || this.config.mongo.params.port,
+    username: this.config.cache.username || this.config.mongo.params.username,
+    password: this.config.cache.password || this.config.mongo.params.password
   };
 
   this.server = new Hapi.Server(serverConfig);
@@ -68,6 +71,10 @@ Rapptor.prototype._setupConfig = function() {
   }
 
   this.config.cwd = this.cwd;
+
+  //parse mongo info for plugins that require it split out (catbox-mongodb)
+  this.config.mongo.params = mongodbUri.parse(this.config.mongo.url);
+
 
   //replace MONGOURL in config
   var configStr = JSON.stringify(this.config);
