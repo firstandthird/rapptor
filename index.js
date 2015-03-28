@@ -213,7 +213,7 @@ Rapptor.prototype.start = function(callback) {
 
   this.server.register(this.plugins, function(err) {
     if (err) {
-      throw err;
+      return callback(err);
     }
 
     // load up rapptor budled methods and helpers
@@ -223,15 +223,17 @@ Rapptor.prototype.start = function(callback) {
       partials: false
     }, function(err) {
       if (err) {
-        throw err;
+        return callback(err);
       }
 
       self._setupViews();
       self._setupAssets();
-      self.server.start(function() {
-        self.server.log(['server', 'info'], 'Server started '+ self.server.info.uri);
+      self.server.start(function(err) {
+        if (!err) {
+          self.server.log(['server', 'info'], 'Server started '+ self.server.info.uri);
+        }
         if (callback) {
-          callback(self.server);
+          callback(err, self.server);
         }
       });
     });
