@@ -241,4 +241,8 @@ Rapptor.prototype.start = function(callback) {
   });
 };
 
+Rapptor.prototype.stop = function(callback) {
+  this.server.stop(callback);
+}
+
 module.exports = Rapptor;

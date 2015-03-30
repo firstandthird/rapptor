@@ -4,7 +4,7 @@ var cwd = process.cwd();
 var loadConfig = require('confi');
 var Rapptor = require('../');
 
-describe('Rapptor#routes', function() {
+describe('Rapptor#all', function() {
 
   var rapptor = rapptor = new Rapptor({
       cwd: __dirname
@@ -17,15 +17,19 @@ describe('Rapptor#routes', function() {
     });
   });
 
-  it('should automatically load routes from the appropriate folder', function(done) {
+  it('should use the all helper correctly', function(done) {
     
     var server = rapptor.server;
     server.inject({
       method: 'GET',
-      url: "/example"
+      url: "/all-test"
     }, function(response) {
       expect(response.statusCode).to.equal(200);
-      expect(response.result).to.equal('this is an example');
+      //console.log(response.result);
+      var docBody = response.result;
+      docBody = docBody.replace(/\n|\s{2,}/g, "");
+
+      expect(docBody).to.equal("<h1>Hi!</h1><p>true</p>");
       done();
     });
     
