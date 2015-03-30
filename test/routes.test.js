@@ -10,7 +10,7 @@ describe('Rapptor#routes', function() {
       cwd: __dirname
     });
     
-    rapptor.start(function(srvr){
+    rapptor.start(function(err, srvr){
       srvr.inject({
         method: 'GET',
         url: "/example"
