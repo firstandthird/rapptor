@@ -1,9 +1,10 @@
+name: 'rapptor'
 server:
   debug:
     request:
       - 'error'
 connection:
-  port: 80
+  port: "{{default ENV.PORT 8080}}"
   address: '0.0.0.0'
   routes:
     response:
@@ -12,9 +13,7 @@ connection:
       options:
         allowUnknown: true
 mongo:
-  host: 'localhost'
-  port: '27017'
-  db: 'rapptor-app'
+  url: "mongodb://{{default ENV.MONGO_PORT_27017_TCP_ADDR 'localhost'}}:{{default ENV.MONGO_PORT_27017_TCP_PORT 27017}}/{{name}}-app"
 structure:
   routes: 'routes'
   assets: 'public'
@@ -25,38 +24,6 @@ structure:
 routes:
   base: '/'
   context: {}
-logging:
-  opsInterval: 15000
-  reporters:
-    console: false
-    mongodb:
-      enabled: true
-      args:
-        - 'MONGOURL'
-        -
-           ttl: 604800
-           events:
-            response: '*'
-            log: '*'
-            error: '*'
-    hipchat:
-      enabled: false
-      args:
-        - 
-          auth_token: ''
-          room: ''
-          roomToken: ''
-          debug: true
-          notify: false
-          events:
-            log:
-              response-errors:
-                color: 'yellow'
-                notify: false
-            error:
-              '*':
-                color: 'red'
-                notify: true
 assets:
   path: '/ui'
   compiled: '_prod'
@@ -64,32 +31,4 @@ assets:
 views:
   errors: false
 cache:
-  partition: 'raptor-catbox'
-plugins:
-  good-mongodb-viewer:
-    _nativePlugin: true
-    connectionUrl: 'MONGOURL'
-    endpoint: '/_logs'
-    searches:
-      #'Response Errors': 'event:log AND tags:response-errors'
-      Jobs: 'tags:agenda'
-  hapi-log-response:
-    _nativePlugin: true
-    enabled: false
-    excludeStatus: [200, 206, 304, 302, 404]
-    tags: ['response-errors']
-  hapi-redirects:
-    _nativePlugin: true
-    redirects: {}
-  hapi-agenda:
-    _nativePlugin: true
-    mongoUrl: 'MONGOURL'
-    jobs: 'DIRNAME/jobs'
-    jsonApi: true
-    basePath: '/admin'
-    processEvery: '30 minutes'
-    every: {}
-  hapi-metrics:
-    _nativePlugin: true
-    connectionUrl: 'MONGOURL'
-    collection: 'rapptor-metrics'
+  partition: '{{name}}-cache'

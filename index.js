@@ -4,6 +4,7 @@ var _ = require('lodash');
 var aug = require('aug');
 var fs = require('fs');
 var path = require('path');
+var mongodbUri = require('mongodb-uri');
 
 var Rapptor = function(options) {
 
@@ -19,10 +20,12 @@ var Rapptor = function(options) {
   serverConfig.cache = {
     engine: require('catbox-mongodb'),
     partition: this.config.cache.partition || this.config.mongo.db,
-    host: this.config.cache.host || this.mongoHost,
-    port: this.config.cache.port || this.mongoPort
+    host: this.config.cache.host || this.config.mongo.params.hosts[0].host,
+    port: this.config.cache.port || this.config.mongo.params.hosts[0].port,
+    username: this.config.cache.username || this.config.mongo.params.username,
+    password: this.config.cache.password || this.config.mongo.params.password
   };
-  
+
   this.server = new Hapi.Server(serverConfig);
 
   this.server.app.config = this.config;
@@ -48,24 +51,19 @@ var Rapptor = function(options) {
       path: this.config.structure.methods
     }
   });
-  
+
   this.server.connection(this.config.connection);
 };
 
 Rapptor.prototype._setupConfig = function() {
 
   //rapptor defaults
-  var defaultConfig = loadConfig({
-    path: __dirname + '/conf'
+  this.config = loadConfig({
+    path: [
+      __dirname + '/conf',
+      this.cwd + '/conf'
+    ]
   });
-  loadConfig.reset();
-
-  //app defaults
-  var appDefaults = loadConfig({
-    path: this.cwd + '/conf'
-  });
-
-  this.config = aug(true, {}, defaultConfig, appDefaults);
 
   //port
   if (process.env.PORT) {
@@ -74,10 +72,9 @@ Rapptor.prototype._setupConfig = function() {
 
   this.config.cwd = this.cwd;
 
-  //mongo
-  this.mongoHost = process.env.MONGO_PORT_27017_TCP_ADDR || this.config.mongo.host;
-  this.mongoPort = process.env.MONGO_PORT_27017_TCP_PORT || this.config.mongo.port;
-  this.config.mongo.url = 'mongodb://'+this.mongoHost+':'+this.mongoPort+'/'+this.config.mongo.db;
+  //parse mongo info for plugins that require it split out (catbox-mongodb)
+  this.config.mongo.params = mongodbUri.parse(this.config.mongo.url);
+
 
   //replace MONGOURL in config
   var configStr = JSON.stringify(this.config);
@@ -94,7 +91,8 @@ Rapptor.prototype._readPlugins = function() {
 
   var self = this;
   _.forIn(this.config.plugins, function(value, key) {
-    if (value.enabled === false) {
+    value = value || {};
+    if (value._enabled === false) {
       return;
     }
     if (!value._nativePlugin) {
@@ -104,7 +102,7 @@ Rapptor.prototype._readPlugins = function() {
         key = path.join(self.cwd, 'node_modules', key);
       }
     }
-    delete value.enabled;
+    delete value._enabled;
     delete value._nativePlugin;
     self.loadPlugin(key, value);
   });
@@ -172,10 +170,10 @@ Rapptor.prototype._setupViews = function() {
       }
 
     } else if (response.isBoom && self.config.views.errors) {
-    
+
       var payload = response.output.payload;
 
-    
+
       return reply.view(self.config.views.errors, {
         statusCode: response.output.statusCode,
         error: payload.error,
@@ -215,7 +213,7 @@ Rapptor.prototype.start = function(callback) {
 
   this.server.register(this.plugins, function(err) {
     if (err) {
-      throw err;
+      return callback(err);
     }
 
     // load up rapptor budled methods and helpers
@@ -225,19 +223,21 @@ Rapptor.prototype.start = function(callback) {
       partials: false
     }, function(err) {
       if (err) {
-        throw err;
+        return callback(err);
       }
 
       self._setupViews();
       self._setupAssets();
-      self.server.start(function() {
-        self.server.log(['server', 'info'], 'Server started '+ self.server.info.uri);
+      self.server.start(function(err) {
+        if (!err) {
+          self.server.log(['server', 'info'], 'Server started '+ self.server.info.uri);
+        }
         if (callback) {
-          callback(self.server);
+          callback(err, self.server);
         }
       });
     });
-    
+
   });
 };
 

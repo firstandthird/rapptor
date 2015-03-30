@@ -1,4 +1,62 @@
 
+0.0.31 / 2015-03-28
+==================
+
+  * BREAKING: return err back on start callback.  Fixes #54
+  * Correct host and port.
+  * Parses mongourl for plugins like catbox-mongodb that insist on taking each param.
+
+
+0.0.30 / 2015-03-27
+==================
+
+  * Only call loadConfig once
+
+0.0.29 / 2015-03-27
+==================
+
+  * Fixed getAsset method
+
+0.0.28 / 2015-03-27
+==================
+
+  * Updated confi and set port to ENV.PORT
+
+0.0.27 / 2015-03-26
+==================
+
+  * Asset helper now uses this._server
+
+0.0.26 / 2015-03-26
+==================
+
+  * fixed if config had no value
+  * renamed cache partition to {{name}}-cache
+
+
+0.0.25 / 2015-03-26
+==================
+
+  * updated hapi-output-cache
+  * Bumped hapi to 8.4.0
+  * Changed plugin enabled flag
+  * Added a bunch of default helpers and some docs for them.
+  * Removed the other mongo config nonsense.
+  * Updated confi and switched configs to use {{name}}. Also have mongo config use ENV if available.
+
+
+0.0.24 / 2015-03-18
+==================
+
+  * added hapi-output-cache as a native plugin
+
+
+0.0.23 / 2015-03-18
+==================
+
+  * updated confi, split up config file
+  * Fixing path of appDefaults to be able to load rapptor from various locations
+
 0.0.22 / 2015-03-15
 ==================
 
@@ -149,4 +207,3 @@
   * loadRoutes from routes directory
   * set up hapi-redirects
   * initial work
-
