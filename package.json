@@ -24,7 +24,7 @@
     "good-mongodb-viewer": "0.7.1",
     "handlebars": "3.0.0",
     "hapi": "8.4.0",
-    "hapi-agenda": "0.6.1",
+    "hapi-agenda": "0.9.0",
     "hapi-auto-loader": "0.1.1",
     "hapi-log-response": "0.1.0",
     "hapi-metrics": "0.0.1",
