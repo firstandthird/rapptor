@@ -109,12 +109,21 @@ Rapptor.prototype._readPlugins = function() {
 };
 
 Rapptor.prototype._setupLogging = function() {
+  var self = this;
   var reporters = [];
 
   _.forIn(this.config.logging.reporters, function(values, key) {
     if (values === false || values.enabled === false) {
       return;
     }
+
+    if (key === 'hipchat') {
+      if (values.format) {
+        // temp until we get upgraded to good 6.0.0
+        values.args[0].format = function(error) { return self.server.methods[values.format](error); };
+      }
+    }
+
     reporters.push({
       reporter: require('good-'+key),
       args: values.args
