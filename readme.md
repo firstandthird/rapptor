@@ -10,6 +10,16 @@ rapptor.start();
 
 see example directory for a working app.
 
+### Using in tests
+
+You can stop the server from starting by passing `testMode: true`
+
+```js
+var rapptor = new Rapptor({
+  testMode: true
+});
+```
+
 ### Built in Handlebar helpers
 
 All block helpers support `{{else}}`

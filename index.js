@@ -11,6 +11,7 @@ var Rapptor = function(options) {
   options = options || {};
 
   this.cwd = options.cwd || process.cwd();
+  this.testMode = options.testMode || false;
 
   //load up config
   this._setupConfig();
@@ -237,6 +238,11 @@ Rapptor.prototype.start = function(callback) {
 
       self._setupViews();
       self._setupAssets();
+
+      if (self.testMode) {
+        return callback(null, self.server);
+      }
+
       self.server.start(function(err) {
         if (!err) {
           self.server.log(['server', 'info'], 'Server started '+ self.server.info.uri);
