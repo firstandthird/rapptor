@@ -20,7 +20,7 @@ structure:
   views: 'public'
   helpers: 'helpers'
   methods: 'methods'
-  partials: 'partials'
+  partials: 'public'
 routes:
   base: '/'
   context: {}

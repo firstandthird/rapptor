@@ -1,5 +1,5 @@
 assets:
-  compiled: '_dev'
+  compiled: '_dist'
   mapping: null
 logging:
   reporters:
