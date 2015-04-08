@@ -1,4 +1,10 @@
 
+n.n.n / 2015-04-08
+==================
+
+  * updated default paths
+  * Adds option to pass in the name of a server method to format hipchat messages.
+
 0.0.33 / 2015-04-01
 ==================
 
