@@ -12,13 +12,7 @@ see example directory for a working app.
 
 ### Using in tests
 
-You can stop the server from starting by passing `testMode: true`
-
-```js
-var rapptor = new Rapptor({
-  testMode: true
-});
-```
+Use the `.setup()` method in place of `.start()`
 
 ### Built in Handlebar helpers
 
