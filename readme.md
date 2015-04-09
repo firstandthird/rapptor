@@ -10,6 +10,10 @@ rapptor.start();
 
 see example directory for a working app.
 
+### Using in tests
+
+Use the `.setup()` method in place of `.start()`
+
 ### Built in Handlebar helpers
 
 All block helpers support `{{else}}`

@@ -217,7 +217,7 @@ Rapptor.prototype._setupAssets = function() {
   });
 };
 
-Rapptor.prototype.start = function(callback) {
+Rapptor.prototype.setup = function(callback) {
   var self = this;
 
   this.server.register(this.plugins, function(err) {
@@ -237,17 +237,33 @@ Rapptor.prototype.start = function(callback) {
 
       self._setupViews();
       self._setupAssets();
-      self.server.start(function(err) {
-        if (!err) {
-          self.server.log(['server', 'info'], 'Server started '+ self.server.info.uri);
-        }
-        if (callback) {
-          callback(err, self.server);
-        }
-      });
+
+      callback(null, self.server);
     });
 
   });
+};
+
+Rapptor.prototype.start = function(callback) {
+
+  callback = callback || _.noop;
+
+  this.setup(function(err, server){
+    if (err) {
+      return callback(err);
+    }
+
+    server.start(function(err) {
+      if (!err) {
+        server.log(['server', 'info'], 'Server started '+ server.info.uri);
+      }
+
+      if (callback) {
+        callback(err, server);
+      }
+    });
+  });
+
 };
 
 module.exports = Rapptor;
