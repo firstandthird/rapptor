@@ -181,7 +181,7 @@ Rapptor.prototype._setupViews = function() {
 
     } else if (response.isBoom && self.config.views.errors) {
 
-      if (self.config.views.json && path.match(new RegExp(self.config.views.json))) {
+      if (self.config.views.errorBlacklist && path.match(new RegExp(self.config.views.errorBlacklist))) {
         return reply.continue();
       }
 

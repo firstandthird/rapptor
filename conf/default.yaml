@@ -30,6 +30,6 @@ assets:
   mapping: '_prod/assets.json'
 views:
   errors: false
-  json: ^\/api
+  errorBlacklist: ^\/api
 cache:
   partition: '{{name}}-cache'
