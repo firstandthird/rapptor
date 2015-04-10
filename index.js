@@ -162,6 +162,7 @@ Rapptor.prototype._setupViews = function() {
 
   this.server.ext('onPreResponse', function(request, reply) {
     var response = request.response;
+    var path = request.path;
 
     if (response.variety === 'view') {
 
@@ -180,8 +181,11 @@ Rapptor.prototype._setupViews = function() {
 
     } else if (response.isBoom && self.config.views.errors) {
 
-      var payload = response.output.payload;
+      if (self.config.views.json && path.match(new RegExp(self.config.views.json))) {
+        return reply.continue();
+      }
 
+      var payload = response.output.payload;
 
       return reply.view(self.config.views.errors, {
         statusCode: response.output.statusCode,

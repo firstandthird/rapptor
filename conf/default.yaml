@@ -30,5 +30,6 @@ assets:
   mapping: '_prod/assets.json'
 views:
   errors: false
+  json: ^\/api
 cache:
   partition: '{{name}}-cache'
