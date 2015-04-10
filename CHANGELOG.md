@@ -1,4 +1,10 @@
 
+0.0.36 / 2015-04-10
+==================
+
+  * Renamed views.json to views.errorBlacklist
+  * Allows a regex to be set to define json paths.
+
 0.0.35 / 2015-04-09
 ==================
 
