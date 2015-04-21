@@ -4,8 +4,11 @@ plugins:
     connectionUrl: 'MONGOURL'
     endpoint: '/_logs'
     searches:
-      #'Response Errors': 'event:log AND tags:response-errors'
-      Jobs: 'tags:agenda'
+      'Jobs': 'tags:agenda'
+      'Job Errors': 'tags:agenda AND tags:error'
+      'User Errors': 'statusCode==401 OR statusCode==400'
+      'Not Found': 'statusCode==404'
+      'Server Errors': 'statusCode==500'
   hapi-log-response:
     _nativePlugin: true
     _enabled: false
