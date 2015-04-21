@@ -1,4 +1,11 @@
 
+0.2.0 / 2015-04-21
+==================
+
+  * updated default searches in mongo log viewer
+  * updated logging to use Good 6
+
+
 0.1.0 / 2015-04-20
 ==================
 
