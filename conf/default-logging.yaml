@@ -1,32 +1,39 @@
 logging:
   opsInterval: 15000
+  requestPayload: true
   reporters:
     console: false
     mongodb:
-      enabled: true
-      args:
-        - 'MONGOURL'
-        -
-           ttl: 604800
-           events:
-            response: '*'
-            log: '*'
-            error: '*'
+      _enabled: true
+      events:
+        response: '*'
+        log: '*'
+        error: '*'
+      config:
+        connectionUrl: 'MONGOURL'
+        ttl: 604800
     hipchat:
-      enabled: false
-      args:
-        - 
-          auth_token: ''
-          room: ''
-          roomToken: ''
-          debug: true
-          notify: false
-          events:
-            log:
-              response-errors:
-                color: 'yellow'
-                notify: false
+      _enabled: false
+      events:
+        log:
+          - 'error'
+        error: '*'
+        response: '*'
+      config:
+        auth_token: ''
+        room: ''
+        roomToken: ''
+        notify: false
+        responseCodes:
+          - 400
+          - 401
+          - 500
+        customizeEvents:
+          error:
+            '*':
+              color: 'red'
+              notify: true
+          log:
             error:
-              '*':
-                color: 'red'
-                notify: true
+              color: 'red'
+              notify: true

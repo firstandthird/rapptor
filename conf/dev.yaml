@@ -4,21 +4,10 @@ assets:
 logging:
   reporters:
     console:
-      enabled: true
-      args:
-        -
-          log: '*'
-          error: '*'
-    mongodb:
-      enabled: true
-      args:
-        - 'MONGOURL'
-        -
-           ttl: 604800
-           events:
-             response: '*'
-             log: '*'
-             error: '*'
+      _enabled: true
+      events:
+        log: '*'
+        error: '*'
 plugins:
   hapi-output-cache:
     enabled: false

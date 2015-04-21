@@ -109,31 +109,22 @@ Rapptor.prototype._readPlugins = function() {
 };
 
 Rapptor.prototype._setupLogging = function() {
-  var self = this;
   var reporters = [];
 
   _.forIn(this.config.logging.reporters, function(values, key) {
-    if (values === false || values.enabled === false) {
+    if (values === false || values._enabled === false) {
       return;
     }
 
-    if (key === 'hipchat') {
-      if (values.format) {
-        // temp until we get upgraded to good 6.0.0
-        values.args[0].format = function(error) { return self.server.methods[values.format](error); };
-      }
-    }
+    delete values._enabled;
 
-    reporters.push({
-      reporter: require('good-'+key),
-      args: values.args
-    });
+    values.reporter = require('good-'+key);
+
+    reporters.push(values);
   });
 
-  this.loadPlugin('good', {
-    opsInterval: this.config.logging.opsInterval,
-    reporters: reporters
-  });
+  this.config.logging.reporters = reporters;
+  this.loadPlugin('good', this.config.logging);
 
 };
 
