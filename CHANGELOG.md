@@ -1,4 +1,10 @@
 
+0.3.0 / 2015-04-22
+==================
+
+  * updated good-hipchat, added prefix and suffix to logs
+
+
 0.2.0 / 2015-04-21
 ==================
 
