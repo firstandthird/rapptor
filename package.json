@@ -19,7 +19,7 @@
     "confi": "0.6.0",
     "good": "^6.1.0",
     "good-console": "^5.0.0",
-    "good-hipchat": "^0.3.0",
+    "good-hipchat": "^0.4.0",
     "good-mongodb": "^0.2.0",
     "good-mongodb-viewer": "0.7.1",
     "handlebars": "3.0.0",
