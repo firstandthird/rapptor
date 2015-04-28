@@ -2,7 +2,7 @@ plugins:
   good-mongodb-viewer:
     _nativePlugin: true
     connectionUrl: 'MONGOURL'
-    endpoint: '/_logs'
+    endpoint: '/admin/logs'
     searches:
       'Jobs': 'tags:agenda'
       'Job Errors': 'tags:agenda AND tags:error'

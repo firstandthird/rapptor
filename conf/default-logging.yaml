@@ -21,7 +21,7 @@ logging:
         response: '*'
       config:
         prefix: '<b>{{name}}</b> <em>({{env}})</em>:'
-        suffix: '<a href="http://{{host}}/_logs">View Logs</a>'
+        suffix: '<a href="http://{{host}}/admin/logs">View Logs</a>'
         auth_token: ''
         room: ''
         roomToken: ''
