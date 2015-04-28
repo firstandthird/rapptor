@@ -1,8 +1,13 @@
 var Handlebars = require('handlebars');
+var Autolinker = require('autolinker');
+
 module.exports = function(text, options) {
   text = text.string || text;
 
-  var newText = text.replace(/(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/gi, '<a href="$1" target="_blank">$1</a>');
+  var linkedText = Autolinker.link(text, {
+    newWindow: true,
+    phone: false
+  });
 
-  return new Handlebars.SafeString(newText);
+  return new Handlebars.SafeString(linkedText);
 };
