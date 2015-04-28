@@ -1,10 +1,10 @@
 var loadConfig = require('confi');
 var Hapi = require('hapi');
 var _ = require('lodash');
-var aug = require('aug');
 var fs = require('fs');
 var path = require('path');
 var mongodbUri = require('mongodb-uri');
+var async = require('async');
 
 var Rapptor = function(options) {
 
@@ -34,23 +34,6 @@ var Rapptor = function(options) {
   this._setupLogging();
   this._readPlugins();
 
-  this.loadPlugin('hapi-auto-loader', {
-    cwd: this.cwd,
-    routes: {
-      path: this.config.structure.routes,
-      base: this.config.routes.base,
-      context: this.config.routes.context
-    },
-    partials: {
-      path: this.config.structure.partials
-    },
-    helpers: {
-      path: this.config.structure.helpers
-    },
-    methods: {
-      path: this.config.structure.methods
-    }
-  });
 
   this.server.connection(this.config.connection);
 };
@@ -215,31 +198,60 @@ Rapptor.prototype._setupAssets = function() {
   });
 };
 
+Rapptor.prototype._setupStrategies = function() {
+
+  var self = this;
+  _.forIn(this.config.strategies, function(value, name) {
+    self.server.auth.strategy(name, value.scheme, value.mode, value.options);
+  });
+
+};
+
 Rapptor.prototype.setup = function(callback) {
   var self = this;
 
-  this.server.register(this.plugins, function(err) {
-    if (err) {
-      return callback(err);
-    }
-
-    // load up rapptor budled methods and helpers
-    require('hapi-auto-loader')(self.server, {
-      cwd: __dirname,
-      routes: false,
-      partials: false
-    }, function(err) {
-      if (err) {
-        return callback(err);
-      }
-
+  async.waterfall([
+    function(done) {
+      self.server.register(self.plugins, done);
+    },
+    function(done) {
+      self._setupStrategies();
+      done();
+    },
+    function(done) {
+      self.server.plugins['hapi-auto-loader'].load({
+        cwd: __dirname,
+        routes: false,
+        partials: false
+      }, done);
+    },
+    function(done) {
+      self.server.plugins['hapi-auto-loader'].load({
+        cwd: self.cwd,
+        routes: {
+          path: self.config.structure.routes,
+          base: self.config.routes.base,
+          context: self.config.routes.context
+        },
+        partials: {
+          path: self.config.structure.partials
+        },
+        helpers: {
+          path: self.config.structure.helpers
+        },
+        methods: {
+          path: self.config.structure.methods
+        }
+      }, done);
+    },
+    function(done) {
       self._setupViews();
       self._setupAssets();
+      done(null, self.server);
+    },
 
-      callback(null, self.server);
-    });
 
-  });
+  ], callback);
 };
 
 Rapptor.prototype.start = function(callback) {

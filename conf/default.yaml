@@ -33,3 +33,5 @@ views:
   errorBlacklist: ^\/api
 cache:
   partition: '{{name}}-cache'
+admin:
+  password: 'changeme'

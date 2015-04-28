@@ -9,6 +9,10 @@ plugins:
       'User Errors': 'statusCode==401 OR statusCode==400'
       'Not Found': 'statusCode==404'
       'Server Errors': 'statusCode==500'
+  hapi-auto-loader:
+    _nativePlugin: true
+  hapi-password:
+    _nativePlugin: true
   hapi-log-response:
     _nativePlugin: true
     _enabled: false

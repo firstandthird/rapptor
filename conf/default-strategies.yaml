@@ -1,0 +1,11 @@
+strategies:
+  admin:
+    scheme: 'password'
+    mode: false
+    options:
+      password: '{{admin.password}}'
+      endpoint: '/admin/login'
+      successEndpont: '/admin'
+      cookieName: '{{name}}-admin'
+      loginForm:
+        name: '{{name}} Admin'
