@@ -81,9 +81,12 @@ Rapptor.prototype._setupConfig = function() {
   configStr = configStr.replace(/MONGOURL/g, this.config.mongo.url);
   configStr = configStr.replace(/DIRNAME/g, this.cwd);
   this.config = JSON.parse(configStr);
-  if (process.env.RAPPTORDEBUG == 1) {
+  if (process.env.RAPPTORDEBUG == 1 || process.env.RAPPTORCONFIG == 1) {
     console.log('RAPPTOR CONFIG. RAAR');
     console.log(JSON.stringify(this.config, null, '  '));
+    if (process.env.RAPPTORCONFIG == 1) {
+      process.exit(0);
+    }
   }
 };
 
