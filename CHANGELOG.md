@@ -1,4 +1,13 @@
 
+0.5.0 / 2015-04-28
+==================
+
+  * changed log endpoint
+  * hapi-admin and strategy support
+  * added RAPPTORCONFIG to print config and then exit
+  * updated hapi-auto-loader to 0.4.0
+
+
 0.4.0 / 2015-04-28
 ==================
 
