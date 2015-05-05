@@ -177,6 +177,15 @@ Rapptor.prototype._setupViews = function() {
 
 Rapptor.prototype._setupAssets = function() {
 
+  if (this.config.assets.mapping) {
+    var assetPath = path.join(this.cwd, this.config.structure.assets, this.config.assets.mapping);
+    if (fs.existsSync(assetPath)) {
+      this.config.assets.mappingObj = require(assetPath);
+    }
+  } else {
+    this.config.assets.mappingObj = {};
+  }
+
   var self = this;
   this.server.route({
     path: self.config.assets.path+'/{path*}',

@@ -1,12 +1,14 @@
 var url = require('url');
 var Handlebars = require('handlebars');
 
-module.exports = function (type, filename) {
+module.exports = function (type, filename, version) {
   if (!filename) {
     return;
   }
 
   var cdn = this._server.app.config.assets.host || '';
+  version = (typeof version === 'string') ? version : this._server.app.config.assets.version;
+
   var file;
 
   if (type == 'image' || type == 'image-path') {
@@ -16,6 +18,10 @@ module.exports = function (type, filename) {
   }
 
   var filePath = url.resolve(cdn, this._server.app.config.assets.path) + '/' + file;
+
+  if (version) {
+    filePath += '?v=' + version;
+  }
 
   var out = '';
   if (type == 'css') {
