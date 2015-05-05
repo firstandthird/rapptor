@@ -182,7 +182,8 @@ Rapptor.prototype._setupAssets = function() {
     if (fs.existsSync(assetPath)) {
       this.config.assets.mappingObj = require(assetPath);
     }
-  } else {
+  }
+  if (!this.config.assets.mappingObj) {
     this.config.assets.mappingObj = {};
   }
 
