@@ -1,4 +1,5 @@
 name: 'rapptor'
+host: ''
 server:
   debug:
     request:
@@ -25,12 +26,13 @@ routes:
   base: '/'
   context: {}
 assets:
+  host: '{{host}}' #CDN goes here
   path: '/ui'
   compiled: '_prod'
   mapping: '_prod/assets.json'
   cors:
     origin: 
-      - '*'
+      - '{{assets.host}}'
     methods:
       - 'GET'
     exposedHeaders: []
