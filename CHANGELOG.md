@@ -1,4 +1,11 @@
 
+0.8.0 / 2015-05-05
+==================
+
+  * default mapping object to empty object
+  * refactor getAsset to load mapping file on server start and add support for either passing in a version to the asset helper or setting globally   in the config
+
+
 0.7.0 / 2015-05-05
 ==================
 
