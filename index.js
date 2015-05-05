@@ -183,10 +183,8 @@ Rapptor.prototype._setupAssets = function() {
     method: 'GET',
     config: {
       auth: false,
-      cache: {
-        //privacy: 'public',
-        //expiresIn: 1000 * 60 * 60 * 24 * 7
-      },
+      cors: self.config.assets.cors,
+      cache: self.config.assets.cache,
       handler: {
         directory: {
           path: path.resolve(self.cwd, self.config.structure.assets),

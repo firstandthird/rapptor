@@ -1,6 +1,7 @@
 assets:
   compiled: '_dist'
   mapping: null
+  cache: {}
 logging:
   reporters:
     console:

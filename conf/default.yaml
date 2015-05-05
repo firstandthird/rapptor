@@ -28,6 +28,15 @@ assets:
   path: '/ui'
   compiled: '_prod'
   mapping: '_prod/assets.json'
+  cors:
+    origin: 
+      - '*'
+    methods:
+      - 'GET'
+    exposedHeaders: []
+  cache:
+    privacy: 'public'
+    expiresIn: 604800000 #1 week
 views:
   errors: false
   errorBlacklist: ^\/api
