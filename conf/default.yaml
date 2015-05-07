@@ -12,6 +12,8 @@ connection:
     validate:
       options:
         allowUnknown: true
+  state:
+    strictHeader: false
 mongo:
   url: "mongodb://{{default ENV.MONGO_PORT_27017_TCP_ADDR 'localhost'}}:{{default ENV.MONGO_PORT_27017_TCP_PORT 27017}}/{{name}}-app"
 structure:
@@ -29,7 +31,7 @@ assets:
   compiled: '_prod'
   mapping: '_prod/assets.json'
   cors:
-    origin: 
+    origin:
       - '*'
     methods:
       - 'GET'
