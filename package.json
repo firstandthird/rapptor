@@ -30,7 +30,7 @@
     "hapi-log-response": "0.1.0",
     "hapi-metrics": "1.0.0",
     "hapi-output-cache": "0.3.0",
-    "hapi-password": "0.2.0",
+    "hapi-password": "0.3.0",
     "hapi-redirects": "0.1.0",
     "joi": "5.1.0",
     "lodash": "3.5.0",

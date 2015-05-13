@@ -8,4 +8,4 @@ strategies:
       successEndpont: '/admin'
       cookieName: '{{name}}-admin'
       loginForm:
-        name: '{{name}} Admin'
+        name: '{{prettyName}} Admin'

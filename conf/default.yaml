@@ -1,4 +1,5 @@
 name: 'rapptor'
+prettyName: '{{name}}'
 server:
   debug:
     request:
