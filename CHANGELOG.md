@@ -1,4 +1,14 @@
 
+0.9.0 / 2015-05-13
+==================
+
+  * updated hapi-password to 0.3.0 and added prettyName field
+  * run auth plugins first
+  * updated confi, removed MONGOURL and DIRNAME replacements
+  * updated hapi-output-cache to 0.3.0
+  * updated hapi-auto-loader
+
+
 0.8.0 / 2015-05-05
 ==================
 
