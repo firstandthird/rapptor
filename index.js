@@ -19,11 +19,11 @@ var Rapptor = function(options) {
   serverConfig.app = this.config;
   serverConfig.cache = {
     engine: require('catbox-mongodb'),
-    partition: this.config.cache.partition || this.config.mongo.db,
-    host: this.config.cache.host || this.config.mongo.params.hosts[0].host,
-    port: this.config.cache.port || this.config.mongo.params.hosts[0].port,
-    username: this.config.cache.username || this.config.mongo.params.username,
-    password: this.config.cache.password || this.config.mongo.params.password
+    partition: this.config.cache.partition,
+    host: this.config.cache.host,
+    port: this.config.cache.port,
+    username: this.config.cache.username,
+    password: this.config.cache.password
   };
 
   this.server = new Hapi.Server(serverConfig);
@@ -55,15 +55,6 @@ Rapptor.prototype._setupConfig = function() {
 
   this.config.cwd = this.cwd;
 
-  //parse mongo info for plugins that require it split out (catbox-mongodb)
-  this.config.mongo.params = mongodbUri.parse(this.config.mongo.url);
-
-
-  //replace MONGOURL in config
-  var configStr = JSON.stringify(this.config);
-  configStr = configStr.replace(/MONGOURL/g, this.config.mongo.url);
-  configStr = configStr.replace(/DIRNAME/g, this.cwd);
-  this.config = JSON.parse(configStr);
   if (process.env.RAPPTORDEBUG == 1 || process.env.RAPPTORCONFIG == 1) {
     console.log('RAPPTOR CONFIG. RAAR');
     console.log(JSON.stringify(this.config, null, '  '));

@@ -1,7 +1,7 @@
 plugins:
   good-mongodb-viewer:
     _nativePlugin: true
-    connectionUrl: 'MONGOURL'
+    connectionUrl: '{{mongo.url}}'
     endpoint: '/admin/logs'
     searches:
       'Jobs': 'tags:agenda'
@@ -23,15 +23,15 @@ plugins:
     redirects: {}
   hapi-agenda:
     _nativePlugin: true
-    mongoUrl: 'MONGOURL'
-    jobs: 'DIRNAME/jobs'
+    mongoUrl: '{{mongo.url}}'
+    jobs: '{{CWD}}/jobs'
     jsonApi: true
     basePath: '/admin'
     processEvery: '30 minutes'
     every: {}
   hapi-metrics:
     _nativePlugin: true
-    connectionUrl: 'MONGOURL'
+    connectionUrl: '{{mongo.url}}'
     collection: '{{name}}-metrics'
   hapi-output-cache:
     _nativePlugin: true

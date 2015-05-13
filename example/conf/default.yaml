@@ -32,7 +32,7 @@ plugins:
     redirects:
       '/test': '/'
   hapi-agenda:
-    mongoUrl: 'MONGOURL'
+    mongoUrl: '{{mongo.url}}'
     jobs: 'DIRNAME/jobs'
     processEvery: '5 seconds'
     #every:

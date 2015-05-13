@@ -13,7 +13,11 @@ connection:
       options:
         allowUnknown: true
 mongo:
-  url: "mongodb://{{default ENV.MONGO_PORT_27017_TCP_ADDR 'localhost'}}:{{default ENV.MONGO_PORT_27017_TCP_PORT 27017}}/{{name}}-app"
+  defaultHost: 'localhost'
+  host: '{{default ENV.MONGO_PORT_27017_TCP_ADDR mongo.defaultHost}}'
+  port: "{{default ENV.MONGO_PORT_27017_TCP_PORT 27017}}"
+  db: "{{name}}-app"
+  url: "mongodb://{{mongo.host}}:{{mongo.port}}/{{mongo.db}}"
 structure:
   routes: 'routes'
   assets: 'public'
@@ -42,5 +46,9 @@ views:
   errorBlacklist: ^\/api
 cache:
   partition: '{{name}}-cache'
+  host: '{{mongo.host}}'
+  port: '{{mongo.port}}'
+  username: ''
+  password: ''
 admin:
   password: 'changeme'

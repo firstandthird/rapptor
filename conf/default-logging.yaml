@@ -10,7 +10,7 @@ logging:
         log: '*'
         error: '*'
       config:
-        connectionUrl: 'MONGOURL'
+        connectionUrl: '{{mongo.url}}'
         ttl: 604800
     hipchat:
       _enabled: false
