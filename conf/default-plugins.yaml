@@ -1,8 +1,12 @@
+authPlugins:
+  hapi-password:
+    _nativePlugin: true
 plugins:
   good-mongodb-viewer:
     _nativePlugin: true
     connectionUrl: '{{mongo.url}}'
     endpoint: '/admin/logs'
+    auth: 'admin'
     searches:
       'Jobs': 'tags:agenda'
       'Job Errors': 'tags:agenda AND tags:error'
@@ -10,8 +14,6 @@ plugins:
       'Not Found': 'statusCode==404'
       'Server Errors': 'statusCode==500'
   hapi-auto-loader:
-    _nativePlugin: true
-  hapi-password:
     _nativePlugin: true
   hapi-log-response:
     _nativePlugin: true

@@ -31,8 +31,10 @@ var Rapptor = function(options) {
   this.server.app.config = this.config;
 
   this.plugins = [];
+  this.authPlugins = [];
   this._setupLogging();
-  this._readPlugins();
+  this._readPlugins(this.config.authPlugins, 'authPlugins');
+  this._readPlugins(this.config.plugins, 'plugins');
 
 
   this.server.connection(this.config.connection);
@@ -64,10 +66,10 @@ Rapptor.prototype._setupConfig = function() {
   }
 };
 
-Rapptor.prototype._readPlugins = function() {
+Rapptor.prototype._readPlugins = function(arr, type) {
 
   var self = this;
-  _.forIn(this.config.plugins, function(value, key) {
+  _.forIn(arr, function(value, key) {
     value = value || {};
     if (value._enabled === false) {
       return;
@@ -81,7 +83,7 @@ Rapptor.prototype._readPlugins = function() {
     }
     delete value._enabled;
     delete value._nativePlugin;
-    self.loadPlugin(key, value);
+    self.loadPlugin(key, value, type);
   });
 };
 
@@ -105,8 +107,11 @@ Rapptor.prototype._setupLogging = function() {
 
 };
 
-Rapptor.prototype.loadPlugin = function(key, options) {
-  this.plugins.push({
+Rapptor.prototype.loadPlugin = function(key, options, type) {
+  if (!type) {
+    type = 'plugins';
+  }
+  this[type].push({
     register: require(key),
     options: options
   });
@@ -211,11 +216,14 @@ Rapptor.prototype.setup = function(callback) {
 
   async.waterfall([
     function(done) {
-      self.server.register(self.plugins, done);
+      self.server.register(self.authPlugins, done);
     },
     function(done) {
       self._setupStrategies();
       done();
+    },
+    function(done) {
+      self.server.register(self.plugins, done);
     },
     function(done) {
       self.server.plugins['hapi-auto-loader'].load({
