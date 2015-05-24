@@ -35,5 +35,7 @@ plugins:
     _nativePlugin: true
     connectionUrl: '{{mongo.url}}'
     collection: '{{name}}-metrics'
+    apiEnabled: true
+    #apiAuth: 'admin'
   hapi-output-cache:
     _nativePlugin: true
