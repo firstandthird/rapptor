@@ -13,6 +13,8 @@ connection:
     validate:
       options:
         allowUnknown: true
+  state:
+    strictHeader: false
 mongo:
   defaultHost: 'localhost'
   host: '{{default ENV.MONGO_PORT_27017_TCP_ADDR mongo.defaultHost}}'
@@ -34,7 +36,7 @@ assets:
   compiled: '_prod'
   mapping: '_prod/assets.json'
   cors:
-    origin: 
+    origin:
       - '*'
     methods:
       - 'GET'
