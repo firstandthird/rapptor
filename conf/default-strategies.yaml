@@ -7,5 +7,6 @@ strategies:
       endpoint: '/admin/login'
       successEndpont: '/admin'
       cookieName: '{{name}}-admin'
+      ttl: 2592000000 #30 days
       loginForm:
         name: '{{prettyName}} Admin'
