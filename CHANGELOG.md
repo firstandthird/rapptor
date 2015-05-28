@@ -1,4 +1,13 @@
 
+0.11.0 / 2015-05-28
+==================
+
+  * added protocol option and use for asset hosts
+  * don't enable metrics api by default
+  * Disabled strict header by default.
+  * default asset host to main host and default cors to asset host
+
+
 0.10.0 / 2015-05-24
 ==================
 
