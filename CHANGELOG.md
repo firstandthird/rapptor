@@ -1,4 +1,10 @@
 
+0.12.0 / 2015-05-29
+==================
+
+  * added fullHost, which includes protocol.  set host and asset host to blank on dev
+
+
 0.11.1 / 2015-05-28
 ==================
 
