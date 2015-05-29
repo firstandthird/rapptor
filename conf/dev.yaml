@@ -1,7 +1,9 @@
+host: ''
 assets:
+  host: ''
   compiled: '_dist'
   mapping: null
-  cache: {}
+  cache: null
 logging:
   reporters:
     console:
