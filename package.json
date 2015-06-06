@@ -28,7 +28,7 @@
     "hapi-agenda": "0.9.1",
     "hapi-auto-loader": "0.5.0",
     "hapi-log-response": "0.1.0",
-    "hapi-metrics": "2.0.0",
+    "hapi-metrics": "3.0.0",
     "hapi-output-cache": "0.3.0",
     "hapi-password": "0.3.0",
     "hapi-redirects": "0.1.0",
