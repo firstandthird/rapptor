@@ -3,11 +3,9 @@ var Hapi = require('hapi');
 var _ = require('lodash');
 var fs = require('fs');
 var path = require('path');
-var mongodbUri = require('mongodb-uri');
 var async = require('async');
 
 var Rapptor = function(options) {
-
   options = options || {};
 
   this.cwd = options.cwd || process.cwd();
