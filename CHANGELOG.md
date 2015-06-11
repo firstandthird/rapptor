@@ -1,4 +1,14 @@
 
+0.16.0 / 2015-06-11
+==================
+
+  * updated node version to 0.10.38.  fixes #69
+  * updated good-mongodb-viewer to 0.8.1.  Fixes #68
+  * check reporter length before loading good plugin. fixes #66
+  * removed mongo uri dep
+  * [docker] install grunt-set-rapptor first, upped version to 0.1.0
+
+
 0.15.0 / 2015-06-06
 ==================
 
