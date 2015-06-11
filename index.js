@@ -100,8 +100,10 @@ Rapptor.prototype._setupLogging = function() {
     reporters.push(values);
   });
 
-  this.config.logging.reporters = reporters;
-  this.loadPlugin('good', this.config.logging);
+  if (reporters.length !== 0) {
+    this.config.logging.reporters = reporters;
+    this.loadPlugin('good', this.config.logging);
+  }
 
 };
 
