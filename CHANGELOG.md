@@ -1,4 +1,10 @@
 
+0.16.1 / 2015-06-15
+==================
+
+  * fixed a bug where stringify would have a circular reference because _server is getting added
+
+
 0.16.0 / 2015-06-11
 ==================
 
