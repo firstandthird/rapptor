@@ -26,7 +26,7 @@
     "handlebars": "^3.0.3",
     "hapi": "^8.6.1",
     "hapi-agenda": "0.9.1",
-    "hapi-auto-loader": "0.5.0",
+    "hapi-auto-loader": "0.6.0",
     "hapi-log-response": "0.1.0",
     "hapi-metrics": "3.0.0",
     "hapi-output-cache": "0.3.0",
