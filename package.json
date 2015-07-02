@@ -17,6 +17,7 @@
     "async": "^1.2.1",
     "autolinker": "0.17.1",
     "catbox-mongodb": "1.1.0",
+    "colors": "^1.1.2",
     "confi": "0.7.0",
     "good": "^6.1.0",
     "good-console": "^5.0.0",
@@ -34,7 +35,8 @@
     "hapi-redirects": "0.1.0",
     "joi": "^6.4.3",
     "lodash": "^3.9.3",
-    "require-all": "^1.1.0"
+    "require-all": "^1.1.0",
+    "yargs": "^3.14.0"
   },
   "devDependencies": {
     "boom": "^2.7.2"
