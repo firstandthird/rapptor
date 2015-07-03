@@ -273,6 +273,10 @@ Rapptor.prototype.callMethod = function(server, method, argv, callback) {
   if(methodFunc) {
     var funcArgs = argv._;
 
+    for(i=0; i<funcArgs.length; i++){
+      funcArgs[i] = JSON.parse(funcArgs[i]);
+    }
+    
     funcArgs.push(function(err, data) {
       if(err) {
         console.log('An ERROR Occured'.red);
