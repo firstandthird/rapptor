@@ -287,7 +287,7 @@ Rapptor.prototype.callMethod = function(server, method, argv, callback) {
 
     });
 
-    methodFunc.apply(this, funcArgs);
+    methodFunc.apply(server, funcArgs);
 
   } else {
     console.log('WARNING: Method ' + method + ' doesn\'t exist');
