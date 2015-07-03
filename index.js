@@ -4,9 +4,6 @@ var _ = require('lodash');
 var fs = require('fs');
 var path = require('path');
 var async = require('async');
-var bootstrap = require('./lib/bootstrap');
-
-var colors = require('colors');
 
 var Rapptor = function(options) {
   options = options || {};
@@ -271,7 +268,7 @@ Rapptor.prototype.callMethod = function(server, method, argv, callback) {
   var methodFunc = _.get(server.methods, method);
 
   if(methodFunc) {
-    var funcArgs = argv._;
+    var funcArgs = argv;
 
     for(i=0; i<funcArgs.length; i++){
       funcArgs[i] = JSON.parse(funcArgs[i]);
@@ -279,12 +276,12 @@ Rapptor.prototype.callMethod = function(server, method, argv, callback) {
     
     funcArgs.push(function(err, data) {
       if(err) {
-        console.log('An ERROR Occured'.red);
-        console.log((err.toString()).yellow);
+        console.log('An ERROR Occured');
+        console.log(err.toString());
         process.exit();
       }
 
-      console.log(('Method '+method+' Result').yellow);
+      console.log('Method '+method+' Result');
       console.log(JSON.stringify(data, null, ' '));
       process.exit();
 
@@ -293,7 +290,7 @@ Rapptor.prototype.callMethod = function(server, method, argv, callback) {
     methodFunc.apply(this, funcArgs);
 
   } else {
-    console.log(('WARNING: Method ' + method + ' doesn\'t exist').red);
+    console.log('WARNING: Method ' + method + ' doesn\'t exist');
     process.exit();
   }
 }
@@ -307,10 +304,10 @@ Rapptor.prototype.start = function(callback) {
       return callback(err);
     }
 
-    var args = bootstrap.argv;
+    var args = process.argv.slice(2);
 
-    if(args._.shift() == 'method') {
-      var method = args._.shift();
+    if(args.shift() == 'method') {
+      var method = args.shift();
       Rapptor.prototype.callMethod(server, method, args, callback);
     } else {
       server.start(function(err) {
