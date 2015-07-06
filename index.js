@@ -261,6 +261,40 @@ Rapptor.prototype.setup = function(callback) {
   ], callback);
 };
 
+Rapptor.prototype.callMethod = function(server, method, argv, callback) {
+
+  callback = callback || _.noop;
+
+  var methodFunc = _.get(server.methods, method);
+
+  if(methodFunc) {
+    var funcArgs = argv;
+
+    for(i=0; i<funcArgs.length; i++){
+      funcArgs[i] = JSON.parse(funcArgs[i]);
+    }
+    
+    funcArgs.push(function(err, data) {
+      if(err) {
+        console.log('An ERROR Occured');
+        console.log(err.toString());
+        process.exit();
+      }
+
+      console.log('Method '+method+' Result');
+      console.log(JSON.stringify(data, null, ' '));
+      process.exit();
+
+    });
+
+    methodFunc.apply(server, funcArgs);
+
+  } else {
+    console.log('WARNING: Method ' + method + ' doesn\'t exist');
+    process.exit();
+  }
+}
+
 Rapptor.prototype.start = function(callback) {
 
   callback = callback || _.noop;
@@ -270,15 +304,24 @@ Rapptor.prototype.start = function(callback) {
       return callback(err);
     }
 
-    server.start(function(err) {
-      if (!err) {
-        server.log(['server', 'info'], 'Server started '+ server.info.uri);
-      }
+    var args = process.argv.slice(2);
 
-      if (callback) {
-        callback(err, server);
-      }
-    });
+    if(args.shift() == 'method') {
+      var method = args.shift();
+      Rapptor.prototype.callMethod(server, method, args, callback);
+    } else {
+      server.start(function(err) {
+        if (!err) {
+          server.log(['server', 'info'], 'Server started '+ server.info.uri);
+        }
+
+        if (callback) {
+          callback(err, server);
+        }
+      });
+    }
+
+
   });
 
 };

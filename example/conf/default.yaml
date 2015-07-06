@@ -25,6 +25,8 @@ logging:
                 notify: true
 assets:
   host: 'http://localhost:8081'
+structure:
+  partials: 'partials'
 views:
   errors: 'errors'
 plugins:
