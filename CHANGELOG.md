@@ -1,4 +1,9 @@
 
+0.18.0 / 2015-07-07
+==================
+
+  * Ability to call a server methods from the command line
+
 0.17.0 / 2015-06-22
 ==================
 
