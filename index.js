@@ -158,6 +158,8 @@ Rapptor.prototype._setupViews = function() {
         return reply.continue();
       }
 
+      self.server.log(['error'], response);
+
       var payload = response.output.payload;
 
       return reply.view(self.config.views.errors, {
@@ -275,9 +277,9 @@ Rapptor.prototype.callMethod = function(server, method, argv, callback) {
         funcArgs[i] = JSON.parse(funcArgs[i]);
       } catch(e) {
         funcArgs[i] = funcArgs[i];
-      }  
+      }
     }
-    
+
     funcArgs.push(function(err, data) {
       if(err) {
         console.log('An ERROR Occured');
