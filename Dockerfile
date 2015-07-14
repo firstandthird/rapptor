@@ -7,7 +7,7 @@ RUN npm i -g bower grunt-cli
 RUN mkdir /app
 
 RUN cd /app && npm install grunt-set-rapptor@0.1.0
-RUN cd /app && npm install rapptor@0.18.2
+RUN cd /app && npm install rapptor@0.19.0
 
 WORKDIR /app
 
