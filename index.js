@@ -158,7 +158,15 @@ Rapptor.prototype._setupViews = function() {
         return reply.continue();
       }
 
-      self.server.log(['error'], response);
+      if (response.output.statusCode == 500) {
+        self.server.log(['error'], {
+          output: response.output,
+          path: request.path,
+          method: request.method,
+          payload: request.payload,
+          stack: response.stack
+        });
+      }
 
       var payload = response.output.payload;
 
