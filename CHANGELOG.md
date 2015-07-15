@@ -1,4 +1,10 @@
 
+0.19.1 / 2015-07-15
+==================
+
+  * more detailed error logging
+  * updated dockerfile version
+
 0.19.0 / 2015-07-14
 ==================
 
