@@ -4,7 +4,8 @@ module.exports = {
   },
   options: {
     cache: {
-      expiresIn: 60 * 60 * 1000
+      expiresIn: 60 * 60 * 1000,
+      generateTimeout: 400
     },
     generateKey: function() {
       return 'getTimeExample';

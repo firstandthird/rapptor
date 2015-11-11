@@ -42,8 +42,6 @@ assets:
   cors:
     origin:
       - '{{fullHost}}'
-    methods:
-      - 'GET'
     exposedHeaders: []
   cache:
     privacy: 'public'
