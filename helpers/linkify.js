@@ -1,10 +1,12 @@
-var Handlebars = require('handlebars');
-var Autolinker = require('autolinker');
+'use strict';
+
+const Handlebars = require('handlebars');
+const Autolinker = require('autolinker');
 
 module.exports = function(text, options) {
   text = text.string || text;
 
-  var linkedText = Autolinker.link(text, {
+  let linkedText = Autolinker.link(text, {
     newWindow: true,
     phone: false
   });

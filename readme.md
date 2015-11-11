@@ -3,12 +3,17 @@
 ### Usage:
 
 ```js
-var Rapptor = require('rapptor');
-var rapptor = new Rapptor();
+const Rapptor = require('rapptor');
+const rapptor = new Rapptor();
 rapptor.start();
 ```
 
 see example directory for a working app.
+
+### Backwards breaking changes
+
+ - Rapptor now requires nodejs > v4
+ - Some core Hapi plugins might require initializing via plugin config
 
 ### Using in tests
 

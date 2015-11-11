@@ -1,15 +1,17 @@
-var url = require('url');
-var Handlebars = require('handlebars');
+'use strict';
+
+const url = require('url');
+const Handlebars = require('handlebars');
 
 module.exports = function (type, filename, version) {
   if (!filename) {
     return;
   }
 
-  var cdn = this._server.app.config.assets.host || '';
+  const cdn = this._server.app.config.assets.host || '';
   version = (typeof version === 'string') ? version : this._server.app.config.assets.version;
 
-  var file;
+  let file;
 
   if (type == 'image' || type == 'image-path') {
     file = filename;
@@ -17,13 +19,14 @@ module.exports = function (type, filename, version) {
     file = this._server.methods.getAsset(filename, type);
   }
 
-  var filePath = url.resolve(cdn, this._server.app.config.assets.path) + '/' + file;
+  let filePath = url.resolve(cdn, this._server.app.config.assets.path) + '/' + file;
 
   if (version) {
     filePath += '?v=' + version;
   }
 
-  var out = '';
+  let out = '';
+
   if (type == 'css') {
     out = '<link rel="stylesheet" href="'+filePath+'"/>';
   } else if (type == 'js') {
@@ -33,6 +36,6 @@ module.exports = function (type, filename, version) {
   } else if (type == 'image-path') {
     out = filePath;
   }
-  
+
   return new Handlebars.SafeString(out);
 };

@@ -1,8 +1,10 @@
-module.exports = function () {
-  var passing = true;
-  var options = arguments[arguments.length-1];
+'use strict';
 
-  for (var i = 0, c = arguments.length; i < c; i++) {
+module.exports = function () {
+  const options = arguments[arguments.length-1];
+  let passing = true;
+
+  for (let i = 0, c = arguments.length; i < c; i++) {
     if (!arguments[i]) {
       passing = false;
       break;
