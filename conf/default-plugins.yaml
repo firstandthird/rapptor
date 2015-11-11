@@ -3,7 +3,9 @@ authPlugins:
     _nativePlugin: true
 plugins:
   vision:
+    _nativePlugin: true
   inert:
+    _nativePlugin: true
   good-mongodb-viewer:
     _nativePlugin: true
     connectionUrl: '{{mongo.url}}'
