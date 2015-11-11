@@ -1,9 +1,9 @@
+'use strict';
+
 exports.time = {
   method: 'GET',
-  path: '/time', 
+  path: '/time',
   handler: function(request, reply) {
-    request.server.methods.getTime(function(err, result){
-      reply(result);
-    });
+    request.server.methods.getTime((err, result) => reply(result));
   }
 };

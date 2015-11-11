@@ -1,8 +1,9 @@
+'use strict';
+
 exports.home = {
   method: 'GET',
-  path: '/', 
+  path: '/',
   handler: function(request, reply) {
-
     request.server.plugins.metrics.add('testing', { isTest: true }, function(err, metric) {
       reply.view('test/view');
     });
