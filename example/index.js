@@ -1,17 +1,15 @@
-var Rapptor = require('../');
-var Boom = require('boom');
+/* eslint-disable no-console */
+'use strict';
+const Rapptor = require('../');
 
-var rapptor = new Rapptor({
+const rapptor = new Rapptor({
+  configPath: `${__dirname}/conf`,
   cwd: __dirname
 });
 
-rapptor.server.route({
-  method: 'GET',
-  path: '/error',
-  handler: function(request, reply) {
-    reply(Boom.badImplementation('error'));
+rapptor.start((err, server, config) => {
+  if (err) {
+    throw err;
   }
+  console.log('Server Started', server.info.uri);
 });
-
-rapptor.start();
-

@@ -1,61 +1,17 @@
-name: 'rapptor'
-prettyName: '{{name}}'
-host: ''
-protocol: 'http'
-fullHost: '{{#if host}}{{protocol}}://{{host}}{{/if}}'
-server:
-  debug:
-    request:
-      - 'error'
+verbose: false
 connection:
-  port: "{{default ENV.PORT 8080}}"
+  port: "{{ENV.PORT || 8080}}"
   address: '0.0.0.0'
-  routes:
-    response:
-      failAction: 'log'
-    validate:
-      options:
-        allowUnknown: true
-  state:
-    strictHeader: false
-mongo:
-  defaultHost: 'localhost'
-  host: '{{default ENV.MONGO_PORT_27017_TCP_ADDR mongo.defaultHost}}'
-  port: "{{default ENV.MONGO_PORT_27017_TCP_PORT 27017}}"
-  db: "{{name}}-app"
-  url: "mongodb://{{mongo.host}}:{{mongo.port}}/{{mongo.db}}"
-structure:
-  routes: 'routes'
-  assets: 'public'
-  views: 'public'
-  helpers: 'helpers'
-  methods: 'methods'
-  partials: 'public'
-routes:
-  base: '/'
-  context: {}
-assets:
-  host: '{{fullHost}}' #CDN goes here
-  path: '/ui'
-  compiled: '_prod'
-  mapping: '_prod/assets.json'
-  cors:
-    origin:
-      - '{{fullHost}}'
-    methods:
-      - 'GET'
-    exposedHeaders: []
-  cache:
-    privacy: 'public'
-    expiresIn: 604800000 #1 week
-views:
-  errors: false
-  errorBlacklist: ^\/api
-cache:
-  partition: '{{name}}-cache'
-  host: '{{mongo.host}}'
-  port: '{{mongo.port}}'
-  username: ''
-  password: ''
-admin:
-  password: 'changeme'
+logging:
+  reporters:
+    json-console:
+      events:
+        error:
+        log:
+plugins:
+  hapi-method-loader:
+    cwd: '{{CWD}}'
+    verbose: '{{verbose}}'
+  hapi-route-loader:
+    cwd: '{{CWD}}'
+    verbose: '{{verbose}}'

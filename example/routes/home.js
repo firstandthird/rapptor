@@ -1,10 +1,18 @@
+'use strict';
 exports.home = {
   method: 'GET',
-  path: '/', 
-  handler: function(request, reply) {
+  path: '/',
+  handler: (request, reply) => {
+    const server = request.server;
+    server.methods.randomNumber((err, number) => {
+      if (err) {
+        return reply(err);
+      }
 
-    request.server.plugins.metrics.add('testing', { isTest: true }, function(err, metric) {
-      reply.view('test/view');
+      reply({
+        config: server.settings.app.someConfigValue,
+        randomNumber: number
+      });
     });
   }
 };

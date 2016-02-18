@@ -1,16 +1,7 @@
-host: ''
-assets:
-  host: ''
-  compiled: '_dist'
-  mapping: null
-  cache: null
 logging:
   reporters:
+    json-console: false
     console:
-      _enabled: true
       events:
-        log: '*'
-        error: '*'
-plugins:
-  hapi-output-cache:
-    enabled: false
+        log:
+        error:

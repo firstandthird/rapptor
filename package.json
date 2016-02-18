@@ -13,30 +13,26 @@
     "type": "git",
     "url": "https://github.com/firstandthird/rapptor.git"
   },
+  "scripts": {
+    "lint": "eslint ."
+  },
   "dependencies": {
-    "async": "1.2.1",
-    "autolinker": "0.17.1",
-    "catbox-mongodb": "1.1.0",
-    "confi": "0.7.0",
-    "good": "6.1.4",
-    "good-console": "5.0.2",
-    "good-hipchat": "0.4.0",
-    "good-mongodb": "0.4.0",
-    "good-mongodb-viewer": "0.8.1",
-    "handlebars": "3.0.3",
-    "hapi": "8.6.1",
-    "hapi-agenda": "0.9.1",
-    "hapi-auto-loader": "0.6.0",
-    "hapi-log-response": "0.1.0",
-    "hapi-metrics": "3.0.0",
-    "hapi-output-cache": "0.3.0",
-    "hapi-password": "0.3.0",
-    "hapi-redirects": "0.1.0",
-    "joi": "6.4.3",
-    "lodash": "3.9.3",
-    "require-all": "1.1.0"
+    "good": "^6.6.0",
+    "good-console": "^5.3.1",
+    "good-json-console": "^1.0.0",
+    "hapi": "^13.0.0",
+    "hapi-confi": "^0.2.0",
+    "hapi-method-loader": "0.0.5",
+    "hapi-route-loader": "^0.1.1",
+    "joi": "^8.0.1",
+    "lodash": "^4.5.0",
+    "require-all": "^2.0.0"
   },
   "devDependencies": {
-    "boom": "2.7.2"
+    "boom": "2.7.2",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^5.0.1",
+    "eslint-config-firstandthird": "^1.5.0",
+    "eslint-plugin-react": "^3.16.1"
   }
 }
