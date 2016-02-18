@@ -23,10 +23,7 @@
     "hapi": "^13.0.0",
     "hapi-confi": "^0.2.0",
     "hapi-method-loader": "0.0.5",
-    "hapi-route-loader": "^0.1.1",
-    "joi": "^8.0.1",
-    "lodash": "^4.5.0",
-    "require-all": "^2.0.0"
+    "hapi-route-loader": "^0.1.1"
   },
   "devDependencies": {
     "boom": "2.7.2",
