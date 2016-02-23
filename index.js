@@ -5,7 +5,8 @@ const hapiConfi = require('hapi-confi');
 class Rapptor {
   constructor(options) {
     this.options = options || {};
-    const projectConfig = options.configPath || `${process.cwd()}/conf`;
+    this.options.cwd = this.options.cwd || process.cwd();
+    const projectConfig = options.configPath || `${options.cwd}/conf`;
     //inject rapptor config first
     const configPaths = [
       `${__dirname}/conf`,
@@ -14,16 +15,20 @@ class Rapptor {
     this.options.configPath = configPaths;
   }
 
+  before(callback) {
+    this.options.before = callback;
+  }
+
   start(done) {
     hapiConfi(Hapi, this.options, (err, server, config) => {
       if (err) {
         return done(err);
       }
-      server.start((err) => {
-        done(err, server, config);
+      server.start((serverErr) => {
+        done(serverErr, server, config);
       });
     });
   }
-};
+}
 
 module.exports = Rapptor;
