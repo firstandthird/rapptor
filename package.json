@@ -17,11 +17,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "good": "^6.6.0",
-    "good-console": "^5.3.1",
-    "good-json-console": "^1.0.0",
     "hapi": "^13.0.0",
     "hapi-confi": "^0.2.0",
+    "hapi-logr": "0.0.3",
     "hapi-method-loader": "0.0.5",
     "hapi-route-loader": "^0.1.1"
   },

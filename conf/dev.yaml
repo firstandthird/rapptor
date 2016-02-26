@@ -1,7 +1,3 @@
-logging:
-  reporters:
-    json-console: false
-    console:
-      events:
-        log:
-        error:
+plugins:
+  hapi-logr:
+    type: 'console'

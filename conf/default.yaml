@@ -2,13 +2,9 @@ verbose: false
 connection:
   port: "{{ENV.PORT || 8080}}"
   address: '0.0.0.0'
-logging:
-  reporters:
-    json-console:
-      events:
-        error:
-        log:
 plugins:
+  hapi-logr:
+    type: 'json'
   hapi-method-loader:
     cwd: '{{CWD}}'
     verbose: '{{verbose}}'
