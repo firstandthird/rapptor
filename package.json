@@ -19,7 +19,7 @@
   "dependencies": {
     "hapi": "^13.0.0",
     "hapi-confi": "^0.2.0",
-    "hapi-logr": "0.0.3",
+    "hapi-logr": "1.0.0",
     "hapi-method-loader": "0.0.5",
     "hapi-route-loader": "^0.1.1"
   },
