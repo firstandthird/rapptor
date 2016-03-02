@@ -26,7 +26,7 @@ class Rapptor {
       }
       server.start((serverErr) => {
         if (!serverErr) {
-          server.log(['start', 'notify'], `Server started: ${server.info.uri}`);
+          server.log(['server', 'notice'], `Server started: ${server.info.uri}`);
         }
         done(serverErr, server, config);
       });
