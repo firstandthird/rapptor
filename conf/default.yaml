@@ -5,6 +5,9 @@ connection:
 plugins:
   hapi-logr:
     type: 'json'
+    renderOptions:
+      console:
+        pretty: true
   hapi-method-loader:
     cwd: '{{CWD}}'
     verbose: '{{verbose}}'
