@@ -1,15 +1,15 @@
-/* eslint-disable no-console */
+#!/usr/bin/env node
 'use strict';
 const Rapptor = require('../');
 
+const cwd = process.cwd();
 const rapptor = new Rapptor({
-  configPath: `${__dirname}/conf`,
-  cwd: __dirname
+  configPath: `${cwd}/conf`,
+  cwd
 });
 
 rapptor.start((err, server, config) => {
   if (err) {
     throw err;
   }
-  console.log('Server Started', server.info.uri);
 });

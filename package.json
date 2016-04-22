@@ -16,6 +16,9 @@
   "scripts": {
     "lint": "eslint ."
   },
+  "bin": {
+    "rapptor": "bin/rapptor.js"
+  },
   "dependencies": {
     "hapi": "^13.3.0",
     "hapi-confi": "^0.3.0",
