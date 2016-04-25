@@ -1,4 +1,4 @@
-FROM node:0.10.38
+FROM node:4.4.3
 
 RUN apt-get update && apt-get install graphicsmagick -y
 
