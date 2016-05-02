@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 'use strict';
 const Rapptor = require('../');
+const path = require('path');
 
-const cwd = process.cwd();
+let cwd = process.cwd();
+if (process.argv.length === 3) {
+  cwd = path.resolve(cwd, process.argv[2]);
+}
 const rapptor = new Rapptor({
   configPath: `${cwd}/conf`,
   cwd
