@@ -2,7 +2,7 @@
 exports.home = {
   method: 'GET',
   path: '/',
-  handler: (request, reply) => {
+  handler(request, reply) {
     const server = request.server;
     server.methods.randomNumber((err, number) => {
       if (err) {
@@ -14,5 +14,14 @@ exports.home = {
         randomNumber: number
       });
     });
+  }
+};
+
+exports.error = {
+  method: 'GET',
+  path: '/bug',
+  handler(request, reply) {
+    const a = request.dummy.blah; //this will error
+    reply('bug!');
   }
 };
