@@ -24,12 +24,25 @@ class Rapptor {
       if (err) {
         return done(err);
       }
+      this.server = server;
       server.start((serverErr) => {
         if (!serverErr) {
           server.log(['server', 'notice'], `Server started: ${server.info.uri}`);
         }
         done(serverErr, server, config);
       });
+    });
+
+    process.on('SIGTERM', () => {
+      this.stop(() => { process.exit(0); });
+    });
+  }
+
+  stop(done) {
+    done = done || function() {};
+
+    this.server.stop({ timeout: 5 * 1000 }, () => {
+      done();
     });
   }
 }
