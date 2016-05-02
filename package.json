@@ -14,7 +14,8 @@
     "url": "https://github.com/firstandthird/rapptor.git"
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "example": "cd example && nodemon ../bin/rapptor.js"
   },
   "bin": {
     "rapptor": "bin/rapptor.js"
