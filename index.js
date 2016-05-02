@@ -27,7 +27,8 @@ class Rapptor {
       this.server = server;
       server.start((serverErr) => {
         if (!serverErr) {
-          server.log(['server', 'notice'], `Server started: ${server.info.uri}`);
+          const uri = process.env.VIRTUAL_HOST || server.info.uri;
+          server.log(['server', 'notice'], `Server started: ${uri}`);
         }
         done(serverErr, server, config);
       });
