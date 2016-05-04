@@ -4,6 +4,7 @@ strategies:
     mode: false
     options:
       password: '{{admin.password}}'
+      salt: 'salt'
       endpoint: '/admin/login'
       successEndpont: '/admin'
       cookieName: '{{name}}-admin'

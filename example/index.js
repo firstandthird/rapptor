@@ -1,7 +1,9 @@
-var Rapptor = require('../');
-var Boom = require('boom');
+'use strict';
 
-var rapptor = new Rapptor({
+const Rapptor = require('../');
+const Boom = require('boom');
+
+const rapptor = new Rapptor({
   cwd: __dirname
 });
 
@@ -14,4 +16,3 @@ rapptor.server.route({
 });
 
 rapptor.start();
-

@@ -1,11 +1,11 @@
+'use strict';
+
 exports.cache = {
   path: '/cache',
   method: 'GET',
   handler: {
     outputCache: {
-      fn: function(request, reply) {
-        reply(new Date());
-      }
+      fn: (request, reply) => reply(new Date())
     }
   }
 };

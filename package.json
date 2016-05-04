@@ -14,29 +14,34 @@
     "url": "https://github.com/firstandthird/rapptor.git"
   },
   "dependencies": {
-    "async": "1.2.1",
-    "autolinker": "0.17.1",
-    "catbox-mongodb": "1.1.0",
-    "confi": "0.7.0",
-    "good": "6.1.4",
-    "good-console": "5.0.2",
+    "async": "1.5.0",
+    "autolinker": "0.22.0",
+    "catbox-mongodb": "1.1.2",
+    "confi": "0.8.0",
+    "good": "6.4.0",
+    "good-console": "5.2.0",
     "good-hipchat": "0.4.0",
     "good-mongodb": "0.4.0",
-    "good-mongodb-viewer": "0.8.1",
-    "handlebars": "3.0.3",
-    "hapi": "8.6.1",
+    "good-mongodb-viewer": "0.9.1",
+    "handlebars": "4.0.4",
+    "hapi": "11.1.0",
     "hapi-agenda": "0.9.1",
     "hapi-auto-loader": "0.6.0",
     "hapi-log-response": "0.1.0",
     "hapi-metrics": "3.0.0",
     "hapi-output-cache": "0.3.0",
-    "hapi-password": "0.3.0",
-    "hapi-redirects": "0.1.0",
-    "joi": "6.4.3",
-    "lodash": "3.9.3",
-    "require-all": "1.1.0"
+    "hapi-password": "0.5.0",
+    "hapi-redirects": "1.0.1",
+    "inert": "^3.2.0",
+    "joi": "7.0.0",
+    "lodash": "3.10.1",
+    "require-all": "2.0.0",
+    "vision": "^4.0.1"
   },
   "devDependencies": {
-    "boom": "2.7.2"
+    "boom": "3.0.0"
+  },
+  "engines": {
+    "node": ">=4.0.0"
   }
 }

@@ -1,11 +1,13 @@
-var loadConfig = require('confi');
-var Hapi = require('hapi');
-var _ = require('lodash');
-var fs = require('fs');
-var path = require('path');
-var async = require('async');
+'use strict';
 
-var Rapptor = function(options) {
+const loadConfig = require('confi');
+const Hapi = require('hapi');
+const _ = require('lodash');
+const fs = require('fs');
+const path = require('path');
+const async = require('async');
+
+const Rapptor = function(options) {
   options = options || {};
 
   this.cwd = options.cwd || process.cwd();
@@ -13,7 +15,8 @@ var Rapptor = function(options) {
   //load up config
   this._setupConfig();
 
-  var serverConfig = _.cloneDeep(this.config.server);
+  const serverConfig = _.cloneDeep(this.config.server);
+
   serverConfig.app = this.config;
   serverConfig.cache = {
     engine: require('catbox-mongodb'),
@@ -34,12 +37,10 @@ var Rapptor = function(options) {
   this._readPlugins(this.config.authPlugins, 'authPlugins');
   this._readPlugins(this.config.plugins, 'plugins');
 
-
   this.server.connection(this.config.connection);
 };
 
 Rapptor.prototype._setupConfig = function() {
-
   //rapptor defaults
   this.config = loadConfig({
     path: [
@@ -65,28 +66,30 @@ Rapptor.prototype._setupConfig = function() {
 };
 
 Rapptor.prototype._readPlugins = function(arr, type) {
-
-  var self = this;
-  _.forIn(arr, function(value, key) {
+  _.forIn(arr, (value, key) => {
     value = value || {};
+
     if (value._enabled === false) {
       return;
     }
+
     if (!value._nativePlugin) {
       if (key[0] == '.') {
-        key = path.join(self.cwd, key);
+        key = path.join(this.cwd, key);
       } else {
-        key = path.join(self.cwd, 'node_modules', key);
+        key = path.join(this.cwd, 'node_modules', key);
       }
     }
+
     delete value._enabled;
     delete value._nativePlugin;
-    self.loadPlugin(key, value, type);
+
+    this.loadPlugin(key, value, type);
   });
 };
 
 Rapptor.prototype._setupLogging = function() {
-  var reporters = [];
+  const reporters = [];
 
   _.forIn(this.config.logging.reporters, function(values, key) {
     if (values === false || values._enabled === false) {
@@ -111,6 +114,7 @@ Rapptor.prototype.loadPlugin = function(key, options, type) {
   if (!type) {
     type = 'plugins';
   }
+
   this[type].push({
     register: require(key),
     options: options
@@ -118,12 +122,13 @@ Rapptor.prototype.loadPlugin = function(key, options, type) {
 };
 
 Rapptor.prototype._setupViews = function() {
-  var self = this;
-  var viewPath = path.join(this.cwd, this.config.structure.views);
+  const viewPath = path.join(this.cwd, this.config.structure.views);
+
   if (!fs.existsSync(viewPath)) {
     return;
   }
-  var viewConfig = {
+
+  const viewConfig = {
     engines: {
       html: this.server.app.handlebars
     },
@@ -133,33 +138,31 @@ Rapptor.prototype._setupViews = function() {
 
   this.server.views(viewConfig);
 
-  this.server.ext('onPreResponse', function(request, reply) {
-    var response = request.response;
-    var path = request.path;
+  this.server.ext('onPreResponse', (request, reply) => {
+    const response = request.response;
+    const path = request.path;
 
     if (response.variety === 'view') {
+      const context = response.source.context || {};
 
-      var context = response.source.context || {};
+      context.env = this.config.env;
 
-      context.env = self.config.env;
-
-      if (typeof self.getViewData === 'function') {
-        self.getViewData(context, request, self.config);
+      if (typeof this.getViewData === 'function') {
+        this.getViewData(context, request, this.config);
       }
+
       response.source.context = context;
 
       if (request.query.json == '1') {
         return reply(response.source.context);
       }
-
-    } else if (response.isBoom && self.config.views.errors) {
-
-      if (self.config.views.errorBlacklist && path.match(new RegExp(self.config.views.errorBlacklist))) {
+    } else if (response.isBoom && this.config.views.errors) {
+      if (this.config.views.errorBlacklist && path.match(new RegExp(this.config.views.errorBlacklist))) {
         return reply.continue();
       }
 
       if (response.output.statusCode == 500) {
-        self.server.log(['error'], {
+        this.server.log(['error'], {
           output: response.output,
           path: request.path,
           method: request.method,
@@ -168,9 +171,9 @@ Rapptor.prototype._setupViews = function() {
         });
       }
 
-      var payload = response.output.payload;
+      const payload = response.output.payload;
 
-      return reply.view(self.config.views.errors, {
+      return reply.view(this.config.views.errors, {
         statusCode: response.output.statusCode,
         error: payload.error,
         message: payload.message
@@ -182,28 +185,28 @@ Rapptor.prototype._setupViews = function() {
 };
 
 Rapptor.prototype._setupAssets = function() {
-
   if (this.config.assets.mapping) {
-    var assetPath = path.join(this.cwd, this.config.structure.assets, this.config.assets.mapping);
+    const assetPath = path.join(this.cwd, this.config.structure.assets, this.config.assets.mapping);
+
     if (fs.existsSync(assetPath)) {
       this.config.assets.mappingObj = require(assetPath);
     }
   }
+
   if (!this.config.assets.mappingObj) {
     this.config.assets.mappingObj = {};
   }
 
-  var self = this;
   this.server.route({
-    path: self.config.assets.path+'/{path*}',
+    path: this.config.assets.path+'/{path*}',
     method: 'GET',
     config: {
       auth: false,
-      cors: self.config.assets.cors,
-      cache: self.config.assets.cache,
+      cors: this.config.assets.cors,
+      cache: this.config.assets.cache,
       handler: {
         directory: {
-          path: path.resolve(self.cwd, self.config.structure.assets),
+          path: path.resolve(this.cwd, this.config.structure.assets),
           listing: false,
           index: false
         }
@@ -213,74 +216,62 @@ Rapptor.prototype._setupAssets = function() {
 };
 
 Rapptor.prototype._setupStrategies = function() {
-
-  var self = this;
-  _.forIn(this.config.strategies, function(value, name) {
-    self.server.auth.strategy(name, value.scheme, value.mode, value.options);
+  _.forIn(this.config.strategies, (value, name) => {
+    this.server.auth.strategy(name, value.scheme, value.mode, value.options)
   });
-
 };
 
 Rapptor.prototype.setup = function(callback) {
-  var self = this;
-
   async.waterfall([
-    function(done) {
-      self.server.register(self.authPlugins, done);
-    },
-    function(done) {
-      self._setupStrategies();
+    done => this.server.register(this.authPlugins, done),
+    done => {
+      this._setupStrategies();
       done();
     },
-    function(done) {
-      self.server.register(self.plugins, done);
-    },
-    function(done) {
-      self.server.plugins['hapi-auto-loader'].load({
+    done => this.server.register(this.plugins, done),
+    done => {
+      this.server.plugins['hapi-auto-loader'].load({
         cwd: __dirname,
         routes: false,
         partials: false
       }, done);
     },
-    function(done) {
-      self.server.plugins['hapi-auto-loader'].load({
-        cwd: self.cwd,
+    done => {
+      this.server.plugins['hapi-auto-loader'].load({
+        cwd: this.cwd,
         routes: {
-          path: self.config.structure.routes,
-          base: self.config.routes.base,
-          context: self.config.routes.context
+          path: this.config.structure.routes,
+          base: this.config.routes.base,
+          context: this.config.routes.context
         },
         partials: {
-          path: self.config.structure.partials
+          path: this.config.structure.partials
         },
         helpers: {
-          path: self.config.structure.helpers
+          path: this.config.structure.helpers
         },
         methods: {
-          path: self.config.structure.methods
+          path: this.config.structure.methods
         }
       }, done);
     },
-    function(done) {
-      self._setupViews();
-      self._setupAssets();
-      done(null, self.server);
-    },
-
-
+    done => {
+      this._setupViews();
+      this._setupAssets();
+      done(null, this.server);
+    }
   ], callback);
 };
 
 Rapptor.prototype.callMethod = function(server, method, argv, callback) {
-
   callback = callback || _.noop;
 
-  var methodFunc = _.get(server.methods, method);
+  const methodFunc = _.get(server.methods, method);
 
   if(methodFunc) {
-    var funcArgs = argv;
+    const funcArgs = argv;
 
-    for(var i=0; i<funcArgs.length; i++){
+    for(let i=0; i<funcArgs.length; i++){
       try {
         funcArgs[i] = JSON.parse(funcArgs[i]);
       } catch(e) {
@@ -310,7 +301,6 @@ Rapptor.prototype.callMethod = function(server, method, argv, callback) {
 }
 
 Rapptor.prototype.start = function(callback) {
-
   callback = callback || _.noop;
 
   this.setup(function(err, server){
@@ -318,10 +308,10 @@ Rapptor.prototype.start = function(callback) {
       return callback(err);
     }
 
-    var args = process.argv.slice(2);
+    const args = process.argv.slice(2);
 
     if(args.shift() == 'method') {
-      var method = args.shift();
+      const method = args.shift();
       Rapptor.prototype.callMethod(server, method, args, callback);
     } else {
       server.start(function(err) {

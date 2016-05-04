@@ -1,9 +1,11 @@
+'use strict';
+
 module.exports = {
   method: function(x, y, z, next) {
-    
-    var oneVal = x + " kings of spain";
-    var twoVal = y + " kings of greece";
-    var threeVal = z + " kings of all";
+
+    let oneVal = x + " kings of spain";
+    let twoVal = y + " kings of greece";
+    let threeVal = z + " kings of all";
 
     ret = {
       one: oneVal,
