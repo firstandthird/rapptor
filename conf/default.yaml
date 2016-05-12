@@ -11,6 +11,10 @@ plugins:
     renderOptions:
       console:
         pretty: true
+      json:
+        additional:
+          hostname: '{{ENV.HOSTNAME}}'
+        tagsObject: true
   hapi-method-loader:
     _priority: 2
     cwd: '{{CWD}}'
