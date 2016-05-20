@@ -13,6 +13,9 @@ const rapptor = new Rapptor({
 });
 
 rapptor.start((err, server, config) => {
+  if (process.env.CONFIG === '1') {
+    server.log(['info', 'config'], config);
+  }
   if (err) {
     throw err;
   }
