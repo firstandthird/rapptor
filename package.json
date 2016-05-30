@@ -24,7 +24,7 @@
     "hapi": "^13.3.0",
     "hapi-confi": "1.0.0",
     "hapi-logr": "^1.2.0",
-    "hapi-method-loader": "0.1.0",
+    "hapi-method-loader": "0.2.0",
     "hapi-route-loader": "1.0.0"
   },
   "devDependencies": {
