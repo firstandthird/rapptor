@@ -6,7 +6,7 @@ connection:
   address: '0.0.0.0'
 plugins:
   hapi-logr:
-    _priority: 1
+    _priority: -1
     type: 'json'
     renderOptions:
       console:
