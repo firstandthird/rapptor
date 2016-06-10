@@ -25,7 +25,7 @@
     "hapi-confi": "2.0.0",
     "hapi-logr": "^1.2.0",
     "hapi-method-loader": "0.2.0",
-    "hapi-route-loader": "1.0.0"
+    "hapi-route-loader": "1.0.1"
   },
   "devDependencies": {
     "boom": "2.7.2",
