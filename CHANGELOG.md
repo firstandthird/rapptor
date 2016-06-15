@@ -1,4 +1,40 @@
 
+1.0.0 / 2016-06-15
+==================
+
+  * added readme
+  * updated hapi-confi to 2.1.1
+  * updated hapi-confi to 2.1.0
+  * updated hapi-route-loader to 1.0.1
+  * updated hapi-confi 2.0.0.  removes authPlugin and strategy loading
+  * hapi-logr priority -5 (to make sure its first)
+  * updated lint config
+  * hapi-logr - changed priority to -1
+  * updated hapi-method-loader to 0.2.0
+  * updated route-loader to 1.0.0
+  * updated hapi-confi to 1.0.0
+  * log config if CONFIG=1 env var set
+  * added additional options for json logging
+  * use VIRTUAL_HOST in log if it exists
+  * updated hapi-route-loader, hapi-method-loader
+  * example run script
+  * added bug route to test logging
+  * server.debug false
+  * be able to pass in directory to cli
+  * added stop function and listen for SIGTERM
+  * updated linting
+  * fixed options issue
+  * added cli
+  * updated dependencies
+  * changed server start tags
+  * updated default log options for console logging
+  * updated hapi-logr
+  * log on server start
+  * swapped out good with hapi-logr to simplify things
+  * added before hook
+  * removed unneeded deps
+  * just the basics
+
 0.20.0 / 2016-04-25
 ==================
 
