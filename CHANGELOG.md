@@ -1,4 +1,12 @@
 
+1.2.0 / 2016-09-05
+==================
+
+  * updated hapi-logr to 1.4.0
+  * updated hapi to 15
+  * updated hapi-route-loader to 1.2.0
+  * license
+
 1.1.0 / 2016-06-15
 ==================
 
