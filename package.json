@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "hapi": "^15.0.3",
-    "hapi-confi": "^2.3.0",
+    "hapi-confi": "2.3.1",
     "hapi-logr": "1.4.0",
     "hapi-method-loader": "0.2.0",
     "hapi-route-loader": "^2.0.0"
