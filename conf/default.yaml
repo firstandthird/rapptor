@@ -1,34 +1,25 @@
-name: 'rapptor'
+verbose: false
 server:
-  debug:
-    request:
-      - 'error'
+  debug: false
 connection:
-  port: "{{default ENV.PORT 8080}}"
+  port: "{{ENV.PORT || 8080}}"
   address: '0.0.0.0'
-  routes:
-    response:
-      failAction: 'log'
-    validate:
-      options:
-        allowUnknown: true
-mongo:
-  url: "mongodb://{{default ENV.MONGO_PORT_27017_TCP_ADDR 'localhost'}}:{{default ENV.MONGO_PORT_27017_TCP_PORT 27017}}/{{name}}-app"
-structure:
-  routes: 'routes'
-  assets: 'public'
-  views: 'public'
-  helpers: 'helpers'
-  methods: 'methods'
-  partials: 'partials'
-routes:
-  base: '/'
-  context: {}
-assets:
-  path: '/ui'
-  compiled: '_prod'
-  mapping: '_prod/assets.json'
-views:
-  errors: false
-cache:
-  partition: '{{name}}-cache'
+plugins:
+  hapi-logr:
+    _priority: -5
+    type: 'json'
+    renderOptions:
+      console:
+        pretty: true
+      json:
+        additional:
+          hostname: '{{ENV.HOSTNAME}}'
+        tagsObject: true
+  hapi-method-loader:
+    _priority: 2
+    cwd: '{{CWD}}'
+    verbose: '{{verbose}}'
+  hapi-route-loader:
+    _priority: 3
+    cwd: '{{CWD}}'
+    verbose: '{{verbose}}'
