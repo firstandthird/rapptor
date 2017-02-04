@@ -28,9 +28,8 @@
     "hapi-route-loader": "^2.1.0"
   },
   "devDependencies": {
-    "boom": "^2.6.1",
     "lab": "^4.0.0",
-    "lab-bdd": "0.1.0"
+    "lab-bdd": "0.1.0",
     "boom": "4.2.0",
     "eslint": "^3.4.0",
     "eslint-config-firstandthird": "^3.0.2",
