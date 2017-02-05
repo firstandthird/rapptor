@@ -7,10 +7,11 @@ connection:
 plugins:
   hapi-logr:
     _priority: -5
-    type: 'json'
+    type: 'console'
     renderOptions:
       console:
-        pretty: true
+        timestamp: false
+        flat: true
       json:
         additional:
           hostname: '{{ENV.HOSTNAME}}'
