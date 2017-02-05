@@ -21,9 +21,9 @@
     "rapptor": "bin/rapptor.js"
   },
   "dependencies": {
-    "hapi": "16.0.2",
+    "hapi": "16.1.0",
     "hapi-confi": "2.3.1",
-    "hapi-logr": "1.6.0",
+    "hapi-logr": "1.7.0",
     "hapi-method-loader": "1.2.0",
     "hapi-route-loader": "2.1.0"
   },
