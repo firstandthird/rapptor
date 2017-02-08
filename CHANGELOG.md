@@ -1,4 +1,17 @@
 
+1.5.0 / 2017-02-05
+==================
+
+  * updated hapi and hapi-logr
+
+1.4.0 / 2017-02-05
+==================
+
+  * tweaked default logging output
+  * pin deps
+  * fix(package): update hapi-method-loader to version 1.2.0
+  * chore(package): update dependencies
+
 1.3.2 / 2016-10-21
 ==================
 
