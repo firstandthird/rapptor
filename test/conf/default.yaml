@@ -3,3 +3,12 @@ connection:
 testValue: '123ABC'
 assets:
   host: 'http://localhost:7321'
+plugins:
+  hapi-method-loader:
+    _priority: 2
+    cwd: '{{CWD}}/test'
+    verbose: '{{verbose}}'
+  hapi-route-loader:
+    _priority: 3
+    cwd: '{{CWD}}/test'
+    verbose: '{{verbose}}'

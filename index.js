@@ -7,7 +7,7 @@ class Rapptor {
     this.options = options || {};
     this.options.cwd = this.options.cwd || process.cwd();
     const projectConfig = this.options.configPath || `${this.options.cwd}/conf`;
-    //inject rapptor config first
+    // inject rapptor config first
     const configPaths = [
       `${__dirname}/conf`,
       projectConfig
@@ -50,6 +50,6 @@ class Rapptor {
 
 Rapptor.prototype.stop = function(callback) {
   this.server.stop(callback);
-}
+};
 
 module.exports = Rapptor;
