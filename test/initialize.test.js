@@ -1,11 +1,13 @@
-exports.lab = require('lab-bdd')(require('lab'));
+'use strict';
+const Rapptor = require('../');
+const Code = require('code');   // assertion library
+const Lab = require('lab');
+const lab = exports.lab = Lab.script();
 
-var Rapptor = require('../');
-
-describe('Rapptor#initialization', function() {
-  it('initializes a new instance or rapptor', function(done) {
-    var rapptor = new Rapptor();
-    expect(rapptor).to.be.a('object');
+lab.experiment('Rapptor#initialization', () => {
+  lab.test('initializes a new instance or rapptor', (done) => {
+    const rapptor = new Rapptor();
+    Code.expect(typeof rapptor).to.equal('object');
     done();
   });
 });
