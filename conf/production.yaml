@@ -1,0 +1,5 @@
+plugins:
+  hapi-logr:
+    renderOptions:
+      console:
+        consoleBell: false
