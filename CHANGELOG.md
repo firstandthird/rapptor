@@ -1,4 +1,10 @@
 
+1.6.0 / 2017-02-08
+==================
+
+  * hapi-confi to 3.0.0
+  * support for rapptor.yaml in project directory
+
 1.5.0 / 2017-02-05
 ==================
 
