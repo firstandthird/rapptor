@@ -24,6 +24,7 @@ class Rapptor {
       if (err) {
         return done(err);
       }
+      this.config = config;
       this.server = server;
       server.start((serverErr) => {
         if (!serverErr) {
