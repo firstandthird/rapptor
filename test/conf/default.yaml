@@ -1,8 +1,12 @@
 connection:
-  port: 8080
+  port: '8888'
 testValue: '123ABC'
 assets:
-  host: 'http://localhost:8080'
+  host: 'http://localhost:8888'
+mongo:
+  host: 'mongod'
+  db: 'table'
+  port: '27017'
 plugins:
   hapi-method-loader:
     _priority: 2
