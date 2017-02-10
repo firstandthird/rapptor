@@ -3,7 +3,7 @@
   "description": "Opinionated web framework built on top of hapi",
   "homepage": "https://github.com/firstandthird/rapptor",
   "author": "First+Third",
-  "version": "1.5.0",
+  "version": "1.7.0",
   "keywords": [
     "hapi",
     "framework",
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "hapi": "16.1.0",
-    "hapi-confi": "2.3.1",
+    "hapi-confi": "3.0.0",
     "hapi-logr": "1.7.0",
     "hapi-method-loader": "1.2.0",
     "hapi-route-loader": "2.1.0"

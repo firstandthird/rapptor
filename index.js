@@ -10,7 +10,8 @@ class Rapptor {
     // inject rapptor config first
     const configPaths = [
       `${__dirname}/conf`,
-      projectConfig
+      projectConfig,
+      { path: this.options.cwd, prefix: 'rapptor' }
     ];
     this.options.configPath = configPaths;
   }
