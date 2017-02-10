@@ -1,7 +1,8 @@
+'use strict';
 exports.allTest = {
   method: 'GET',
-  path: '/all-test', 
-  handler: function(request, reply) {
-    reply.view('all-test/index');
+  path: '/all-test',
+  handler: (request, reply) => {
+    reply.view('all-test/index', { names: ['bob', 'dave', 'ralph'] });
   }
 };
