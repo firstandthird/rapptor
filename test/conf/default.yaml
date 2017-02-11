@@ -1,8 +1,8 @@
 connection:
-  port: '8888'
+  port: 8080
 testValue: '123ABC'
 assets:
-  host: 'http://localhost:8888'
+  host: 'http://localhost:8080'
 mongo:
   host: 'mongod'
   db: 'table'
