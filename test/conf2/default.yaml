@@ -23,7 +23,7 @@ plugins:
 views:
   engines:
     html: "handlebars"
-  path: "{{CWD}}/test/templates"
+  path: "{{CWD}}/test/public/pages/"
   #partialsPath: "{{templatePath}}/partials"
   helpersPath: "{{CWD}}/test/helpers"
   isCached: true

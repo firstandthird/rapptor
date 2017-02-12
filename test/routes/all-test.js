@@ -3,6 +3,6 @@ exports.allTest = {
   method: 'GET',
   path: '/all-test',
   handler: (request, reply) => {
-    reply.view('all-test/index', { names: ['bob', 'dave', 'ralph'] });
+    reply.view('all-test/index');
   }
 };

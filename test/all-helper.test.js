@@ -23,13 +23,24 @@ lab.experiment('Rapptor#all', () => {
     rapptor.stop(done);
   });
 
+  lab.test('should use custom helper correctly', (done) => {
+    rapptor.server.inject({
+      method: 'GET',
+      url: '/helper-test'
+    }, (response) => {
+      Code.expect(response.statusCode).to.equal(200);
+      Code.expect(response.result).to.include('bob:dave:ralph');
+      done();
+    });
+  });
+
   lab.test('should use the all helper correctly', (done) => {
     rapptor.server.inject({
       method: 'GET',
       url: '/all-test'
     }, (response) => {
       Code.expect(response.statusCode).to.equal(200);
-      Code.expect(response.result).to.include('bob:dave:ralph');
+      Code.expect(response.result).to.include('<p>true</p>');
       done();
     });
   });

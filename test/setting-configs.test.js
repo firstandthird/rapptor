@@ -8,8 +8,7 @@ lab.experiment('Rapptor#setup', () => {
   lab.test('should have a base set of configurations', (done) => {
     const rapptor = new Rapptor();
     rapptor.start(() => {
-      console.log(rapptor)
-      Code.expect(rapptor.config.connection.port).to.equal('8080');
+      Code.expect(rapptor.config.connection.port).to.equal(1234);
       Code.expect(rapptor.config.connection.address).to.equal('0.0.0.0');
       rapptor.stop(done);
     });
