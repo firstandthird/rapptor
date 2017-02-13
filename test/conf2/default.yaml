@@ -1,6 +1,6 @@
 connection:
   port: '8080'
-testValue: '123ABC'
+testValue: 'conf2!'
 assets:
   host: 'http://localhost:8080'
 mongo:
