@@ -10,10 +10,11 @@ lab.experiment('Rapptor#initialization', { timeout: 5000 }, () => {
       cwd: __dirname,
     });
     Code.expect(typeof rapptor).to.equal('object');
+    Code.expect(typeof rapptor.start).to.equal('function');
     rapptor.start((err, server, config) => {
       Code.expect(err).to.equal(undefined);
       Code.expect(typeof server).to.equal('object');
-      Code.expect(typeof server.methods.randomNumber).to.equal('function');
+      Code.expect(typeof config).to.equal('object');
       rapptor.stop(done);
     });
   });

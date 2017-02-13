@@ -29,6 +29,17 @@ lab.experiment('Rapptor#setup', () => {
     });
   });
 
+  lab.test('auto-loads rapptor-prefixed configs in cwd', (done) => {
+    const rapptor = new Rapptor({
+      cwd: __dirname
+    });
+    rapptor.start(() => {
+      const raptConfig = rapptor.config;
+      Code.expect(raptConfig.rapptorValue).to.equal('rapptor!');
+      done();
+    });
+  });
+
   lab.test('accept a configPath', (done) => {
     const rapptor = new Rapptor({
       configPath: `${__dirname}/conf2`
