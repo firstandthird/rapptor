@@ -1,0 +1,20 @@
+connection:
+  port: 8080
+testValue: '123ABC'
+assets:
+  host: 'http://localhost:8080'
+mongo:
+  host: 'mongod'
+  db: 'table'
+  port: '27017'
+plugins:
+  hapi-method-loader:
+    _priority: 2
+    cwd: '{{CWD}}/test'
+    path: '{{CWD}}/test/methods'
+    verbose: '{{verbose}}'
+  hapi-route-loader:
+    _priority: 3
+    cwd: '{{CWD}}/test'
+    path: '{{CWD}}/test/routes'
+    verbose: '{{verbose}}'
