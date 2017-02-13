@@ -6,7 +6,8 @@ const lab = exports.lab = Lab.script();
 
 lab.experiment('Rapptor#routes', () => {
   const rapptor = new Rapptor({
-    cwd: __dirname
+    cwd: __dirname,
+    configPath: `${__dirname}/conf`
   });
 
   lab.before((done) => {
@@ -20,7 +21,6 @@ lab.experiment('Rapptor#routes', () => {
     const server = rapptor.server;
     Code.expect(typeof server.methods.randomNumber).to.equal('function');
     server.methods.randomNumber((err, value) => {
-      console.log(err)
       Code.expect(typeof err).to.equal(null);
       Code.expect(typeof value).to.equal('number');
     });
