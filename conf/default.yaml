@@ -2,7 +2,7 @@ verbose: false
 server:
   debug: false
 connection:
-  port: "{{ENV.PORT || 1234}}"
+  port: "{{ENV.PORT || 8080}}"
   address: '0.0.0.0'
 plugins:
   hapi-logr:
