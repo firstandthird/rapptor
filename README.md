@@ -1,4 +1,4 @@
-# Rapptor
+# Rapptor [![Build Status](https://travis-ci.org/firstandthird/rapptor.svg?branch=master)](https://travis-ci.org/firstandthird/rapptor)
 
 Rapptor is a lightweight library that sits on top of [hapi](http://hapijs.com).
 
