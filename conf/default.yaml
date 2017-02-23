@@ -11,6 +11,7 @@ plugins:
       consoleColor:
         reporter: 'logr-console-color'
         options:
+          timestamp: false
   hapi-method-loader:
     _priority: 2
     cwd: '{{CWD}}'
