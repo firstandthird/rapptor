@@ -8,8 +8,7 @@ lab.experiment('Rapptor#setup', () => {
   lab.test('default options', (done) => {
     const rapptor = new Rapptor();
     rapptor.start((err) => {
-      // should fail because hapi-method-loader cannot find 'methods' directory in root:
-      Code.expect(err.toString()).to.include('ENOENT: no such file or directory');
+      Code.expect(err).to.equal(undefined);
       done();
     });
   });

@@ -7,15 +7,10 @@ connection:
 plugins:
   hapi-logr:
     _priority: -5
-    type: 'console'
-    renderOptions:
-      console:
-        timestamp: false
-        flat: true
-      json:
-        additional:
-          hostname: '{{ENV.HOSTNAME}}'
-        tagsObject: true
+    reporters:
+      consoleColor:
+        reporter: 'logr-console-color'
+        options:
   hapi-method-loader:
     _priority: 2
     cwd: '{{CWD}}'

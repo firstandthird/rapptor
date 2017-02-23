@@ -1,0 +1,6 @@
+plugins:
+  hapi-logr:
+    reporters:
+      consoleColor:
+        options:
+          timestamp: false
