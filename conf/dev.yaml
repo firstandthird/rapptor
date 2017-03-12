@@ -1,0 +1,5 @@
+plugins:
+  hapi-logr:
+    reporters:
+      bell:
+        reporter: 'logr-reporter-bell'

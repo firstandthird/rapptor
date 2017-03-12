@@ -1,6 +1,0 @@
-plugins:
-  hapi-logr:
-    reporters:
-      consoleColor:
-        options:
-          bell: false
