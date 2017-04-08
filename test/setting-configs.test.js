@@ -62,8 +62,4 @@ lab.experiment('Rapptor#setup', () => {
       done();
     });
   });
-
-  lab.test('logs objects on one line with hapi-flat', (done) => {
-
-  });
 });
