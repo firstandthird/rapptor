@@ -1,5 +1,10 @@
 plugins:
-  hapi-logr:
+hapi-logr:
+    _priority: -5
     reporters:
+      consoleColor:
+        reporter: 'logr-console-color'
+        options:
+          timestamp: false
       bell:
         reporter: 'logr-reporter-bell'

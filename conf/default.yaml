@@ -5,13 +5,6 @@ connection:
   port: "{{ENV.PORT || 8080}}"
   address: '0.0.0.0'
 plugins:
-  hapi-logr:
-    _priority: -5
-    reporters:
-      flat:
-        reporter: 'logr-flat'
-        options:
-          timestamp: false
   hapi-method-loader:
     _priority: 2
     cwd: '{{CWD}}'
@@ -20,3 +13,15 @@ plugins:
     _priority: 3
     cwd: '{{CWD}}'
     verbose: '{{verbose}}'
+  hapi-logr:
+    _priority: -5
+    reporters:
+      flat:
+        reporter: 'logr-flat'
+        options:
+          timestamp: false
+          colors:
+            error: 'red'
+            warning: 'yellow'
+            success: 'green'
+            notice: 'blue'
