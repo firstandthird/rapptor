@@ -8,8 +8,8 @@ plugins:
   hapi-logr:
     _priority: -5
     reporters:
-      consoleColor:
-        reporter: 'logr-console-color'
+      flat:
+        reporter: 'logr-flat'
         options:
           timestamp: false
   hapi-method-loader:
