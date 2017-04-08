@@ -20,8 +20,3 @@ plugins:
         reporter: 'logr-flat'
         options:
           timestamp: false
-          colors:
-            error: 'red'
-            warning: 'yellow'
-            success: 'green'
-            notice: 'blue'
