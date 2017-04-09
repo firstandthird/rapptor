@@ -1,7 +1,9 @@
 plugins:
   hapi-logr:
     reporters:
-      flat: null
+      flat:
+        options:
+          enabled: false
       consoleColor:
         reporter: 'logr-console-color'
         options:
