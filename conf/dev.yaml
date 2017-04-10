@@ -8,5 +8,6 @@ plugins:
         reporter: 'logr-console-color'
         options:
           timestamp: false
+          appColor: true
       bell:
         reporter: 'logr-reporter-bell'

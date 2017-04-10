@@ -20,3 +20,4 @@ plugins:
         reporter: 'logr-flat'
         options:
           timestamp: false
+          appColor: true
