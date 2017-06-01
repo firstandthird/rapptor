@@ -14,6 +14,9 @@ class Rapptor {
       { path: this.options.cwd, prefix: 'rapptor' }
     ];
     this.options.configPath = configPaths;
+    if (!this.options.envPrefix) {
+      this.options.envPrefix = 'rapptor';
+    }
   }
 
   before(callback) {
