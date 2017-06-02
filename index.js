@@ -17,6 +17,7 @@ class Rapptor {
     if (!this.options.envPrefix) {
       this.options.envPrefix = 'rapptor';
     }
+    this.options.configUrl = process.env.RAPPTOR_CONFIG_URL;
   }
 
   before(callback) {
