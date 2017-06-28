@@ -4,6 +4,7 @@ server:
 connection:
   port: "{{ENV.PORT || 8080}}"
   address: '0.0.0.0'
+routePrefix: '{{ ENV.PATH_PREFIX }}'
 plugins:
   hapi-method-loader:
     _priority: 2
@@ -12,7 +13,7 @@ plugins:
   hapi-route-loader:
     _priority: 3
     cwd: '{{CWD}}'
-    prefix: '{{ENV.PATH_PREFIX}}'
+    prefix: '{{routePrefix}}'
     verbose: '{{verbose}}'
   hapi-logr:
     _priority: -5
