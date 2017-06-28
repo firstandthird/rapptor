@@ -12,6 +12,7 @@ plugins:
   hapi-route-loader:
     _priority: 3
     cwd: '{{CWD}}'
+    prefix: '{{ENV.PATH_PREFIX}}'
     verbose: '{{verbose}}'
   hapi-logr:
     _priority: -5
