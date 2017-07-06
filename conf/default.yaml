@@ -23,3 +23,13 @@ plugins:
         options:
           timestamp: false
           appColor: true
+      consoleColor:
+        reporter: 'logr-console-color'
+        options:
+          enabled: false
+          timestamp: false
+          appColor: true
+      bell:
+        reporter: 'logr-reporter-bell'
+        options:
+          enabled: false

@@ -5,9 +5,9 @@ plugins:
         options:
           enabled: false
       consoleColor:
-        reporter: 'logr-console-color'
         options:
-          timestamp: false
-          appColor: true
+          enabled: true
       bell:
         reporter: 'logr-reporter-bell'
+        options:
+          enabled: true
