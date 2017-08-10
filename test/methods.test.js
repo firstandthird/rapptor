@@ -21,7 +21,7 @@ lab.experiment('Rapptor#routes', () => {
     const server = rapptor.server;
     Code.expect(typeof server.methods.randomNumber).to.equal('function');
     server.methods.randomNumber((err, value) => {
-      Code.expect(typeof err).to.equal(null);
+      Code.expect(err).to.equal(null);
       Code.expect(typeof value).to.equal('number');
     });
     done();
