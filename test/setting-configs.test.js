@@ -21,7 +21,7 @@ lab.experiment('Rapptor#setup', () => {
       const raptConfig = rapptor.config;
       // should load config from tests/conf
       Code.expect(raptConfig.assets.host).to.equal('http://localhost:8080');
-      Code.expect(raptConfig.connection.port.toString()).to.equal('8080');
+      Code.expect(raptConfig.connection.port).to.equal(8080);
       Code.expect(raptConfig.server.debug).to.equal(false);
       Code.expect(raptConfig.testValue).to.equal('123ABC');
       done();
