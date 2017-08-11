@@ -6,6 +6,8 @@ connection:
   address: '0.0.0.0'
 routePrefix: "{{ ENV.PATH_PREFIX }}"
 plugins:
+  hapi-trailing-slash:
+    method: 'remove'
   hapi-method-loader:
     _priority: 2
     cwd: '{{CWD}}'
