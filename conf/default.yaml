@@ -19,6 +19,7 @@ plugins:
     verbose: '{{verbose}}'
   hapi-logr:
     _priority: -5
+    clientErrorsToWarnings: true
     reporters:
       flat:
         reporter: 'logr-flat'
