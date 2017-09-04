@@ -24,6 +24,7 @@
   "dependencies": {
     "hapi": "^16.5.2",
     "hapi-confi": "^4.1.0",
+    "hapi-log-response": "^1.4.0",
     "hapi-logr": "^3.5.0",
     "hapi-method-loader": "^1.3.0",
     "hapi-route-loader": "^2.3.0",

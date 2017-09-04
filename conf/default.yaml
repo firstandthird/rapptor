@@ -36,3 +36,4 @@ plugins:
         reporter: 'logr-reporter-bell'
         options:
           enabled: false
+  hapi-log-response:
