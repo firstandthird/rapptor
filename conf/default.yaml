@@ -37,9 +37,3 @@ plugins:
         options:
           enabled: false
   hapi-log-response:
-    tags:
-      -'hapi-log-response'
-    excludeResponse:
-      -
-    excludeStatus:
-      -
