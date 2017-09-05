@@ -34,14 +34,14 @@
     "logr-reporter-bell": "0.0.1"
   },
   "devDependencies": {
-    "boom": "4.2.0",
+    "boom": "5.2.0",
     "code": "^4.0.0",
-    "eslint": "^3.9.1",
+    "eslint": "^4.6.1",
     "eslint-config-firstandthird": "^3.2.0",
     "eslint-plugin-import": "^2.1.0",
     "handlebars": "^4.0.6",
     "inert": "^4.1.0",
-    "lab": "^12.1.0",
+    "lab": "^14.2.2",
     "vision": "^4.1.1"
   }
 }
