@@ -37,3 +37,5 @@ plugins:
         options:
           enabled: false
   hapi-log-response:
+    tags:
+      - 'detailed-response'
