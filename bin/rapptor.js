@@ -9,7 +9,7 @@ const argv = require('yargs')
     describe: 'path to config',
   }).argv;
 
-let cwd = argv._.length ? path.resolve(process.cwd(), argv._[0]) : process.cwd();
+const cwd = argv._.length ? path.resolve(process.cwd(), argv._[0]) : process.cwd();
 const rapptor = new Rapptor({
   configPath: argv.config ? argv.config : `${cwd}/conf`,
   cwd
