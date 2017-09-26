@@ -34,7 +34,7 @@
     "logr-reporter-bell": "0.0.1"
   },
   "devDependencies": {
-    "boom": "5.2.0",
+    "boom": "6.0.0",
     "code": "^4.0.0",
     "eslint": "^4.6.1",
     "eslint-config-firstandthird": "^4.0.0",
