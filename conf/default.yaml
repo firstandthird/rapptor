@@ -20,7 +20,7 @@ plugins:
   hapi-logr:
     _priority: -5
     clientErrorsToWarnings: true
-    request: '{{!!ENV.ACCESS_LOGS || false}}'
+    requests: '{{!!ENV.ACCESS_LOGS || false}}'
     reporters:
       flat:
         reporter: 'logr-flat'
