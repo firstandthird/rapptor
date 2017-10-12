@@ -64,7 +64,9 @@ lab.experiment('Rapptor#routes log requests', () => {
         Code.expect(msg).to.contain('request');
         Code.expect(msg).to.contain('/example');
         console.log = oldLog;
-        done();
+        rapptor.stop(() => {
+          done();
+        });
       };
       server.inject({
         method: 'GET',
@@ -73,11 +75,6 @@ lab.experiment('Rapptor#routes log requests', () => {
         Code.expect(response.statusCode).to.equal(200);
         Code.expect(response.result).to.equal('this is an example');
       });
-    });
-  });
-  lab.after((done) => {
-    rapptor.stop(() => {
-      done();
     });
   });
 
@@ -102,13 +99,10 @@ lab.experiment('Rapptor#routes log requests', () => {
         Code.expect(response.statusCode).to.equal(200);
         Code.expect(response.result).to.equal('this is an example');
         Code.expect(shouldBeEmpty.length).to.equal(0);
-        done();
+        rapptor.stop(() => {
+          done();
+        });
       });
-    });
-  });
-  lab.after((done) => {
-    rapptor.stop(() => {
-      done();
     });
   });
 });
