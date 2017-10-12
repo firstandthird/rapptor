@@ -18,3 +18,13 @@ plugins:
     cwd: '{{CWD}}/test'
     path: '{{CWD}}/test/routes'
     verbose: '{{verbose}}'
+  hapi-logr:
+    _priority: -5
+    clientErrorsToWarnings: true
+    requests: '{{!!ENV.ACCESS_LOGS || false}}'
+    reporters:
+      flat:
+        reporter: 'logr-flat'
+        options:
+          timestamp: false
+          appColor: true
