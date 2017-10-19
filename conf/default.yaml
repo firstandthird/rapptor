@@ -9,6 +9,7 @@ routePrefix: "{{ ENV.PATH_PREFIX }}"
 plugins:
   hapi-trailing-slash:
     method: 'remove'
+    _priority: 100
   hapi-method-loader:
     _priority: 2
     cwd: '{{CWD}}'
@@ -40,5 +41,6 @@ plugins:
         options:
           enabled: '{{logType === "cli"}}'
   hapi-log-response:
+    _priority: 110
     tags:
       - 'detailed-response'
