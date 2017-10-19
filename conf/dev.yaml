@@ -1,12 +1,7 @@
 plugins:
   hapi-logr:
+    logType: '{{ENV.LOG_TYPE || "cli" }}'
     reporters:
-      flat:
-        options:
-          enabled: false
-      consoleColor:
-        options:
-          enabled: true
       bell:
         reporter: 'logr-reporter-bell'
         options:
