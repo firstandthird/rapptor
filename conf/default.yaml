@@ -1,4 +1,5 @@
-verbose: false
+verbose: true
+logType: '{{ENV.LOG_TYPE || "flat" }}'
 server:
   debug: false
 connection:
@@ -21,17 +22,23 @@ plugins:
     _priority: -5
     clientErrorsToWarnings: true
     requests: '{{!!ENV.ACCESS_LOGS || false}}'
-    logType: '{{ENV.LOG_TYPE || "flat" }}'
     reporters:
       flat:
         reporter: 'logr-flat'
         options:
           timestamp: false
           appColor: true
+          enabled: '{{logType === "flat"}}'
+      consoleColor:
+        reporter: 'logr-console-color'
+        options:
+          enabled: '{{logType==="cli"}}'
+          timestamp: false
+          appColor: true
       bell:
         reporter: 'logr-reporter-bell'
         options:
-          enabled: false
+          enabled: '{{logType==="cli"}}'
   hapi-log-response:
     tags:
       - 'detailed-response'
