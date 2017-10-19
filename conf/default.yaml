@@ -32,13 +32,13 @@ plugins:
       consoleColor:
         reporter: 'logr-console-color'
         options:
-          enabled: '{{logType==="cli"}}'
+          enabled: '{{logType === "cli"}}'
           timestamp: false
           appColor: true
       bell:
         reporter: 'logr-reporter-bell'
         options:
-          enabled: '{{logType==="cli"}}'
+          enabled: '{{logType === "cli"}}'
   hapi-log-response:
     tags:
       - 'detailed-response'
