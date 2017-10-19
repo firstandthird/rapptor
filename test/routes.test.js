@@ -105,4 +105,26 @@ lab.experiment('Rapptor#routes log requests', () => {
       });
     });
   });
+
+  lab.test('does not log request for invalid cookie errors', (done) => {
+    rapptor = new Rapptor({
+      cwd: __dirname
+    });
+    rapptor.start((err, server) => {
+      if (err) {
+        throw err;
+      }
+      rapptor.server.state('a', { strictHeader: true });
+      server.inject({
+        method: 'GET',
+        headers: { cookie: 'a=x y;' },
+        url: '/invalidCookie'
+      }, (response) => {
+        Code.expect(response.statusCode).to.equal(200);
+        rapptor.stop(() => {
+          done();
+        });
+      });
+    });
+  });
 });

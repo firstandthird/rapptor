@@ -3,6 +3,9 @@ logType: '{{ENV.LOG_TYPE || "flat" }}'
 server:
   debug: false
 connection:
+  routes:
+    state:
+      failAction: 'ignore'
   port: "{{ENV.PORT || 8080}}"
   address: '0.0.0.0'
 routePrefix: "{{ ENV.PATH_PREFIX }}"
