@@ -1,4 +1,4 @@
-verbose: true
+verbose: false
 logType: '{{ENV.LOG_TYPE || "flat" }}'
 server:
   debug: false
