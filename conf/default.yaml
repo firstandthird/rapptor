@@ -8,7 +8,7 @@ connection:
       failAction: 'ignore'
   port: "{{ENV.PORT || 8080}}"
   address: '0.0.0.0'
-routePrefix: "{{ ENV.PATH_PREFIX }}"
+routePrefix: "{{ ENV.PATH_PREFIX || '' }}"
 plugins:
   hapi-trailing-slash:
     method: 'remove'
