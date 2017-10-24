@@ -33,6 +33,8 @@ plugins:
           timestamp: false
           appColor: true
           enabled: '{{logType === "flat"}}'
+          theme:
+            keys: 'cyan'
       consoleColor:
         reporter: 'logr-console-color'
         options:
