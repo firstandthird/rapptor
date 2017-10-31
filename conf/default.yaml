@@ -10,6 +10,8 @@ connection:
   address: '0.0.0.0'
 routePrefix: "{{ ENV.PATH_PREFIX || '' }}"
 plugins:
+  hapi-require-https:
+    _enabled: '{{ENV.FORCE_HTTPS === "true"}}'
   hapi-trailing-slash:
     method: 'remove'
     _priority: 100

@@ -128,3 +128,38 @@ lab.experiment('Rapptor#routes log requests', () => {
     });
   });
 });
+
+lab.experiment('Rapptor#require https routes', () => {
+  process.env.FORCE_HTTPS = 'true';
+  const rapptor = new Rapptor({
+    cwd: __dirname
+  });
+
+  lab.before((done) => {
+    rapptor.start((err, server) => {
+      Code.expect(err).to.equal(undefined);
+      done();
+    });
+  });
+
+  lab.test('should automatically load routes from the appropriate folder', (done) => {
+    const server = rapptor.server;
+    server.inject({
+      method: 'GET',
+      headers: {
+        'x-forwarded-proto': 'http'
+      },
+      url: '/example'
+    }, (response) => {
+      Code.expect(response.headers.location).to.include('https://');
+      Code.expect(response.statusCode).to.equal(301);
+      done();
+    });
+  });
+
+  lab.after((done) => {
+    rapptor.stop(() => {
+      done();
+    });
+  });
+});
