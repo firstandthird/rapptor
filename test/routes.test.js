@@ -142,7 +142,7 @@ lab.experiment('Rapptor#require https routes', () => {
     });
   });
 
-  lab.test('should automatically load routes from the appropriate folder', (done) => {
+  lab.test('should forward non-https routes to https', (done) => {
     const server = rapptor.server;
     server.inject({
       method: 'GET',
