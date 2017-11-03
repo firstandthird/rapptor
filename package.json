@@ -41,7 +41,7 @@
     "eslint-config-firstandthird": "^4.0.1",
     "eslint-plugin-import": "^2.1.0",
     "handlebars": "^4.0.6",
-    "inert": "^4.1.0",
+    "inert": "^5.0.0",
     "lab": "^14.2.2",
     "vision": "^4.1.1"
   }
