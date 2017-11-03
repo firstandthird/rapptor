@@ -22,7 +22,7 @@
     "rapptor": "bin/rapptor.js"
   },
   "dependencies": {
-    "hapi": "^16.6.2",
+    "hapi": "^17.0.0",
     "hapi-confi": "^5.2.0",
     "hapi-log-response": "^1.7.0",
     "hapi-logr": "^3.7.0",
