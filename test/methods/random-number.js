@@ -1,8 +1,8 @@
 'use strict';
 module.exports = {
-  method: (done) => {
-    setTimeout(() => {
-      done(null, Math.random());
-    }, 500);
+  method: async() => {
+    const wait = (ms) =>  new Promise(resolve => setTimeout(resolve, ms));
+    wait(500);
+    return Math.random();
   }
 };

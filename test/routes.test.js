@@ -9,123 +9,93 @@ lab.experiment('Rapptor#routes', () => {
     cwd: __dirname
   });
 
-  lab.before((done) => {
-    rapptor.start((err, server) => {
-      Code.expect(err).to.equal(undefined);
-      done();
-    });
+  lab.before(async () => {
+    await rapptor.start();
   });
 
-  lab.test('should automatically load routes from the appropriate folder', (done) => {
+  lab.test('should automatically load routes from the appropriate folder', async() => {
     const server = rapptor.server;
-    server.inject({
+    const response = await server.inject({
       method: 'GET',
       url: '/example'
-    }, (response) => {
-      Code.expect(response.statusCode).to.equal(200);
-      Code.expect(response.result).to.equal('this is an example');
-      done();
     });
+    Code.expect(response.statusCode).to.equal(200);
+    Code.expect(response.result).to.equal('this is an example');
   });
 
-  lab.test('should automatically load routes from the appropriate folder', (done) => {
+  lab.test('should automatically load routes from the appropriate folder', async() => {
     const server = rapptor.server;
-    server.inject({
+    const response = await server.inject({
       method: 'GET',
       url: '/example'
-    }, (response) => {
-      Code.expect(response.statusCode).to.equal(200);
-      Code.expect(response.result).to.equal('this is an example');
-      done();
     });
+    Code.expect(response.statusCode).to.equal(200);
+    Code.expect(response.result).to.equal('this is an example');
   });
 
-  lab.after((done) => {
-    rapptor.stop(() => {
-      done();
-    });
+  lab.after(async() => {
+    await rapptor.stop();
   });
 });
 
 lab.experiment('Rapptor#routes log requests', () => {
   let rapptor;
-  lab.test('should log request with hapi-logr if ENV.ACCESS_LOGS is true', (done) => {
+  lab.test('should log request with hapi-logr if ENV.ACCESS_LOGS is true', async() => {
     process.env.ACCESS_LOGS = 'true';
     rapptor = new Rapptor({
       cwd: __dirname
     });
-    rapptor.start((err, server) => {
-      if (err) {
-        throw err;
-      }
-      const oldLog = console.log;
-      console.log = (msg) => {
-        oldLog(msg);
-        Code.expect(msg).to.contain('request');
-        Code.expect(msg).to.contain('/example');
-        console.log = oldLog;
-        rapptor.stop(() => {
-          done();
-        });
-      };
-      server.inject({
-        method: 'GET',
-        url: '/example'
-      }, (response) => {
-        Code.expect(response.statusCode).to.equal(200);
-        Code.expect(response.result).to.equal('this is an example');
-      });
+    const { server, config } = await rapptor.start();
+    const oldLog = console.log;
+    console.log = async(msg) => {
+      oldLog(msg);
+      Code.expect(msg).to.contain('request');
+      Code.expect(msg).to.contain('/example');
+      console.log = oldLog;
+      await rapptor.stop();
+    };
+    const response = await server.inject({
+      method: 'GET',
+      url: '/example'
     });
+    Code.expect(response.statusCode).to.equal(200);
+    Code.expect(response.result).to.equal('this is an example');
   });
 
-  lab.test('does not log request if ENV.ACCESS_LOGS is not true', (done) => {
+  lab.test('does not log request if ENV.ACCESS_LOGS is not true', async() => {
     process.env.ACCESS_LOGS = undefined;
     rapptor = new Rapptor({
       cwd: __dirname
     });
-    rapptor.start((err, server) => {
-      if (err) {
-        throw err;
-      }
-      const shouldBeEmpty = [];
-      const oldLog = console.log;
-      console.log = (msg) => {
-        shouldBeEmpty.push(msg);
-      };
-      server.inject({
-        method: 'GET',
-        url: '/example'
-      }, (response) => {
-        Code.expect(response.statusCode).to.equal(200);
-        Code.expect(response.result).to.equal('this is an example');
-        Code.expect(shouldBeEmpty.length).to.equal(0);
-        rapptor.stop(() => {
-          done();
-        });
-      });
+    const { server, config } = await rapptor.start();
+    const shouldBeEmpty = [];
+    const oldLog = console.log;
+    console.log = (msg) => {
+      shouldBeEmpty.push(msg);
+    };
+    const response = await server.inject({
+      method: 'GET',
+      url: '/example'
     });
+    Code.expect(response.statusCode).to.equal(200);
+    Code.expect(response.result).to.equal('this is an example');
+    Code.expect(shouldBeEmpty.length).to.equal(0);
+    await rapptor.stop();
   });
 
-  lab.test('does not log request for invalid cookie errors', (done) => {
+  lab.test('does not log request for invalid cookie errors', async() => {
     rapptor = new Rapptor({
       cwd: __dirname
     });
-    rapptor.start((err, server) => {
-      if (err) {
-        throw err;
-      }
-      rapptor.server.state('a', { strictHeader: true });
-      server.inject({
-        method: 'GET',
-        headers: { cookie: 'a=x y;' },
-        url: '/invalidCookie'
-      }, (response) => {
-        Code.expect(response.statusCode).to.equal(200);
-        rapptor.stop(() => {
-          done();
-        });
-      });
+    await rapptor.start();
+    rapptor.server.state('a', { strictHeader: true });
+    const response = await server.inject({
+      method: 'GET',
+      headers: { cookie: 'a=x y;' },
+      url: '/invalidCookie'
     });
+    Code.expect(response.statusCode).to.equal(200);
+    await rapptor.stop();
   });
 });
 
@@ -135,31 +105,24 @@ lab.experiment('Rapptor#require https routes', () => {
     cwd: __dirname
   });
 
-  lab.before((done) => {
-    rapptor.start((err, server) => {
-      Code.expect(err).to.equal(undefined);
-      done();
-    });
+  lab.before(async() => {
+    await rapptor.start();
   });
 
-  lab.test('should forward non-https routes to https', (done) => {
+  lab.test('should forward non-https routes to https', async() => {
     const server = rapptor.server;
-    server.inject({
+    const response = await server.inject({
       method: 'GET',
       headers: {
         'x-forwarded-proto': 'http'
       },
       url: '/example'
-    }, (response) => {
-      Code.expect(response.headers.location).to.include('https://');
-      Code.expect(response.statusCode).to.equal(301);
-      done();
     });
+    Code.expect(response.headers.location).to.include('https://');
+    Code.expect(response.statusCode).to.equal(301);
   });
 
-  lab.after((done) => {
-    rapptor.stop(() => {
-      done();
-    });
+  lab.after(async() => {
+    await rapptor.stop();
   });
 });

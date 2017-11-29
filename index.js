@@ -20,42 +20,40 @@ class Rapptor {
     this.options.configUrl = process.env.RAPPTOR_CONFIG_URL;
   }
 
+  // callback should be an async function
   before(callback) {
     this.options.before = callback;
   }
 
-  start(done) {
-    hapiConfi(Hapi, this.options, (err, server, config) => {
-      if (err) {
-        return done(err);
+  start() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { server, config } = await hapiConfi(Hapi, this.options);
+        this.config = config;
+        this.server = server;
+        const uri = process.env.VIRTUAL_HOST || server.info.uri;
+        process.on('SIGTERM', () => {
+          this.stop(() => { process.exit(0); });
+        });
+        await server.start();
+        server.log(['server', 'notice'], `Server started: ${uri}`);
+        return resolve({ server, config });
+      } catch (e) {
+        return reject(e);
       }
-      this.config = config;
-      this.server = server;
-      server.start((serverErr) => {
-        if (!serverErr) {
-          const uri = process.env.VIRTUAL_HOST || server.info.uri;
-          server.log(['server', 'notice'], `Server started: ${uri}`);
-        }
-        done(serverErr, server, config);
-      });
-    });
-
-    process.on('SIGTERM', () => {
-      this.stop(() => { process.exit(0); });
     });
   }
 
-  stop(done) {
-    done = done || function() {};
-
-    this.server.stop({ timeout: 5 * 1000 }, () => {
-      done();
+  stop() {
+    return new Promise( async (resolve, reject) => {
+      await this.server.stop({ timeout: 5 * 1000 });
+      resolve();
     });
   }
 }
 
-Rapptor.prototype.stop = function(callback) {
-  this.server.stop(callback);
+Rapptor.prototype.stop = async function() {
+  await this.server.stop();
 };
 
 module.exports = Rapptor;
