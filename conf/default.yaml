@@ -2,7 +2,6 @@ verbose: false
 logType: '{{ENV.LOG_TYPE || "flat" }}'
 server:
   debug: false
-connection:
   routes:
     state:
       failAction: 'ignore'
@@ -27,7 +26,7 @@ plugins:
   hapi-logr:
     _priority: -5
     clientErrorsToWarnings: true
-    requests: '{{!!ENV.ACCESS_LOGS || false}}'
+    requests: '{{ENV.ACCESS_LOGS || false}}'
     reporters:
       flat:
         reporter: 'logr-flat'

@@ -12,14 +12,12 @@ lab.experiment('Rapptor#routes', () => {
 
   lab.before(async() => {
     const { server, config } = await rapptor.start();
-    Code.expect(err).to.equal(undefined);
   });
 
   lab.test('should automatically load methods from the appropriate folder', async() => {
     const server = rapptor.server;
     Code.expect(typeof server.methods.randomNumber).to.equal('function');
     const value = await server.methods.randomNumber();
-    Code.expect(err).to.equal(null);
     Code.expect(typeof value).to.equal('number');
   });
 

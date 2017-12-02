@@ -26,13 +26,13 @@ lab.experiment('Rapptor#all', () => {
     Code.expect(response.statusCode).to.equal(200);
     Code.expect(response.result).to.include('bob:dave:ralph');
   });
-  //
-  // lab.test('should use the all helper correctly', async() => {
-  //   const response = await rapptor.server.inject({
-  //     method: 'GET',
-  //     url: '/all-test'
-  //   });
-  //   Code.expect(response.statusCode).to.equal(200);
-  //   Code.expect(response.result).to.include('<p>true</p>');
-  // });
+
+  lab.test('should use the all helper correctly', async() => {
+    const response = await rapptor.server.inject({
+      method: 'GET',
+      url: '/all-test'
+    });
+    Code.expect(response.statusCode).to.equal(200);
+    Code.expect(response.result).to.include('<p>true</p>');
+  });
 });

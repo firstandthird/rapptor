@@ -3,5 +3,5 @@
 exports.invalidCookie = {
   method: 'GET',
   path: '/invalidCookie',
-  handler: (request, reply) => reply(null, 'celery is not a cookie')
+  handler: (request, h) => 'celery is not a cookie'
 };

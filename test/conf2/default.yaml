@@ -1,4 +1,4 @@
-verbose: true
+verbose: false
 connection:
   port: '8080'
 testValue: 'conf2!'

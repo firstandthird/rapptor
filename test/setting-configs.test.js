@@ -8,6 +8,7 @@ lab.experiment('Rapptor#setup', () => {
   lab.test('default options', async() => {
     const rapptor = new Rapptor();
     await rapptor.start();
+    await rapptor.stop();
   });
 
   lab.test('accept a cwd', async() => {
@@ -21,6 +22,7 @@ lab.experiment('Rapptor#setup', () => {
     Code.expect(raptConfig.connection.port).to.equal(8080);
     Code.expect(raptConfig.server.debug).to.equal(false);
     Code.expect(raptConfig.testValue).to.equal('123ABC');
+    await rapptor.stop();
   });
 
   lab.test('auto-loads rapptor-prefixed configs in cwd', async() => {
@@ -30,6 +32,7 @@ lab.experiment('Rapptor#setup', () => {
     await rapptor.start();
     const raptConfig = rapptor.config;
     Code.expect(raptConfig.rapptorValue).to.equal('rapptor!');
+    await rapptor.stop();
   });
 
   lab.test('accept a configPath', async() => {
@@ -40,6 +43,7 @@ lab.experiment('Rapptor#setup', () => {
     const raptConfig = rapptor.config;
     Code.expect(raptConfig.connection.port).to.equal('8080');
     Code.expect(raptConfig.testValue).to.equal('conf2!');
+    await rapptor.stop();
   });
 
   lab.test('both cwd and configPath', async() => {
@@ -50,5 +54,6 @@ lab.experiment('Rapptor#setup', () => {
     await rapptor.start();
     const raptConfig = rapptor.config;
     Code.expect(raptConfig.testValue).to.equal('conf2!');
+    await rapptor.stop();
   });
 });

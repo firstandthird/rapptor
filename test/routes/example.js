@@ -1,7 +1,7 @@
 exports.example = {
   method: 'GET',
-  path: '/example', 
-  handler: function(request, reply) {
-    reply('this is an example');
+  path: '/example',
+  handler: function(request, h) {
+    return 'this is an example';
   }
 };
