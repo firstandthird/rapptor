@@ -2,7 +2,6 @@ verbose: false
 logType: '{{ENV.LOG_TYPE || "flat" }}'
 server:
   debug: false
-connection:
   routes:
     state:
       failAction: 'ignore'
@@ -10,7 +9,7 @@ connection:
   address: '0.0.0.0'
 routePrefix: "{{ ENV.PATH_PREFIX || '' }}"
 plugins:
-  hapi-require-https:
+  "@firstandthird/hapi-require-https":
     _enabled: '{{ENV.FORCE_HTTPS === "true"}}'
   hapi-trailing-slash:
     method: 'remove'
@@ -27,7 +26,7 @@ plugins:
   hapi-logr:
     _priority: -5
     clientErrorsToWarnings: true
-    requests: '{{!!ENV.ACCESS_LOGS || false}}'
+    requests: '{{ENV.ACCESS_LOGS === "true" || ENV.ACCESS_LOGS === true }}'
     reporters:
       flat:
         reporter: 'logr-flat'

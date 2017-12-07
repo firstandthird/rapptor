@@ -10,26 +10,18 @@ lab.experiment('Rapptor#routes', () => {
     configPath: `${__dirname}/conf`
   });
 
-  lab.before((done) => {
-    rapptor.start((err, server) => {
-      Code.expect(err).to.equal(undefined);
-      done();
-    });
+  lab.before(async() => {
+    const { server, config } = await rapptor.start();
   });
 
-  lab.test('should automatically load methods from the appropriate folder', (done) => {
+  lab.test('should automatically load methods from the appropriate folder', async() => {
     const server = rapptor.server;
     Code.expect(typeof server.methods.randomNumber).to.equal('function');
-    server.methods.randomNumber((err, value) => {
-      Code.expect(err).to.equal(null);
-      Code.expect(typeof value).to.equal('number');
-    });
-    done();
+    const value = await server.methods.randomNumber();
+    Code.expect(typeof value).to.equal('number');
   });
 
-  lab.after((done) => {
-    rapptor.stop(() => {
-      done();
-    });
+  lab.after(async () => {
+    await rapptor.stop();
   });
 });

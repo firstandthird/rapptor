@@ -10,38 +10,29 @@ lab.experiment('Rapptor#all', () => {
     cwd: __dirname
   });
 
-  lab.before((done) => {
-    rapptor.start((err) => {
-      if (err) {
-        throw err;
-      }
-      done();
-    });
+  lab.before(async() => {
+    await rapptor.start();
   });
 
-  lab.after((done) => {
-    rapptor.stop(done);
+  lab.after(async() => {
+    await rapptor.stop();
   });
 
-  lab.test('should use custom helper correctly', (done) => {
-    rapptor.server.inject({
+  lab.test('should use custom helper correctly', async() => {
+    const response = await rapptor.server.inject({
       method: 'GET',
       url: '/helper-test'
-    }, (response) => {
-      Code.expect(response.statusCode).to.equal(200);
-      Code.expect(response.result).to.include('bob:dave:ralph');
-      done();
     });
+    Code.expect(response.statusCode).to.equal(200);
+    Code.expect(response.result).to.include('bob:dave:ralph');
   });
 
-  lab.test('should use the all helper correctly', (done) => {
-    rapptor.server.inject({
+  lab.test('should use the all helper correctly', async() => {
+    const response = await rapptor.server.inject({
       method: 'GET',
       url: '/all-test'
-    }, (response) => {
-      Code.expect(response.statusCode).to.equal(200);
-      Code.expect(response.result).to.include('<p>true</p>');
-      done();
     });
+    Code.expect(response.statusCode).to.equal(200);
+    Code.expect(response.result).to.include('<p>true</p>');
   });
 });

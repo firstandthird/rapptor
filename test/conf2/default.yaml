@@ -1,3 +1,4 @@
+verbose: false
 connection:
   port: '8080'
 testValue: 'conf2!'
@@ -11,7 +12,7 @@ plugins:
   vision:
   inert:
   hapi-method-loader:
-    _priority: 2
+    _priority: -2
     cwd: '{{CWD}}/test'
     path: '{{CWD}}/test/methods'
     verbose: '{{verbose}}'
