@@ -25,30 +25,21 @@ class Rapptor {
     this.options.before = callback;
   }
 
-  start() {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const { server, config } = await hapiConfi(Hapi, this.options);
-        this.config = config;
-        this.server = server;
-        const uri = process.env.VIRTUAL_HOST || server.info.uri;
-        process.on('SIGTERM', () => {
-          this.stop(() => { process.exit(0); });
-        });
-        await server.start();
-        server.log(['server', 'notice'], `Server started: ${uri}`);
-        return resolve({ server, config });
-      } catch (e) {
-        return reject(e);
-      }
+  async start() {
+    const { server, config } = await hapiConfi(Hapi, this.options);
+    this.config = config;
+    this.server = server;
+    const uri = process.env.VIRTUAL_HOST || server.info.uri;
+    process.on('SIGTERM', () => {
+      this.stop(() => { process.exit(0); });
     });
+    await server.start();
+    server.log(['server', 'notice'], `Server started: ${uri}`);
+    return { server, config };
   }
 
-  stop() {
-    return new Promise( async (resolve, reject) => {
-      await this.server.stop({ timeout: 5 * 1000 });
-      resolve();
-    });
+  async stop() {
+    await this.server.stop({ timeout: 5 * 1000 });
   }
 }
 
