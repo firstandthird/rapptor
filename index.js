@@ -4,6 +4,9 @@ const hapiConfi = require('hapi-confi');
 
 class Rapptor {
   constructor(options) {
+    // Actually provides helpful stack traces
+    process.on('unhandledRejection', r => console.log(r));
+    
     this.options = options || {};
     this.options.cwd = this.options.cwd || process.cwd();
     const projectConfig = this.options.configPath || `${this.options.cwd}/conf`;
