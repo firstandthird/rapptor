@@ -18,6 +18,7 @@ class Rapptor {
       this.options.envPrefix = 'rapptor';
     }
     this.options.configUrl = process.env.RAPPTOR_CONFIG_URL;
+    this.isConfigured = false;
   }
 
   // callback should be an async function
@@ -25,10 +26,20 @@ class Rapptor {
     this.options.before = callback;
   }
 
-  async start() {
+  async setup() {
     const { server, config } = await hapiConfi(Hapi, this.options);
     this.config = config;
     this.server = server;
+    this.isConfigured = true;
+    return { server, config };
+  }
+
+  async start() {
+    if (!this.isConfigured) {
+      await this.setup();
+    }
+    const server = this.server;
+    const config = this.config;
     const uri = process.env.VIRTUAL_HOST || server.info.uri;
     process.on('SIGTERM', () => {
       this.stop(() => { process.exit(0); });
