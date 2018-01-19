@@ -1,6 +1,6 @@
 'use strict';
 const Rapptor = require('../');
-const Code = require('code');   // assertion library
+const Code = require('code'); // assertion library
 const Lab = require('lab');
 const lab = exports.lab = Lab.script();
 
@@ -11,7 +11,7 @@ lab.experiment('Rapptor#routes', () => {
   });
 
   lab.before(async() => {
-    const { server, config } = await rapptor.start();
+    await rapptor.start();
   });
 
   lab.test('should automatically load methods from the appropriate folder', async() => {

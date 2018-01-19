@@ -1,6 +1,6 @@
 'use strict';
 const Rapptor = require('../');
-const Code = require('code');   // assertion library
+const Code = require('code'); // assertion library
 const Lab = require('lab');
 const lab = exports.lab = Lab.script();
 

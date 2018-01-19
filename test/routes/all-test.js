@@ -2,7 +2,5 @@
 exports.allTest = {
   method: 'GET',
   path: '/all-test',
-  handler: (request, h) => {
-    return h.view('all-test/index');
-  }
+  handler: (request, h) => h.view('all-test/index')
 };
