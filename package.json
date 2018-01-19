@@ -14,7 +14,7 @@
     "url": "https://github.com/firstandthird/rapptor.git"
   },
   "scripts": {
-    "test": "lab --leaks",
+    "test": "eslint . && lab --leaks",
     "lint": "eslint .",
     "example": "cd example && nodemon ../bin/rapptor.js"
   },
