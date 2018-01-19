@@ -1,6 +1,6 @@
 'use strict';
 const Rapptor = require('../');
-const Code = require('code');   // assertion library
+const Code = require('code'); // assertion library
 const Lab = require('lab');
 const lab = exports.lab = Lab.script();
 
@@ -45,7 +45,7 @@ lab.experiment('Rapptor#routes log requests', () => {
     rapptor = new Rapptor({
       cwd: __dirname
     });
-    const { server, config } = await rapptor.start();
+    const { server } = await rapptor.start();
     const oldLog = console.log;
     console.log = async(msg) => {
       oldLog(msg);
@@ -72,9 +72,8 @@ lab.experiment('Rapptor#routes log requests', () => {
     rapptor = new Rapptor({
       cwd: __dirname
     });
-    const { server, config } = await rapptor.start();
+    const { server } = await rapptor.start();
     const shouldBeEmpty = [];
-    const oldLog = console.log;
     console.log = (msg) => {
       shouldBeEmpty.push(msg);
     };

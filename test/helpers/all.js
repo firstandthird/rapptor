@@ -1,7 +1,8 @@
+/* eslint-disable */
 'use strict';
 module.exports = function () {
   let passing = true;
-  const options = arguments[arguments.length-1];
+  const options = arguments[arguments.length - 1];
 
   for (let i = 0, c = arguments.length; i < c; i++) {
     if (!arguments[i]) {
@@ -12,7 +13,7 @@ module.exports = function () {
 
   if (passing) {
     return options.fn(this);
-  } else {
-    return options.inverse(this);
   }
+  return options.inverse(this);
 };
+/* eslint-enable */

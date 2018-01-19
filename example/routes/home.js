@@ -22,6 +22,6 @@ exports.error = {
   path: '/bug',
   handler(request, reply) {
     const a = request.dummy.blah; //this will error
-    reply('bug!');
+    reply(a);
   }
 };
