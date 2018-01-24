@@ -56,4 +56,18 @@ lab.experiment('Rapptor#setup', () => {
     Code.expect(raptConfig.testValue).to.equal('conf2!');
     await rapptor.stop();
   });
+
+  lab.test('will throw error if invalid yaml', async() => {
+    const rapptor = new Rapptor({
+      configPath: `${__dirname}/broken`
+    });
+    try {
+      await rapptor.start();
+    } catch (e) {
+      Code.expect(e).to.not.equal(null);
+      Code.expect(e.toString().startsWith('YAMLException:')).to.equal(true);
+      return;
+    }
+    lab.fail('rapptor should throw error');
+  });
 });

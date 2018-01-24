@@ -13,18 +13,20 @@ plugins:
     _enabled: '{{ENV.FORCE_HTTPS === "true"}}'
   hapi-trailing-slash:
     method: 'remove'
-    _priority: 100
+    _dependencies:
+      - 'hapi-logr'
   hapi-method-loader:
-    _priority: 2
+    _dependencies:
+      - 'hapi-logr'
     cwd: '{{CWD}}'
     verbose: '{{verbose}}'
   hapi-route-loader:
-    _priority: 3
+    _dependencies:
+      - 'hapi-method-loader'
     cwd: '{{CWD}}'
     prefix: '{{routePrefix}}'
     verbose: '{{verbose}}'
   hapi-logr:
-    _priority: -5
     clientErrorsToWarnings: true
     requests: '{{ENV.ACCESS_LOGS === "true" || ENV.ACCESS_LOGS === true }}'
     reporters:
@@ -47,6 +49,7 @@ plugins:
         options:
           enabled: '{{logType === "cli"}}'
   hapi-log-response:
-    _priority: 110
+    _dependencies:
+      - 'hapi-logr'
     tags:
       - 'detailed-response'
