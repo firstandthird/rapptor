@@ -68,6 +68,6 @@ lab.experiment('Rapptor#setup', () => {
       Code.expect(e.toString().startsWith('YAMLException:')).to.equal(true);
       return;
     }
-    lab.fail('rapptor should throw error');
+    throw new Error('rapptor should throw error');
   });
 });
