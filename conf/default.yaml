@@ -9,22 +9,7 @@ server:
   address: '0.0.0.0'
 routePrefix: "{{ ENV.PATH_PREFIX || '' }}"
 plugins:
-  "@firstandthird/hapi-require-https":
-    _enabled: '{{ENV.FORCE_HTTPS === "true"}}'
-  hapi-trailing-slash:
-    method: 'remove'
-    _priority: 100
-  hapi-method-loader:
-    _priority: 2
-    cwd: '{{CWD}}'
-    verbose: '{{verbose}}'
-  hapi-route-loader:
-    _priority: 3
-    cwd: '{{CWD}}'
-    prefix: '{{routePrefix}}'
-    verbose: '{{verbose}}'
   hapi-logr:
-    _priority: -5
     clientErrorsToWarnings: true
     requests: '{{ENV.ACCESS_LOGS === "true" || ENV.ACCESS_LOGS === true }}'
     reporters:
@@ -46,7 +31,21 @@ plugins:
         reporter: 'logr-reporter-bell'
         options:
           enabled: '{{logType === "cli"}}'
+  "@firstandthird/hapi-require-https":
+    _enabled: '{{ENV.FORCE_HTTPS === "true"}}'
+  hapi-method-loader:
+    cwd: '{{CWD}}'
+    verbose: '{{verbose}}'
+  hapi-route-loader:
+    _dependencies:
+      - 'hapi-method-loader'
+    cwd: '{{CWD}}'
+    prefix: '{{routePrefix}}'
+    verbose: '{{verbose}}'
   hapi-log-response:
-    _priority: 110
+    _dependencies:
+      - 'hapi-trailing-slash'
     tags:
       - 'detailed-response'
+  hapi-trailing-slash:
+    method: 'remove'

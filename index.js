@@ -6,7 +6,7 @@ class Rapptor {
   constructor(options) {
     this.options = options || {};
     this.options.cwd = this.options.cwd || process.cwd();
-    const prefix = options.configPrefix || 'rapptor';
+    const prefix = this.options.configPrefix || 'rapptor';
     const projectConfig = this.options.configPath || `${this.options.cwd}/conf`;
     // inject rapptor config first
     const configPaths = [
