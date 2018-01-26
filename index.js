@@ -42,8 +42,7 @@ class Rapptor {
     const server = this.server;
     const config = this.config;
     const uri = process.env.VIRTUAL_HOST || server.info.uri;
-    let listener = undefined;
-    listener = () => {
+    const listener = () => {
       process.removeListener('SIGTERM', listener);
       this.stop(() => { process.exit(0); });
     };
