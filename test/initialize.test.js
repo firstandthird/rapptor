@@ -19,14 +19,16 @@ lab.experiment('Rapptor#initialization', { timeout: 5000 }, () => {
   });
 
   lab.test('removes SIGTERM listener ', async() => {
+    const originalEventCount = process.listenerCount('SIGTERM');
     const rapptor = new Rapptor({
       cwd: __dirname,
     });
-    const { server } = await rapptor.start();
-    Code.expect(process.listenerCount('SIGTERM')).to.equal(2);
+    await rapptor.start();
+    Code.expect(process.listenerCount('SIGTERM')).to.equal(originalEventCount + 1);
     process.emit('SIGTERM');
+    // wait for server to wind down:
+    await new Promise(resolve => setTimeout(resolve, 3000));
     Code.expect(process.listenerCount('SIGTERM')).to.equal(0);
-    await server.stop();
   });
 
   lab.test('can config a new instance of rapptor without starting the server', async() => {
