@@ -7,7 +7,7 @@ server:
       failAction: 'ignore'
   port: "{{ENV.PORT || 8080}}"
   address: '0.0.0.0'
-routePrefix: "{{ ENV.PATH_PREFIX || '' }}"
+routePrefix: "{{ ENV.ROUTE_PREFIX || ENV.PATH_PREFIX || '' }}"
 plugins:
   hapi-logr:
     clientErrorsToWarnings: true

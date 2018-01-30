@@ -70,4 +70,13 @@ lab.experiment('Rapptor#setup', () => {
     }
     throw new Error('rapptor should throw YAML error');
   });
+
+  lab.test('support ROUTE_PREFIX', async() => {
+    process.env.ROUTE_PREFIX = '/aRandomRoutePrefix';
+    const rapptor = new Rapptor({ cwd: __dirname });
+    const { server } = await rapptor.setup();
+    server.table().forEach(route => {
+      Code.expect(route.path.startsWith('/aRandomRoutePrefix/')).to.equal(true);
+    });
+  });
 });
