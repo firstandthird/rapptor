@@ -42,9 +42,11 @@ class Rapptor {
     const server = this.server;
     const config = this.config;
     const uri = process.env.VIRTUAL_HOST || server.info.uri;
-    process.on('SIGTERM', () => {
+    const listener = () => {
+      process.removeListener('SIGTERM', listener);
       this.stop(() => { process.exit(0); });
-    });
+    };
+    process.on('SIGTERM', listener);
     await server.start();
     server.log(['server', 'notice'], `Server started: ${uri}`);
     return { server, config };
