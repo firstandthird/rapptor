@@ -25,7 +25,7 @@
     "@firstandthird/hapi-require-https": "^2.1.0",
     "hapi": "^17.1.1",
     "hapi-confi": "^7.1.1",
-    "hapi-log-response": "^2.1.1",
+    "hapi-log-response": "^3.0.0",
     "hapi-logr": "^4.0.0",
     "hapi-method-loader": "^2.0.0",
     "hapi-route-loader": "^4.0.0",
