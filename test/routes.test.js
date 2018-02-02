@@ -40,23 +40,17 @@ lab.experiment('Rapptor#routes', () => {
 
 lab.experiment('Rapptor#routes log requests', () => {
   let rapptor;
-  lab.test('should log request with hapi-logr if ENV.ACCESS_LOGS is true', async() => {
+  lab.test('should log request with hapi-log-response if ENV.ACCESS_LOGS is true', async() => {
     process.env.ACCESS_LOGS = 'true';
     rapptor = new Rapptor({
       cwd: __dirname
     });
     const { server } = await rapptor.start();
-    const oldLog = console.log;
-    console.log = async(msg) => {
-      oldLog(msg);
-      if (msg.indexOf('Server started') > -1) {
-        return;
-      }
-      Code.expect(msg).to.contain('request');
-      Code.expect(msg).to.contain('/example');
-      console.log = oldLog;
+    server.events.on('log', async(event, tags) => {
+      Code.expect(event.tags).to.contain('detailed-response');
+      Code.expect(event.data.path).to.contain('/example');
       await rapptor.stop();
-    };
+    });
     const response = await server.inject({
       method: 'GET',
       url: '/example'
