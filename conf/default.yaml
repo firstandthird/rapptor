@@ -9,6 +9,12 @@ server:
   address: '0.0.0.0'
 routePrefix: "{{ ENV.ROUTE_PREFIX || ENV.PATH_PREFIX || '' }}"
 plugins:
+  hapi-cache-stats:
+    interval: 600000
+  hapi-oppsy:
+    interval: 60
+    logCpu: false
+    logMemory: false
   hapi-logr:
     clientErrorsToWarnings: true
     reporters:
