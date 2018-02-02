@@ -29,7 +29,7 @@
     "hapi-log-response": "^3.0.0",
     "hapi-logr": "^5.0.0",
     "hapi-method-loader": "^2.0.0",
-    "hapi-oppsy": "^2.0.0",
+    "hapi-oppsy": "^2.0.1",
     "hapi-route-loader": "^4.0.0",
     "hapi-trailing-slash": "^3.0.0",
     "logr-console-color": "^1.3.1",
