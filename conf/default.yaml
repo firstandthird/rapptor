@@ -16,7 +16,6 @@ plugins:
     logCpu: false
     logMemory: false
   hapi-logr:
-    clientErrorsToWarnings: true
     reporters:
       flat:
         reporter: 'logr-flat'
