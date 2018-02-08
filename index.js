@@ -57,8 +57,4 @@ class Rapptor {
   }
 }
 
-Rapptor.prototype.stop = async function() {
-  await this.server.stop();
-};
-
 module.exports = Rapptor;
