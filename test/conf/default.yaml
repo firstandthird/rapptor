@@ -8,8 +8,6 @@ mongo:
   db: 'table'
   port: '27017'
 plugins:
-  hapi-oppsy:
-    _enabled: false
   hapi-method-loader:
     _dependencies:
       - 'hapi-logr'

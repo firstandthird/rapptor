@@ -98,5 +98,27 @@ lab.experiment('Rapptor#setup', () => {
     server.methods.cacheTest();
     server.methods.cacheTest();
     await new Promise(resolve => setTimeout(resolve, 3000));
+    await rapptor.stop();
+  });
+
+  lab.test('support OPS_INTERVAL', { timeout: 5000 }, async() => {
+    process.env.OPS_INTERVAL = 200;
+    const rapptor = new Rapptor({ cwd: __dirname });
+    const { server } = await rapptor.setup();
+    await rapptor.start();
+    server.events.on('log', (input, tags) => {
+      Code.expect(tags.ops).to.equal(true);
+      Code.expect(tags.requests).to.equal(true);
+    });
+    server.route({
+      method: 'get',
+      path: '/route',
+      handler(request, h) {
+        return { hi: 'there' };
+      }
+    });
+    await server.inject({ url: '/route' });
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    await rapptor.stop();
   });
 });
