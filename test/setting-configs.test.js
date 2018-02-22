@@ -107,6 +107,7 @@ lab.experiment('Rapptor#setup', () => {
     await server.inject({ url: '/testTiming' });
     await new Promise(resolve => setTimeout(resolve, 2000));
     Code.expect(called).to.equal(true);
+    await rapptor.stop();
   });
 
   lab.test('support CACHE_STATS', { timeout: 5000 }, async() => {
@@ -127,5 +128,6 @@ lab.experiment('Rapptor#setup', () => {
     server.methods.cacheTest();
     server.methods.cacheTest();
     await new Promise(resolve => setTimeout(resolve, 3000));
+    await rapptor.stop();
   });
 });
