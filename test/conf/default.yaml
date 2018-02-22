@@ -8,8 +8,6 @@ mongo:
   db: 'table'
   port: '27017'
 plugins:
-  hapi-cache-stats:
-    _enabled: false
   hapi-oppsy:
     _enabled: false
   hapi-method-loader:

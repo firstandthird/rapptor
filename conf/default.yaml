@@ -13,7 +13,8 @@ plugins:
     _enabled: '{{ ENV.TIMING == 1 }}'
     threshold: '{{ parseInt(ENV.SLOW_THRESHOLD) || 300 }}'
   hapi-cache-stats:
-    interval: 600000
+    interval: '{{ ENV.CACHE_STATS ? parseInt(ENV.CACHE_STATS) : undefined }}'
+    _enabled: '{{ ENV.CACHE_STATS !== undefined }}'
   hapi-oppsy:
     interval: 60
     logCpu: false
