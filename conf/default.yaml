@@ -10,8 +10,8 @@ server:
 routePrefix: "{{ ENV.ROUTE_PREFIX || ENV.PATH_PREFIX || '' }}"
 plugins:
   hapi-timing:
-    _enabled: '{{ ENV.TIMING === 1 }}'
-    threshold: '{{ ENV.SLOW_THRESHOLD || 300 }}'
+    _enabled: '{{ ENV.TIMING == 1 }}'
+    threshold: '{{ parseInt(ENV.SLOW_THRESHOLD) || 300 }}'
   hapi-cache-stats:
     interval: 600000
   hapi-oppsy:

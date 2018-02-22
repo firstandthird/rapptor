@@ -79,4 +79,33 @@ lab.experiment('Rapptor#setup', () => {
       Code.expect(route.path.startsWith('/aRandomRoutePrefix/')).to.equal(true);
     });
   });
+
+  lab.test('support SLOW_THRESHOLD', { timeout: 5000 }, async() => {
+    process.env.TIMING = 1;
+    process.env.SLOW_THRESHOLD = 10;
+    const rapptor = new Rapptor({ cwd: __dirname });
+    const { server } = await rapptor.setup();
+    server.route({
+      method: 'get',
+      path: '/testTiming',
+      async handler(request, h) {
+        await new Promise(resolve => setTimeout(resolve, 400));
+        return { ok: true };
+      }
+    });
+    let called = false;
+    server.events.on('log', (input, tags) => {
+      called = true;
+      Code.expect(tags['hapi-timing']).to.equal(true);
+      Code.expect(typeof input.data.responseTime).to.equal('number');
+      Code.expect(input.data.threshold).to.equal(10);
+      Code.expect(typeof input.data.responseTime).to.equal('number');
+      Code.expect(input.data.message).to.include('request took');
+      Code.expect(input.data.message).to.include('ms to process');
+    });
+    await server.start();
+    await server.inject({ url: '/testTiming' });
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    Code.expect(called).to.equal(true);
+  });
 });
