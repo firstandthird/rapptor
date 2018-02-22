@@ -27,10 +27,6 @@ plugins:
           theme:
             keys: 'cyan'
           tagColors:
-            error: 'bgRed'
-            warning: 'bgYellow'
-            success: 'bgGreen'
-            notice: 'bgBlue'
             redirect: 'bgBlue'
             not-found: 'bgBlue'
             user-error: 'bgYellow'
