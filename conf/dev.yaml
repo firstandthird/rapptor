@@ -2,5 +2,3 @@ logType: '{{ENV.LOG_TYPE || "cli" }}'
 plugins:
   hapi-oppsy:
     _enabled: false
-  hapi-cache-stats:
-    _enabled: false

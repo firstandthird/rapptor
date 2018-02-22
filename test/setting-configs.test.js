@@ -5,6 +5,7 @@ const Lab = require('lab');
 const lab = exports.lab = Lab.script();
 
 lab.experiment('Rapptor#setup', () => {
+  /*
   lab.test('default options', async() => {
     const rapptor = new Rapptor();
     await rapptor.start();
@@ -78,5 +79,17 @@ lab.experiment('Rapptor#setup', () => {
     server.table().forEach(route => {
       Code.expect(route.path.startsWith('/aRandomRoutePrefix/')).to.equal(true);
     });
+  });
+*/
+  lab.test('support CACHE_STATS', { timeout: 5000 }, async() => {
+    process.env.CACHE_STATS = 200;
+    const rapptor = new Rapptor({ cwd: __dirname });
+    const { server } = await rapptor.setup();
+    server.events.on('log', (input, tags) => {
+      console.log('=====')
+      console.log(input)
+      console.log(tags)
+    });
+    await new Promise(resolve => setTimeout(resolve, 2000));
   });
 });
