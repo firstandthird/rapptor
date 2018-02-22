@@ -9,6 +9,9 @@ server:
   address: '0.0.0.0'
 routePrefix: "{{ ENV.ROUTE_PREFIX || ENV.PATH_PREFIX || '' }}"
 plugins:
+  hapi-timing:
+    _enabled: "{{ ENV.TIMING == '1' }}"
+    threshold: '{{ parseInt(ENV.SLOW_THRESHOLD) || 300 }}'
   hapi-cache-stats:
     interval: '{{ ENV.CACHE_STATS ? parseInt(ENV.CACHE_STATS) : undefined }}'
     _enabled: '{{ ENV.CACHE_STATS !== undefined }}'
