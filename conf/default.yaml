@@ -17,6 +17,7 @@ plugins:
     logCpu: false
     logMemory: false
   hapi-logr:
+    unhandledRejection: true
     reporters:
       flat:
         reporter: 'logr-flat'
