@@ -10,8 +10,8 @@ server:
 routePrefix: "{{ ENV.ROUTE_PREFIX || ENV.PATH_PREFIX || '' }}"
 plugins:
   hapi-cache-stats:
-    interval: '{{ ENV.CACHE_STATS }}'
-    _enabled: '{{ ENV.CACHE_STATS !== undefined }}'
+    interval: '{{ ENV.CACHE_STATS ? parseInt(ENV.CACHE_STATS) : undefined }}'
+    _enabled: '{{ ENV.CACHE_STATS }}'
   hapi-oppsy:
     interval: 60
     logCpu: false
