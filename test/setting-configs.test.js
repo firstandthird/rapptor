@@ -79,4 +79,24 @@ lab.experiment('Rapptor#setup', () => {
       Code.expect(route.path.startsWith('/aRandomRoutePrefix/')).to.equal(true);
     });
   });
+
+  lab.test('support CACHE_STATS', { timeout: 5000 }, async() => {
+    process.env.CACHE_STATS = 200;
+    const rapptor = new Rapptor({ cwd: __dirname });
+    const { server } = await rapptor.setup();
+    const cacheTest = () => new Date().getTime();
+    server.method('cacheTest', cacheTest, { cache: { expiresIn: 1000, generateTimeout: 100 } });
+    server.events.on('log', (input, tags) => {
+      Code.expect(tags['hapi-cache-stats']).to.equal(true);
+      Code.expect(tags.cacheTest).to.equal(true);
+      Code.expect(tags.warning).to.equal(true);
+      Code.expect(typeof input.timestamp).to.equal('number');
+      Code.expect(input.data).to.equal('Hit ratio of 0 is lower than threshold of 0.5');
+    });
+    await server.start();
+    server.methods.cacheTest();
+    server.methods.cacheTest();
+    server.methods.cacheTest();
+    await new Promise(resolve => setTimeout(resolve, 3000));
+  });
 });
