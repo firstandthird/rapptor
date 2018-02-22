@@ -9,17 +9,6 @@ server:
   address: '0.0.0.0'
 routePrefix: "{{ ENV.ROUTE_PREFIX || ENV.PATH_PREFIX || '' }}"
 plugins:
-  hapi-timing:
-    _enabled: "{{ ENV.TIMING == '1' }}"
-    threshold: '{{ parseInt(ENV.SLOW_THRESHOLD) || 300 }}'
-  hapi-cache-stats:
-    interval: '{{ ENV.CACHE_STATS ? parseInt(ENV.CACHE_STATS) : undefined }}'
-    _enabled: '{{ ENV.CACHE_STATS !== undefined }}'
-  hapi-oppsy:
-    _enabled: '{{ENV.OPS_INTERVAL !== undefined }}'
-    interval: '{{ ENV.OPS_INTERVAL ? parseInt(ENV.OPS_INTERVAL) : undefined }}'
-    logCpu: false
-    logMemory: false
   hapi-logr:
     reporters:
       flat:
@@ -45,6 +34,18 @@ plugins:
         reporter: 'logr-reporter-bell'
         options:
           enabled: '{{logType === "cli"}}'
+  hapi-timing:
+    _enabled: "{{ ENV.TIMING == '1' }}"
+    threshold: '{{ parseInt(ENV.SLOW_THRESHOLD) || 300 }}'
+  hapi-cache-stats:
+    interval: '{{ ENV.CACHE_STATS ? parseInt(ENV.CACHE_STATS) : undefined }}'
+    _enabled: '{{ ENV.CACHE_STATS !== undefined }}'
+    verbose: '{{ ENV.CACHE_STATS_VERBOSE }}'
+  hapi-oppsy:
+    _enabled: '{{ENV.OPS_INTERVAL !== undefined }}'
+    interval: '{{ ENV.OPS_INTERVAL ? parseInt(ENV.OPS_INTERVAL) : undefined }}'
+    logCpu: false
+    logMemory: false
   "@firstandthird/hapi-require-https":
     _enabled: '{{ENV.FORCE_HTTPS === "true"}}'
   hapi-method-loader:
