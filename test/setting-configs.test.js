@@ -98,6 +98,7 @@ lab.experiment('Rapptor#setup', () => {
     server.methods.cacheTest();
     server.methods.cacheTest();
     await new Promise(resolve => setTimeout(resolve, 3000));
+    await rapptor.stop();
   });
 
   lab.test('support OPS_INTERVAL', { timeout: 5000 }, async() => {
