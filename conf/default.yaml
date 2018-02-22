@@ -16,7 +16,8 @@ plugins:
     interval: '{{ ENV.CACHE_STATS ? parseInt(ENV.CACHE_STATS) : undefined }}'
     _enabled: '{{ ENV.CACHE_STATS !== undefined }}'
   hapi-oppsy:
-    interval: 60
+    _enabled: '{{ENV.OPS_INTERVAL !== undefined }}'
+    interval: '{{ ENV.OPS_INTERVAL ? parseInt(ENV.OPS_INTERVAL) : undefined }}'
     logCpu: false
     logMemory: false
   hapi-logr:
@@ -29,6 +30,11 @@ plugins:
           enabled: '{{logType === "flat"}}'
           theme:
             keys: 'cyan'
+          tagColors:
+            redirect: 'bgBlue'
+            not-found: 'bgBlue'
+            user-error: 'bgYellow'
+            server-error: 'bgRed'
       consoleColor:
         reporter: 'logr-console-color'
         options:
