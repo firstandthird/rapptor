@@ -26,6 +26,15 @@ plugins:
           enabled: '{{logType === "flat"}}'
           theme:
             keys: 'cyan'
+          tagColors:
+            error: 'bgRed'
+            warning: 'bgYellow'
+            success: 'bgGreen'
+            notice: 'bgBlue'
+            redirect: 'bgBlue'
+            not-found: 'bgBlue'
+            user-error: 'bgYellow'
+            server-error: 'bgRed'
       consoleColor:
         reporter: 'logr-console-color'
         options:
