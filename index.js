@@ -20,6 +20,7 @@ class Rapptor {
     }
     this.options.configUrl = process.env.RAPPTOR_CONFIG_URL;
     this.isConfigured = false;
+    this.sigtermCalled = false;
   }
 
   // callback should be an async function
@@ -44,6 +45,7 @@ class Rapptor {
     const uri = process.env.VIRTUAL_HOST || server.info.uri;
     const listener = () => {
       process.removeListener('SIGTERM', listener);
+      this.sigtermCalled = true;
       this.stop(() => { process.exit(0); });
     };
     process.on('SIGTERM', listener);
@@ -53,7 +55,11 @@ class Rapptor {
   }
 
   async stop() {
-    this.server.log(['server', 'stopping', 'sigterm', 'notice'], 'Stopping server...');
+    const tags = ['server', 'stopping', 'notice'];
+    if (this.sigtermCalled) {
+      tags.splice(2, 0, 'sigterm');
+    }
+    this.server.log(tags, 'Stopping server...');
     await this.server.stop({ timeout: 5000 });
     this.server.log(['server', 'stopped'], 'Server stopped');
   }
