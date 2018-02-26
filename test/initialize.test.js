@@ -18,6 +18,16 @@ lab.experiment('Rapptor#initialization', { timeout: 5000 }, () => {
     await rapptor.stop();
   });
 
+  lab.test('server stops when SIGTERM event is emitted ', async() => {
+    const rapptor = new Rapptor({
+      cwd: __dirname,
+    });
+    await rapptor.start();
+    process.emit('SIGTERM');
+    // wait for server to wind down:
+    await new Promise(resolve => setTimeout(resolve, 3000));
+  });
+
   lab.test('can config a new instance of rapptor without starting the server', async() => {
     const rapptor = new Rapptor({
       cwd: __dirname,
