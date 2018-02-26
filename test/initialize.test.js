@@ -24,8 +24,9 @@ lab.experiment('Rapptor#initialization', { timeout: 5000 }, () => {
     });
     await rapptor.start();
     process.emit('SIGTERM');
-    // wait for server to wind down:
+    // wait for server to wind down, tests will crash if it does not:
     await new Promise(resolve => setTimeout(resolve, 3000));
+    Code.expect(process.listenerCount('SIGTERM')).to.equal(0);
   });
 
   lab.test('can config a new instance of rapptor without starting the server', async() => {
