@@ -53,7 +53,8 @@ class Rapptor {
   }
 
   async stop() {
-    await this.server.stop({ timeout: 5 * 1000 });
+    this.server.log(['server', 'stopping', 'sigterm', 'notice'], 'Stopping server...');
+    await this.server.stop({ timeout: 5000 });
   }
 }
 
