@@ -18,15 +18,13 @@ lab.experiment('Rapptor#initialization', { timeout: 5000 }, () => {
     await rapptor.stop();
   });
 
-  lab.test('removes SIGTERM listener ', async() => {
-    const originalEventCount = process.listenerCount('SIGTERM');
+  lab.test('server stops when SIGTERM event is emitted ', async() => {
     const rapptor = new Rapptor({
       cwd: __dirname,
     });
     await rapptor.start();
-    Code.expect(process.listenerCount('SIGTERM')).to.equal(originalEventCount + 1);
     process.emit('SIGTERM');
-    // wait for server to wind down:
+    // wait for server to wind down, tests will crash if it does not:
     await new Promise(resolve => setTimeout(resolve, 3000));
     Code.expect(process.listenerCount('SIGTERM')).to.equal(0);
   });

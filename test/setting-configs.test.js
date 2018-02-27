@@ -95,9 +95,6 @@ lab.experiment('Rapptor#setup', () => {
     });
     let called = false;
     server.events.on('log', (input, tags) => {
-      if (called) {
-        return;
-      }
       called = true;
       Code.expect(tags['hapi-timing']).to.equal(true);
       Code.expect(typeof input.data.responseTime).to.equal('number');
@@ -119,12 +116,7 @@ lab.experiment('Rapptor#setup', () => {
     const { server } = await rapptor.setup();
     const cacheTest = () => new Date().getTime();
     server.method('cacheTest', cacheTest, { cache: { expiresIn: 1000, generateTimeout: 100 } });
-    let called = false;
     server.events.on('log', (input, tags) => {
-      if (called) {
-        return;
-      }
-      called = true;
       Code.expect(tags['hapi-cache-stats']).to.equal(true);
       Code.expect(tags.cacheTest).to.equal(true);
       Code.expect(tags.warning).to.equal(true);
