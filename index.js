@@ -57,7 +57,7 @@ class Rapptor {
   async stop() {
     const tags = ['server', 'stopping', 'notice'];
     if (this.sigtermCalled) {
-      tags.splice(2, 0, 'sigterm');
+      tags.push('sigterm');
     }
     this.server.log(tags, 'Stopping server...');
     await this.server.stop({ timeout: 5000 });
