@@ -46,7 +46,12 @@ lab.experiment('Rapptor#routes log requests', () => {
       cwd: __dirname
     });
     const { server } = await rapptor.start();
+    let called = false;
     server.events.on('log', async(event, tags) => {
+      if (called) {
+        return;
+      }
+      called = true;
       Code.expect(event.tags).to.contain('detailed-response');
       Code.expect(event.data.path).to.contain('/example');
       await rapptor.stop();
