@@ -42,8 +42,9 @@ class Rapptor {
     const server = this.server;
     const config = this.config;
     const uri = process.env.VIRTUAL_HOST || server.info.uri;
-    this.sigtermHandler = () => {
-      this.stop(() => { process.exit(0); });
+    this.sigtermHandler = async () => {
+      await this.stop('SIGTERM');
+      process.exit(0);
     };
     this.sigtermHandler.bind(this);
     process.on('SIGTERM', this.sigtermHandler);
@@ -52,11 +53,17 @@ class Rapptor {
     return { server, config };
   }
 
-  async stop() {
+  async stop(stoppedBy) {
     if (this.sigtermHandler) {
       process.removeListener('SIGTERM', this.sigtermHandler);
     }
-    await this.server.stop({ timeout: 5 * 1000 });
+    const tags = ['server', 'stopping', 'notice'];
+    if (stoppedBy === 'SIGTERM') {
+      tags.push('sigterm');
+    }
+    this.server.log(tags, 'Stopping server...');
+    await this.server.stop({ timeout: 5000 });
+    this.server.log(['server', 'stopped'], 'Server stopped');
   }
 }
 
