@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@firstandthird/hapi-require-https": "^2.1.0",
-    "hapi": "^17.2.0",
+    "hapi": "^17.2.1",
     "hapi-cache-stats": "^1.0.1",
     "hapi-confi": "^7.3.1",
     "hapi-log-response": "^4.0.0",
@@ -38,7 +38,7 @@
     "logr-reporter-bell": "0.0.1"
   },
   "devDependencies": {
-    "boom": "5.2.0",
+    "boom": "^7.2.0",
     "code": "^5.2.0",
     "eslint": "^4.18.1",
     "eslint-config-firstandthird": "^4.3.0",
