@@ -7,16 +7,17 @@ let cwd = process.cwd();
 if (process.argv.length === 3) {
   cwd = path.resolve(cwd, process.argv[2]);
 }
-const rapptor = new Rapptor({
-  configPath: `${cwd}/conf`,
-  cwd
-});
+const main = async function() {
+  const rapptor = new Rapptor({
+    configPath: `${cwd}/conf`,
+    cwd
+  });
 
-rapptor.start((err, server, config) => {
-  if (process.env.CONFIG === '1') {
-    server.log(['info', 'config'], config);
+  try {
+    await rapptor.start();
+  } catch (e) {
+    console.error(e.stack || e.message); //eslint-disable-line no-console
+    process.exit(1);
   }
-  if (err) {
-    throw err;
-  }
-});
+};
+main();
