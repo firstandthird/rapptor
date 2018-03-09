@@ -10,6 +10,7 @@ server:
 routePrefix: "{{ ENV.ROUTE_PREFIX || ENV.PATH_PREFIX || '' }}"
 plugins:
   hapi-logr:
+    unhandledRejection: true
     reporters:
       flat:
         reporter: 'logr-flat'
