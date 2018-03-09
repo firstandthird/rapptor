@@ -1,6 +1,6 @@
 verbose: false
 connection:
-  port: '8080'
+  port: '9999'
 testValue: 'conf2!'
 assets:
   host: 'http://localhost:8080'

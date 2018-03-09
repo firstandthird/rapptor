@@ -1,38 +1,34 @@
 'use strict';
 const Rapptor = require('../');
-const Code = require('code'); // assertion library
-const Lab = require('lab');
-const lab = exports.lab = Lab.script();
+const tap = require('tap');
 
-lab.experiment('Rapptor#all', () => {
+
+tap.test('should use custom helper correctly', async t => {
   const rapptor = new Rapptor({
     configPath: `${__dirname}/conf2`,
     cwd: __dirname
   });
-
-  lab.before(async() => {
-    await rapptor.start();
+  await rapptor.start();
+  const response = await rapptor.server.inject({
+    method: 'GET',
+    url: '/helper-test'
   });
+  t.equal(response.statusCode, 200, 'custom helper does not crash');
+  t.match(response.result, 'bob:dave:ralph', 'custom helper returns correct template');
+  await rapptor.stop();
+});
 
-  lab.after(async() => {
-    await rapptor.stop();
+tap.test('should use the all helper correctly', async t => {
+  const rapptor = new Rapptor({
+    configPath: `${__dirname}/conf2`,
+    cwd: __dirname
   });
-
-  lab.test('should use custom helper correctly', async() => {
-    const response = await rapptor.server.inject({
-      method: 'GET',
-      url: '/helper-test'
-    });
-    Code.expect(response.statusCode).to.equal(200);
-    Code.expect(response.result).to.include('bob:dave:ralph');
+  await rapptor.start();
+  const response = await rapptor.server.inject({
+    method: 'GET',
+    url: '/all-test'
   });
-
-  lab.test('should use the all helper correctly', async() => {
-    const response = await rapptor.server.inject({
-      method: 'GET',
-      url: '/all-test'
-    });
-    Code.expect(response.statusCode).to.equal(200);
-    Code.expect(response.result).to.include('<p>true</p>');
-  });
+  t.equal(response.statusCode, 200, 'all helper does not crash');
+  t.match(response.result, '<p>true</p>', 'all helper returns correct template');
+  await rapptor.stop();
 });

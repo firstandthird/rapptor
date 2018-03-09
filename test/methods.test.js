@@ -1,27 +1,16 @@
 'use strict';
 const Rapptor = require('../');
-const Code = require('code'); // assertion library
-const Lab = require('lab');
-const lab = exports.lab = Lab.script();
+const tap = require('tap');
 
-lab.experiment('Rapptor#routes', () => {
+tap.test('should automatically load methods from the appropriate folder', async t => {
   const rapptor = new Rapptor({
     cwd: __dirname,
     configPath: `${__dirname}/conf`
   });
-
-  lab.before(async() => {
-    await rapptor.start();
-  });
-
-  lab.test('should automatically load methods from the appropriate folder', async() => {
-    const server = rapptor.server;
-    Code.expect(typeof server.methods.randomNumber).to.equal('function');
-    const value = await server.methods.randomNumber();
-    Code.expect(typeof value).to.equal('number');
-  });
-
-  lab.after(async () => {
-    await rapptor.stop();
-  });
+  await rapptor.start();
+  const server = rapptor.server;
+  t.equal(typeof server.methods.randomNumber, 'function');
+  const value = await server.methods.randomNumber();
+  t.equal(typeof value, 'number');
+  await rapptor.stop();
 });
