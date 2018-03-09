@@ -39,7 +39,7 @@ class Rapptor {
       }
       // exit with error (unless we're just testing it):
       if (reason.toString() !== 'Error: rapptorTesting') {
-        // process.exit(1);
+        process.exit(1);
       }
     };
     this.unhandledPromiseHandler.bind(this);
