@@ -40,6 +40,7 @@ lab.experiment('Rapptor#routes', () => {
 
 lab.experiment('Rapptor#routes log requests', () => {
   let rapptor;
+
   lab.test('should log request with hapi-log-response if ENV.ACCESS_LOGS is true', async() => {
     process.env.ACCESS_LOGS = 'true';
     rapptor = new Rapptor({
@@ -47,6 +48,9 @@ lab.experiment('Rapptor#routes log requests', () => {
     });
     const { server } = await rapptor.start();
     server.events.on('log', async(event, tags) => {
+      if (tags.server) {
+        return;
+      }
       Code.expect(event.tags).to.contain('detailed-response');
       Code.expect(event.data.path).to.contain('/example');
       await rapptor.stop();

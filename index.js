@@ -28,6 +28,23 @@ class Rapptor {
   }
 
   async setup() {
+    // start listening for any unhandled promises
+    this.unhandledPromiseHandler = async(reason, promise) => {
+      // this may happen before server and server.log is configured:
+      if (this.server) {
+        this.server.log(['promise', 'error'], reason);
+        await this.stop();
+      } else {
+        console.log('[promise, error]', reason);
+      }
+      // exit with error (unless we're just testing it):
+      if (reason !== 'rapptorTesting') {
+        process.exit(1);
+      }
+    };
+    this.unhandledPromiseHandler.bind(this);
+    process.on('unhandledRejection', this.unhandledPromiseHandler);
+    // now configure server:
     const { server, config } = await hapiConfi(Hapi, this.options);
     this.config = config;
     this.server = server;
@@ -42,9 +59,11 @@ class Rapptor {
     const server = this.server;
     const config = this.config;
     const uri = process.env.VIRTUAL_HOST || server.info.uri;
-    this.sigtermHandler = async () => {
+    this.sigtermHandler = async (evt) => {
       await this.stop('SIGTERM');
-      process.exit(0);
+      if (!evt.rapptorTestMode) {
+        process.exit(0);
+      }
     };
     this.sigtermHandler.bind(this);
     process.on('SIGTERM', this.sigtermHandler);
@@ -54,6 +73,9 @@ class Rapptor {
   }
 
   async stop(stoppedBy) {
+    if (this.unhandledPromiseHandler) {
+      process.removeListener('unhandledRejection', this.unhandledPromiseHandler);
+    }
     if (this.sigtermHandler) {
       process.removeListener('SIGTERM', this.sigtermHandler);
     }
@@ -62,7 +84,10 @@ class Rapptor {
       tags.push('sigterm');
     }
     this.server.log(tags, 'Stopping server...');
-    await this.server.stop({ timeout: 5000 });
+    // only stop if the server is running to avoid causing an unhandled promise rejection:
+    if (this.server.info.started !== 0) {
+      await this.server.stop({ timeout: 5000 });
+    }
     this.server.log(['server', 'stopped'], 'Server stopped');
   }
 }

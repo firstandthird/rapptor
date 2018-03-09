@@ -23,7 +23,7 @@ lab.experiment('Rapptor#initialization', { timeout: 5000 }, () => {
       cwd: __dirname,
     });
     await rapptor.start();
-    process.emit('SIGTERM');
+    process.emit('SIGTERM', { rapptorTestMode: true });
     // wait for server to wind down, tests will crash if it does not:
     await new Promise(resolve => setTimeout(resolve, 3000));
     Code.expect(process.listenerCount('SIGTERM')).to.equal(0);
@@ -38,5 +38,16 @@ lab.experiment('Rapptor#initialization', { timeout: 5000 }, () => {
     Code.expect(typeof config).to.equal('object');
     // verify server isn't started yet:
     Code.expect(server.info.started).to.equal(0);
+  });
+
+  lab.test('will log unhandled promises and stop the server', async() => {
+    const rapptor = new Rapptor({
+      cwd: __dirname,
+    });
+    const { server } = await rapptor.start();
+    Code.expect(server.info.started).to.not.equal(0); // server is started
+    Promise.reject('rapptorTesting');
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    Code.expect(server.info.started).to.equal(0); // server will now be stopped
   });
 });
