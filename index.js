@@ -29,7 +29,7 @@ class Rapptor {
 
   async setup() {
     // start listening for any unhandled promises
-    const unhandledPromiseHandler = async(reason, promise) => {
+    this.unhandledPromiseHandler = async(reason, promise) => {
       // this may happen before server and server.log is configured:
       if (this.server) {
         this.server.log(['promise', 'error'], reason);
@@ -42,7 +42,8 @@ class Rapptor {
         process.exit(1);
       }
     };
-    process.on('unhandledRejection', unhandledPromiseHandler.bind(this));
+    this.unhandledPromiseHandler.bind(this);
+    process.on('unhandledRejection', this.unhandledPromiseHandler);
     // now configure server:
     const { server, config } = await hapiConfi(Hapi, this.options);
     this.config = config;
@@ -72,6 +73,9 @@ class Rapptor {
   }
 
   async stop(stoppedBy) {
+    if (this.unhandledPromiseHandler) {
+      process.removeListener('unhandledRejection', this.unhandledPromiseHandler);
+    }
     if (this.sigtermHandler) {
       process.removeListener('SIGTERM', this.sigtermHandler);
     }
