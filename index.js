@@ -37,8 +37,10 @@ class Rapptor {
       } else {
         console.log('[promise, error]', reason);
       }
-      // exit with error:
-      process.exit(1);
+      // exit with error (unless we're just testing it):
+      if (reason !== 'rapptorTesting') {
+        process.exit(1);
+      }
     };
     process.on('unhandledRejection', unhandledPromiseHandler.bind(this));
     // now configure server:
@@ -56,9 +58,11 @@ class Rapptor {
     const server = this.server;
     const config = this.config;
     const uri = process.env.VIRTUAL_HOST || server.info.uri;
-    this.sigtermHandler = async () => {
+    this.sigtermHandler = async (evt) => {
       await this.stop('SIGTERM');
-      process.exit(0);
+      if (!evt.rapptorTestMode) {
+        process.exit(0);
+      }
     };
     this.sigtermHandler.bind(this);
     process.on('SIGTERM', this.sigtermHandler);
@@ -76,7 +80,10 @@ class Rapptor {
       tags.push('sigterm');
     }
     this.server.log(tags, 'Stopping server...');
-    await this.server.stop({ timeout: 5000 });
+    // only stop if the server is running to avoid causing an unhandled promise rejection:
+    if (this.server.info.started !== 0) {
+      await this.server.stop({ timeout: 5000 });
+    }
     this.server.log(['server', 'stopped'], 'Server stopped');
   }
 }

@@ -95,13 +95,14 @@ lab.experiment('Rapptor#setup', () => {
     });
     let called = false;
     server.events.on('log', (input, tags) => {
+      if (called) {
+        return;
+      }
       called = true;
       Code.expect(tags['hapi-timing']).to.equal(true);
       Code.expect(typeof input.data.responseTime).to.equal('number');
       Code.expect(input.data.threshold).to.equal(10);
       Code.expect(typeof input.data.responseTime).to.equal('number');
-      Code.expect(input.data.message).to.include('request took');
-      Code.expect(input.data.message).to.include('ms to process');
     });
     await server.start();
     await server.inject({ url: '/testTiming' });
@@ -117,6 +118,9 @@ lab.experiment('Rapptor#setup', () => {
     const cacheTest = () => new Date().getTime();
     server.method('cacheTest', cacheTest, { cache: { expiresIn: 1000, generateTimeout: 100 } });
     server.events.on('log', (input, tags) => {
+      if (tags.server) {
+        return;
+      }
       Code.expect(tags['hapi-cache-stats']).to.equal(true);
       Code.expect(tags.cacheTest).to.equal(true);
       Code.expect(tags.warning).to.equal(true);
@@ -137,6 +141,9 @@ lab.experiment('Rapptor#setup', () => {
     const { server } = await rapptor.setup();
     await rapptor.start();
     server.events.on('log', (input, tags) => {
+      if (tags.server) {
+        return;
+      }
       Code.expect(tags.ops).to.equal(true);
       Code.expect(tags.requests).to.equal(true);
     });
