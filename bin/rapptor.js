@@ -1,22 +1,12 @@
 #!/usr/bin/env node
 'use strict';
 const Rapptor = require('../');
-const path = require('path');
 
-let cwd = process.cwd();
+const cwd = process.cwd();
 let justConfig = false;
 
-if (process.argv.length === 3) {
-  if (process.argv[2] === 'config') {
-    justConfig = true;
-  } else {
-    cwd = path.resolve(cwd, process.argv[2]);
-  }
-} else if (process.argv.length === 4) {
-  if (process.argv[2] === 'config') {
-    justConfig = true;
-    cwd = path.resolve(cwd, process.argv[3]);
-  }
+if (process.argv.length >= 3 && process.argv[2] === 'config') {
+  justConfig = true;
 }
 
 const main = async function() {
