@@ -26,6 +26,7 @@
     "hapi": "^17.2.1",
     "hapi-cache-stats": "^1.0.2",
     "hapi-confi": "^7.4.0",
+    "hapi-health": "^1.1.0",
     "hapi-log-response": "^4.1.0",
     "hapi-logr": "^5.0.0",
     "hapi-method-loader": "^2.0.0",

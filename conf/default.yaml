@@ -9,6 +9,7 @@ server:
   address: '0.0.0.0'
 routePrefix: "{{ ENV.ROUTE_PREFIX || ENV.PATH_PREFIX || '' }}"
 plugins:
+  hapi-health:
   hapi-logr:
     reporters:
       flat:
