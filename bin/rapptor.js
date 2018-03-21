@@ -27,7 +27,7 @@ const main = async function() {
   try {
     if (justConfig) {
       const { config } = await rapptor.setup();
-      console.log(JSON.stringify(config, null, 2));
+      console.log(JSON.stringify(config, null, 2)); //eslint-disable-line no-console
     } else {
       await rapptor.start();
     }
