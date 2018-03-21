@@ -10,6 +10,7 @@ server:
 routePrefix: "{{ ENV.ROUTE_PREFIX || ENV.PATH_PREFIX || '' }}"
 plugins:
   hapi-health:
+    token: "{{ENV.HEALTH_TOKEN}}"
   hapi-logr:
     reporters:
       flat:
