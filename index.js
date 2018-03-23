@@ -65,7 +65,7 @@ class Rapptor {
     this.sigtermHandler.bind(this);
     process.on('SIGTERM', this.sigtermHandler);
     await server.start();
-    server.log(['server', 'notice'], `Server started: ${uri}`);
+    server.log(['server', 'start', 'notice'], `Server started: ${uri}`);
     return { server, config };
   }
 
@@ -85,7 +85,7 @@ class Rapptor {
     if (this.server.info.started !== 0) {
       await this.server.stop({ timeout: 5000 });
     }
-    this.server.log(['server', 'stopped'], 'Server stopped');
+    this.server.log(['server', 'stop'], 'Server stopped');
   }
 }
 
