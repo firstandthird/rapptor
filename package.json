@@ -25,7 +25,7 @@
     "@firstandthird/hapi-require-https": "^2.1.0",
     "hapi": "^17.2.3",
     "hapi-cache-stats": "^1.0.2",
-    "hapi-confi": "^7.4.0",
+    "hapi-confi": "^7.4.1",
     "hapi-health": "^1.1.0",
     "hapi-log-response": "^4.1.0",
     "hapi-logr": "^5.0.1",
