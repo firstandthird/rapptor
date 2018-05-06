@@ -61,7 +61,7 @@ plugins:
     prefix: '{{routePrefix}}'
     verbose: '{{verbose}}'
   hapi-log-response:
-    requests: '{{ getEnv("ACCESS_LOGS", false) }}'
+    requests: '{{ truthy(getEnv("ACCESS_LOGS", false)) }}'
     _dependencies:
       - 'hapi-trailing-slash'
     tags:
