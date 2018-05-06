@@ -22,7 +22,7 @@ plugins:
     verbose: '{{verbose}}'
   hapi-logr:
     clientErrorsToWarnings: true
-    requests: '{{ENV.ACCESS_LOGS === "true" || ENV.ACCESS_LOGS === true }}'
+    requests: '{{ truthy(getEnv("ACCESS_LOGS", false)) }}'
     reporters:
       flat:
         reporter: 'logr-flat'
