@@ -38,12 +38,12 @@ plugins:
         options:
           enabled: '{{logType === "cli"}}'
   hapi-timing:
-    _enabled: "{{ getEnv('TIMING', false) === '1' }}"
+    _enabled: "{{ truthy(ENV.TIMING) }}"
     threshold: '{{ parseInt(getEnv("SLOW_THRESHOLD", "300")) }}'
   hapi-cache-stats:
     interval: '{{ getEnv("CACHE_STATS", false) }}'
     _enabled: '{{ envExists("CACHE_STATS") }}'
-    verbose: '{{ getEnv("CACHE_STATS_VERBOSE", false) }}'
+    verbose: '{{ truthy(ENV.CACHE_STATS_VERBOSE) }}'
   hapi-oppsy:
     _enabled: '{{ getEnv("OPS_INTERVAL", false) }}'
     interval: '{{ parseInt(getEnv("OPS_INTERVAL", "0")) }}'
@@ -61,7 +61,7 @@ plugins:
     prefix: '{{routePrefix}}'
     verbose: '{{verbose}}'
   hapi-log-response:
-    requests: '{{ truthy(getEnv("ACCESS_LOGS", false)) }}'
+    requests: '{{ truthy(ENV.ACCESS_LOGS) }}'
     _dependencies:
       - 'hapi-trailing-slash'
     tags:
