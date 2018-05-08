@@ -53,7 +53,7 @@ plugins:
     logCpu: false
     logMemory: false
   "@firstandthird/hapi-require-https":
-    _enabled: '{{ getEnv("FORCE_HTTPS", false) }}'
+    _enabled: '{{ truthy(ENV.FORCE_HTTPS) }}'
   hapi-method-loader:
     cwd: '{{CWD}}'
     verbose: '{{verbose}}'
