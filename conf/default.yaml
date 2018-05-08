@@ -1,16 +1,16 @@
 verbose: false
-logType: '{{ENV.LOG_TYPE || "flat" }}'
+logType: '{{ getEnv("LOG_TYPE", "flat") }}'
 server:
   debug: false
   routes:
     state:
       failAction: 'ignore'
-  port: "{{ENV.PORT || 8080}}"
+  port: "{{ getEnv('PORT', 8080) }}"
   address: '0.0.0.0'
-routePrefix: "{{ ENV.ROUTE_PREFIX || ENV.PATH_PREFIX || '' }}"
+routePrefix: "{{ getEnv('ROUTE_PREFIX', getEnv('PATH_PREFIX', '')) }}"
 plugins:
   hapi-health:
-    token: "{{ENV.HEALTH_TOKEN}}"
+    token: "{{ getEnv('HEALTH_TOKEN', false) }}"
     endpoint: "{{routePrefix}}/health"
   hapi-logr:
     reporters:
@@ -38,19 +38,19 @@ plugins:
         options:
           enabled: '{{logType === "cli"}}'
   hapi-timing:
-    _enabled: "{{ ENV.TIMING == '1' }}"
-    threshold: '{{ parseInt(ENV.SLOW_THRESHOLD) || 300 }}'
+    _enabled: "{{ truthy(ENV.TIMING) }}"
+    threshold: '{{ parseInt(getEnv("SLOW_THRESHOLD", "300")) }}'
   hapi-cache-stats:
-    interval: '{{ ENV.CACHE_STATS ? parseInt(ENV.CACHE_STATS) : undefined }}'
-    _enabled: '{{ ENV.CACHE_STATS !== undefined }}'
-    verbose: '{{ ENV.CACHE_STATS_VERBOSE }}'
+    interval: '{{ getEnv("CACHE_STATS", false) }}'
+    _enabled: '{{ envExists("CACHE_STATS") }}'
+    verbose: '{{ truthy(ENV.CACHE_STATS_VERBOSE) }}'
   hapi-oppsy:
-    _enabled: '{{ENV.OPS_INTERVAL !== undefined }}'
-    interval: '{{ ENV.OPS_INTERVAL ? parseInt(ENV.OPS_INTERVAL) : undefined }}'
+    _enabled: '{{ getEnv("OPS_INTERVAL", false) }}'
+    interval: '{{ parseInt(getEnv("OPS_INTERVAL", "0")) }}'
     logCpu: false
     logMemory: false
   "@firstandthird/hapi-require-https":
-    _enabled: '{{ENV.FORCE_HTTPS === "true"}}'
+    _enabled: '{{ getEnv("FORCE_HTTPS", false) }}'
   hapi-method-loader:
     cwd: '{{CWD}}'
     verbose: '{{verbose}}'
@@ -61,7 +61,7 @@ plugins:
     prefix: '{{routePrefix}}'
     verbose: '{{verbose}}'
   hapi-log-response:
-    requests: '{{ENV.ACCESS_LOGS === "true" || ENV.ACCESS_LOGS === true }}'
+    requests: '{{ truthy(ENV.ACCESS_LOGS) }}'
     _dependencies:
       - 'hapi-trailing-slash'
     tags:
