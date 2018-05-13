@@ -45,10 +45,10 @@ plugins:
     threshold: '{{ envVars.threshold }}'
   hapi-cache-stats:
     interval: '{{ envVars.cacheStatsInterval }}'
-    _enabled: '{{ truthy(envVars.cacheStatsInterval) }}'
-    verbose: '{{ truthy(envVars.cacheStatsVerbose) }}'
+    _enabled: '{{ envVars.cacheStatsEnabled }}'
+    verbose: '{{ envVars.cacheStatsVerbose }}'
   hapi-oppsy:
-    _enabled: '{{ truthy(envVars.opsInterval) }}'
+    _enabled: '{{ envVars.opsEnabled }}'
     interval: '{{ envVars.opsInterval }}'
     logCpu: false
     logMemory: false

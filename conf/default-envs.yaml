@@ -7,7 +7,9 @@ envVars:
   timing: "{{ truthy(ENV.TIMING) }}"
   threshold: '{{ parseInt(getEnv("SLOW_THRESHOLD", "300")) }}'
   cacheStatsInterval: '{{ getEnv("CACHE_STATS", false) }}'
+  cacheStatsEnabled: '{{ truthy(cacheStatsInterval) }}'
   cacheStatsVerbose: '{{ truthy(ENV.CACHE_STATS_VERBOSE) }}'
   opsInterval: '{{ parseInt(getEnv("OPS_INTERVAL", "0")) }}'
+  opsEnabled: '{{ truthy(opsInterval) }}'
   forceHttps: '{{ truthy(getEnv("FORCE_HTTPS", false)) }}'
   logRequests: '{{ truthy(ENV.ACCESS_LOGS) }}'
