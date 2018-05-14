@@ -1,20 +1,20 @@
 verbose: false
-logType: '{{ getEnv("LOG_TYPE", "flat") }}'
+logType: '{{ envVars.logType }}'
 server:
   debug: false
   routes:
     state:
       failAction: 'ignore'
-  port: "{{ getEnv('PORT', 8080) }}"
+  port: "{{ envVars.port }}"
   address: '0.0.0.0'
-routePrefix: "{{ getEnv('ROUTE_PREFIX', getEnv('PATH_PREFIX', '')) }}"
+routePrefix: "{{ envVars.routePrefix }}"
 plugins:
   hapi-config-route:
-    _enabled: '{{ envExists("CONFIG_KEY") }}'
-    key: '{{ENV.CONFIG_KEY}}'
+    _enabled: '{{ truthy(envVars.configKey) }}'
+    key: '{{envVars.configKey}}'
     endpoint: '{{getEnv("ROUTE_PREFIX", "")}}/_config'
   hapi-health:
-    token: "{{ getEnv('HEALTH_TOKEN', false) }}"
+    token: "{{ envVars.healthToken }}"
     endpoint: "{{routePrefix}}/health"
   hapi-logr:
     reporters:
@@ -42,19 +42,19 @@ plugins:
         options:
           enabled: '{{logType === "cli"}}'
   hapi-timing:
-    _enabled: "{{ truthy(ENV.TIMING) }}"
-    threshold: '{{ parseInt(getEnv("SLOW_THRESHOLD", "300")) }}'
+    _enabled: "{{ envVars.timing }}"
+    threshold: '{{ envVars.threshold }}'
   hapi-cache-stats:
-    interval: '{{ getEnv("CACHE_STATS", false) }}'
-    _enabled: '{{ envExists("CACHE_STATS") }}'
-    verbose: '{{ truthy(ENV.CACHE_STATS_VERBOSE) }}'
+    interval: '{{ envVars.cacheStatsInterval }}'
+    _enabled: '{{ envVars.cacheStatsEnabled }}'
+    verbose: '{{ envVars.cacheStatsVerbose }}'
   hapi-oppsy:
-    _enabled: '{{ getEnv("OPS_INTERVAL", false) }}'
-    interval: '{{ parseInt(getEnv("OPS_INTERVAL", "0")) }}'
+    _enabled: '{{ envVars.opsEnabled }}'
+    interval: '{{ envVars.opsInterval }}'
     logCpu: false
     logMemory: false
   "@firstandthird/hapi-require-https":
-    _enabled: '{{ truthy(ENV.FORCE_HTTPS) }}'
+    _enabled: '{{ envVars.forceHttps }}'
   hapi-method-loader:
     cwd: '{{CWD}}'
     verbose: '{{verbose}}'
@@ -65,7 +65,7 @@ plugins:
     prefix: '{{routePrefix}}'
     verbose: '{{verbose}}'
   hapi-log-response:
-    requests: '{{ truthy(ENV.ACCESS_LOGS) }}'
+    requests: '{{ envVars.logRequests }}'
     _dependencies:
       - 'hapi-trailing-slash'
     tags:

@@ -1,0 +1,15 @@
+envVars:
+  logType: '{{ getEnv("LOG_TYPE", "flat") }}'
+  port: "{{ getEnv('PORT', 8080) }}"
+  routePrefix: "{{ getEnv('ROUTE_PREFIX', getEnv('PATH_PREFIX', '')) }}"
+  configKey: '{{ envExists("CONFIG_KEY") }}'
+  healthToken: "{{ getEnv('HEALTH_TOKEN', false) }}"
+  timing: "{{ truthy(ENV.TIMING) }}"
+  threshold: '{{ parseInt(getEnv("SLOW_THRESHOLD", "300")) }}'
+  cacheStatsInterval: '{{ getEnv("CACHE_STATS", false) }}'
+  cacheStatsEnabled: '{{ truthy(envVars.cacheStatsInterval) }}'
+  cacheStatsVerbose: '{{ truthy(ENV.CACHE_STATS_VERBOSE) }}'
+  opsInterval: '{{ parseInt(getEnv("OPS_INTERVAL", "0")) }}'
+  opsEnabled: '{{ truthy(envVars.opsInterval) }}'
+  forceHttps: '{{ truthy(getEnv("FORCE_HTTPS", false)) }}'
+  logRequests: '{{ truthy(ENV.ACCESS_LOGS) }}'
