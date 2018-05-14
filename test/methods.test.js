@@ -9,6 +9,8 @@ tap.test('should automatically load methods from the appropriate folder', async 
   });
   await rapptor.start();
   const server = rapptor.server;
+  t.equal(server.methods.randomNumber.description, 'a test method');
+  t.isA(server.methods.randomNumber.schema, 'object');
   t.equal(typeof server.methods.randomNumber, 'function');
   const value = await server.methods.randomNumber();
   t.equal(typeof value, 'number');
