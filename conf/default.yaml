@@ -12,6 +12,7 @@ plugins:
   hapi-config-route:
     _enabled: '{{ truthy(envVars.configKey) }}'
     key: '{{envVars.configKey}}'
+    endpoint: '{{getEnv("ROUTE_PREFIX", "")}}/_config'
   hapi-health:
     token: "{{ envVars.healthToken }}"
     endpoint: "{{routePrefix}}/health"
