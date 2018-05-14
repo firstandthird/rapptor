@@ -30,7 +30,7 @@
     "hapi-health": "^1.1.0",
     "hapi-log-response": "^4.1.0",
     "hapi-logr": "^5.0.1",
-    "hapi-method-loader": "^2.0.0",
+    "hapi-method-loader": "^2.1.0",
     "hapi-oppsy": "^2.0.2",
     "hapi-route-loader": "^4.0.0",
     "hapi-timing": "^3.1.1",
