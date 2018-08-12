@@ -53,7 +53,7 @@ plugins:
     interval: '{{ envVars.opsInterval }}'
     logCpu: false
     logMemory: false
-  "@firstandthird/hapi-require-https":
+  hapi-require-https:
     _enabled: '{{ envVars.forceHttps }}'
   hapi-method-loader:
     cwd: '{{CWD}}'
