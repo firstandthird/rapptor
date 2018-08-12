@@ -22,7 +22,6 @@
     "rapptor": "bin/rapptor.js"
   },
   "dependencies": {
-    "@firstandthird/hapi-require-https": "^2.1.0",
     "hapi": "^17.2.3",
     "hapi-cache-stats": "^1.0.2",
     "hapi-confi": "^7.4.1",
@@ -32,6 +31,7 @@
     "hapi-logr": "^5.0.1",
     "hapi-method-loader": "^2.1.0",
     "hapi-oppsy": "^2.0.2",
+    "hapi-require-https": "^3.0.0",
     "hapi-route-loader": "^4.0.0",
     "hapi-timing": "^3.1.1",
     "hapi-trailing-slash": "^3.0.0",
