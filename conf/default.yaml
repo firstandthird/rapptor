@@ -11,7 +11,7 @@ server:
 routePrefix: "{{ envVars.routePrefix }}"
 plugins:
   hapi-config-route:
-    _enabled: '{{ envExists(envVars.configKey) }}'
+    _enabled: '{{ (envVars.configKey) }}'
     key: '{{envVars.configKey}}'
     endpoint: '{{envVars.routePrefix}}/_config'
   hapi-health:
