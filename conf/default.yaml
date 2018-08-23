@@ -10,12 +10,13 @@ server:
 routePrefix: "{{ envVars.routePrefix }}"
 plugins:
   hapi-config-route:
-    _enabled: '{{ truthy(envVars.configKey) }}'
+    _enabled: '{{ envExists(envVars.configKey) }}'
     key: '{{envVars.configKey}}'
     endpoint: '{{envVars.routePrefix}}/_config'
   hapi-health:
     token: "{{ envVars.healthToken }}"
     endpoint: "{{routePrefix}}/health"
+    auth: false
   hapi-logr:
     reporters:
       flat:
