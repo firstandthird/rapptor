@@ -82,6 +82,8 @@ plugins:
     verbose: '{{verbose}}'
   hapi-log-response:
     requests: '{{ envVars.logRequests }}'
+    includeEventTags: true
+    ignoreUnauthorizedTry: true
     _dependencies:
       - 'hapi-trailing-slash'
     tags:
