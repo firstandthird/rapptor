@@ -1,3 +1,4 @@
+name: 'rapptor'
 verbose: false
 logType: '{{ envVars.logType }}'
 server:
@@ -42,6 +43,18 @@ plugins:
         reporter: 'logr-reporter-bell'
         options:
           enabled: '{{logType === "cli"}}'
+      sentry:
+        reporter: 'logr-sentry'
+        options:
+          enabled: '{{(envVars.sentryDsn)}}'
+          dsn: '{{envVars.sentryDsn}}'
+          environment: '{{env}}'
+          name: '{{name}}'
+          filter:
+            - 'error'
+            - 'warning'
+            - 'user-error'
+            - 'server-error'
   hapi-timing:
     _enabled: "{{ envVars.timing }}"
     threshold: '{{ envVars.threshold }}'

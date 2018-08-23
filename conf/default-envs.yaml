@@ -13,3 +13,4 @@ envVars:
   opsEnabled: '{{ envExists("OPS_INTERVAL") }}'
   forceHttps: '{{ truthy(getEnv("FORCE_HTTPS", false)) }}'
   logRequests: '{{ truthy(ENV.ACCESS_LOGS) }}'
+  sentryDsn: '{{getEnv("SENTRY_DSN", "")}}'
