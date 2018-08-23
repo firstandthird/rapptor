@@ -11,7 +11,7 @@ server:
 routePrefix: "{{ envVars.routePrefix }}"
 plugins:
   hapi-config-route:
-    _enabled: '{{ (envVars.configKey) ? : true : false }}'
+    _enabled: '{{ (envVars.configKey) ? true : false }}'
     key: '{{envVars.configKey}}'
     endpoint: '{{envVars.routePrefix}}/_config'
     auth: false
