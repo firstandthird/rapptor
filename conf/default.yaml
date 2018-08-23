@@ -19,6 +19,8 @@ plugins:
     endpoint: "{{routePrefix}}/health"
     auth: false
   hapi-logr:
+    unhandledRejection: true
+    uncaughtException: true
     reporters:
       flat:
         reporter: 'logr-flat'
