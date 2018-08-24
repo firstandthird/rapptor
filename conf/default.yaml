@@ -10,11 +10,6 @@ server:
   address: '0.0.0.0'
 routePrefix: "{{ envVars.routePrefix }}"
 plugins:
-  hapi-config-route:
-    _enabled: '{{ (envVars.configKey) ? true : false }}'
-    key: '{{envVars.configKey}}'
-    endpoint: '{{envVars.routePrefix}}/_config'
-    auth: false
   hapi-health:
     token: "{{ envVars.healthToken }}"
     endpoint: "{{routePrefix}}/health"

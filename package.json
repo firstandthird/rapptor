@@ -25,7 +25,6 @@
     "hapi": "17.5.2",
     "hapi-cache-stats": "^1.0.2",
     "hapi-confi": "^7.4.1",
-    "hapi-config-route": "^1.0.0",
     "hapi-health": "^1.1.0",
     "hapi-log-response": "^4.1.0",
     "hapi-logr": "^5.0.1",

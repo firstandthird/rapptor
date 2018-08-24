@@ -1,4 +1,1 @@
 logType: '{{ENV.LOG_TYPE || "cli" }}'
-
-envVars:
-  configKey: 'dev'
