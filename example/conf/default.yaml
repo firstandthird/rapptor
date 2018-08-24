@@ -1,5 +1,2 @@
 verbose: true
 someConfigValue: 'oh yeah'
-plugins:
-  './plugins/error':
-    _priority: 10
