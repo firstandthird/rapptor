@@ -49,7 +49,7 @@ plugins:
       sentry:
         reporter: 'logr-sentry'
         options:
-          enabled: '{{(envVars.sentryDsn)}}'
+          enabled: '{{(envVars.sentryDsn) ? true : false}}'
           dsn: '{{envVars.sentryDsn}}'
           environment: '{{env}}'
           name: '{{name}}'
