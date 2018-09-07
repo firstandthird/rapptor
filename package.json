@@ -16,6 +16,7 @@
   "scripts": {
     "test": "eslint . && tap test/*.test.js --cov",
     "lint": "eslint .",
+    "config": "node bin/rapptor.js config",
     "example": "cd example && nodemon ../bin/rapptor.js"
   },
   "bin": {
