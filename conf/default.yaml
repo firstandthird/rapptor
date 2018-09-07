@@ -9,6 +9,13 @@ server:
   port: "{{ envVars.port }}"
   address: '0.0.0.0'
 routePrefix: "{{ envVars.routePrefix }}"
+sentryFilter:
+  - 'error'
+  - 'warning'
+  - 'user-error'
+  - 'server-error'
+  - 'sentry'
+
 plugins:
   hapi-health:
     token: "{{ envVars.healthToken }}"
@@ -48,13 +55,7 @@ plugins:
           dsn: '{{envVars.sentryDsn}}'
           environment: '{{env}}'
           logger: '{{name}}'
-          filter:
-            - 'error'
-            - 'warning'
-            - 'user-error'
-            - 'server-error'
-            - 'redirect'
-            - 'not-found'
+          filter: '{{sentryFilter}}'
   hapi-timing:
     _enabled: "{{ envVars.timing }}"
     threshold: '{{ envVars.threshold }}'
