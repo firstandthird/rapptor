@@ -1,5 +1,5 @@
 envVars:
-  logType: '{{ getEnv("LOG_TYPE", "flat") }}'
+  logType: '{{ getEnv("LOG_TYPE", "logfmt") }}'
   port: "{{ getEnv('PORT', 8080) }}"
   routePrefix: "{{ getEnv('ROUTE_PREFIX', getEnv('PATH_PREFIX', '')) }}"
   healthToken: "{{ getEnv('HEALTH_TOKEN', false) }}"

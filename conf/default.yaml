@@ -25,19 +25,10 @@ plugins:
     unhandledRejection: true
     uncaughtException: true
     reporters:
-      flat:
-        reporter: 'logr-flat'
+      logfmt:
+        reporter: 'logr-logfmt'
         options:
-          timestamp: false
-          appColor: true
-          enabled: '{{logType === "flat"}}'
-          theme:
-            keys: 'cyan'
-          tagColors:
-            redirect: 'bgBlue'
-            not-found: 'bgBlue'
-            user-error: 'bgYellow'
-            server-error: 'bgRed'
+          enabled: '{{logType === "logfmt"}}'
       consoleColor:
         reporter: 'logr-console-color'
         options:
