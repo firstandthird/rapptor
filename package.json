@@ -14,7 +14,7 @@
     "url": "https://github.com/firstandthird/rapptor.git"
   },
   "scripts": {
-    "test": "eslint . && tap test/*.test.js --cov",
+    "test": "eslint . && tap test/initialize.test.js --cov",
     "lint": "eslint .",
     "config": "node bin/rapptor.js config",
     "example": "cd example && nodemon ../bin/rapptor.js"
