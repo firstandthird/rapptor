@@ -1,7 +1,5 @@
 # Rapptor [![Build Status](https://travis-ci.org/firstandthird/rapptor.svg?branch=master)](https://travis-ci.org/firstandthird/rapptor)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/firstandthird/rapptor.svg)](https://greenkeeper.io/)
-
 Rapptor is a lightweight library that sits on top of [hapi](http://hapijs.com).
 
 ## Features
