@@ -115,3 +115,26 @@ tap.test('be able to conditionally load hapi-oppsy plugin', async t => {
   await rapptor.stop();
   t.end();
 });
+
+tap.test('be able to conditionally load logr-logfmt reporter', async t => {
+  process.env.LOG_TYPE = 'logfmt';
+  const rapptor = new Rapptor({
+    cwd: __dirname,
+  });
+  const { config } = await rapptor.setup();
+  t.ok(config.plugins['hapi-logr'].reporters.logfmt.options.enabled);
+  await rapptor.stop();
+  t.end();
+});
+
+tap.test('be able to conditionally load logr-console-color  and logr-reporter-bell reporters', async t => {
+  process.env.LOG_TYPE = 'cli';
+  const rapptor = new Rapptor({
+    cwd: __dirname,
+  });
+  const { config } = await rapptor.setup();
+  t.ok(config.plugins['hapi-logr'].reporters.bell.options.enabled);
+  t.ok(config.plugins['hapi-logr'].reporters.consoleColor.options.enabled);
+  await rapptor.stop();
+  t.end();
+});
