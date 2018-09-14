@@ -37,7 +37,7 @@
     "hapi-trailing-slash": "^3.0.0",
     "json-stringify-safe": "^5.0.1",
     "logr-console-color": "^1.4.0",
-    "logr-logfmt": "^1.0.0",
+    "logr-logfmt": "^1.1.3",
     "logr-reporter-bell": "0.0.1",
     "logr-sentry": "^1.1.0"
   },
