@@ -65,7 +65,7 @@ class Rapptor {
     this.sigtermHandler.bind(this);
     process.on('SIGTERM', this.sigtermHandler);
     await server.start();
-    server.log(['server', 'start', 'notice'], { message: 'starting Server', uri, gitBranch: config.envVars.gitBranch, gitCommit: config.envVars.gitCommit });
+    server.log(['server', 'start', 'notice'], { message: 'Starting Server', uri, gitBranch: config.envVars.gitBranch, gitCommit: config.envVars.gitCommit });
     return { server, config };
   }
 
