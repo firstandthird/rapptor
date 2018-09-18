@@ -42,6 +42,7 @@ plugins:
       sentry:
         reporter: 'logr-sentry'
         options:
+          release: '{{envVars.gitBranch}}_{{envVars.gitCommit}}'
           enabled: '{{(envVars.sentryDsn) ? true : false}}'
           dsn: '{{envVars.sentryDsn}}'
           environment: '{{env}}'

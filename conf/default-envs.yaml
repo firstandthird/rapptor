@@ -1,4 +1,6 @@
 envVars:
+  gitCommit: '{{ getEnv("GIT_COMMIT", "unknown") }}'
+  gitBranch: '{{ getEnv("GIT_BRANCH", "unknown") }}'
   logType: '{{ getEnv("LOG_TYPE", "logfmt") }}'
   port: "{{ getEnv('PORT', 8080) }}"
   routePrefix: "{{ getEnv('ROUTE_PREFIX', getEnv('PATH_PREFIX', '')) }}"
