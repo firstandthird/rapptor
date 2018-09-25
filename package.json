@@ -28,7 +28,7 @@
     "hapi-confi": "^7.4.1",
     "hapi-health": "^1.2.2",
     "hapi-log-response": "^4.7.0",
-    "hapi-logr": "^5.0.2",
+    "hapi-logr": "^6.0.0",
     "hapi-method-loader": "^2.1.0",
     "hapi-oppsy": "^2.0.2",
     "hapi-require-https": "^3.0.0",
