@@ -110,7 +110,9 @@ tap.test('by default hapi-logr will load logr-logfmt reporter', async t => {
   };
   server.log(['start'], 'hi there');
   console.log = oldLog;
-  t.match(logs[0], '\u001b[90m[\u001b[39m\u001b[31mstart\u001b[39m\u001b[90m]\u001b[39m hi there');
+  t.match(logs[0], 'level=INFO');
+  t.match(logs[0], 'msg="hi there"');
+  t.match(logs[0], 'tag="start"');
   await rapptor.stop();
   t.end();
 });
