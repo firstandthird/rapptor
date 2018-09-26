@@ -10,7 +10,7 @@ module.exports = {
     logRequests: false,
   },
   name: 'rapptor',
-  verbose: true,
+  verbose: false,
   server: {
     debug: false,
     port: 8080,
@@ -25,19 +25,30 @@ module.exports = {
     },
     'hapi-logr': {
       unhandledRejection: true,
-      uncaughtException: true
+      uncaughtException: true,
+      reporters: {
+        sentry: {
+          reporter: 'logr-sentry',
+          options: {
+            enabled: false,
+            dsn: '',
+            environment: 'dev',
+            logger: 'rapptor',
+            filter: ['error', 'warning', 'user-error', 'server-error', 'sentry']
+          }
+        }
+      }
     },
     'hapi-require-https': {
       _enabled: false
     },
     'hapi-method-loader': {
-      verbose: true,
+      verbose: false,
       autoLoad: true
     },
     'hapi-route-loader': {
-      _dependencies: ['hapi-method-loader'],
       prefix: '',
-      verbose: true
+      verbose: false
     },
     'hapi-log-response': {
       requests: false,

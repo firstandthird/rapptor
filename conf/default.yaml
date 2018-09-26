@@ -1,5 +1,5 @@
 name: 'rapptor'
-verbose: true
+verbose: false
 logType: '{{ envVars.logType }}'
 server:
   debug: false
@@ -9,6 +9,12 @@ server:
   port: "{{ envVars.port }}"
   address: '0.0.0.0'
 routePrefix: "{{ envVars.routePrefix }}"
+sentryFilter:
+  - 'error'
+  - 'warning'
+  - 'user-error'
+  - 'server-error'
+  - 'sentry'
 plugins:
   hapi-health:
     token: "{{ envVars.healthToken }}"
@@ -19,6 +25,16 @@ plugins:
   hapi-logr:
     unhandledRejection: true
     uncaughtException: true
+    reporters:
+        sentry:
+          reporter: 'logr-sentry'
+          options:
+            release: '{{envVars.gitBranch}}_{{envVars.gitCommit}}'
+            enabled: '{{(envVars.sentryDsn) ? true : false}}'
+            dsn: '{{envVars.sentryDsn}}'
+            environment: '{{env}}'
+            logger: '{{name}}'
+            filter: '{{sentryFilter}}'
   hapi-require-https:
     _enabled: '{{ envVars.forceHttps }}'
   hapi-method-loader:

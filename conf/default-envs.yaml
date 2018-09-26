@@ -7,3 +7,4 @@ envVars:
   enableProm: '{{ getEnv("ENABLE_PROM", false)}}'
   forceHttps: '{{ truthy(getEnv("FORCE_HTTPS", false)) }}'
   logRequests: '{{ truthy(ENV.ACCESS_LOGS) }}'
+  sentryDsn: '{{getEnv("SENTRY_DSN", "")}}'
