@@ -31,14 +31,11 @@ module.exports = {
       _enabled: false
     },
     'hapi-method-loader': {
-      cwd: '/home/ubuntu/Documents/GitHub/rapptor',
       verbose: true,
-      path: '/home/ubuntu/Documents/GitHub/rapptor/methods',
       autoLoad: true
     },
     'hapi-route-loader': {
       _dependencies: ['hapi-method-loader'],
-      cwd: '/home/ubuntu/Documents/GitHub/rapptor',
       prefix: '',
       verbose: true
     },
