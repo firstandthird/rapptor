@@ -1,5 +1,5 @@
 name: 'rapptor'
-verbose: false
+verbose: true
 logType: '{{ envVars.logType }}'
 server:
   debug: false
@@ -9,57 +9,16 @@ server:
   port: "{{ envVars.port }}"
   address: '0.0.0.0'
 routePrefix: "{{ envVars.routePrefix }}"
-sentryFilter:
-  - 'error'
-  - 'warning'
-  - 'user-error'
-  - 'server-error'
-  - 'sentry'
-
 plugins:
   hapi-health:
     token: "{{ envVars.healthToken }}"
     endpoint: "{{routePrefix}}/health"
     auth: false
+  hapi-prom:
+    _enabled: "{{ truthy(envVars.enableProm)}}"
   hapi-logr:
     unhandledRejection: true
     uncaughtException: true
-    reporters:
-      logfmt:
-        reporter: 'logr-logfmt'
-        options:
-          enabled: '{{logType === "logfmt"}}'
-      consoleColor:
-        reporter: 'logr-console-color'
-        options:
-          enabled: '{{logType === "cli"}}'
-          timestamp: false
-          appColor: true
-      bell:
-        reporter: 'logr-reporter-bell'
-        options:
-          enabled: '{{logType === "cli"}}'
-      sentry:
-        reporter: 'logr-sentry'
-        options:
-          release: '{{envVars.gitBranch}}_{{envVars.gitCommit}}'
-          enabled: '{{(envVars.sentryDsn) ? true : false}}'
-          dsn: '{{envVars.sentryDsn}}'
-          environment: '{{env}}'
-          logger: '{{name}}'
-          filter: '{{sentryFilter}}'
-  hapi-timing:
-    _enabled: "{{ envVars.timing }}"
-    threshold: '{{ envVars.threshold }}'
-  hapi-cache-stats:
-    interval: '{{ envVars.cacheStatsInterval }}'
-    _enabled: '{{ envVars.cacheStatsEnabled }}'
-    verbose: '{{ envVars.cacheStatsVerbose }}'
-  hapi-oppsy:
-    _enabled: '{{ envVars.opsEnabled }}'
-    interval: '{{ envVars.opsInterval }}'
-    logCpu: false
-    logMemory: false
   hapi-require-https:
     _enabled: '{{ envVars.forceHttps }}'
   hapi-method-loader:
