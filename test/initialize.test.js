@@ -18,7 +18,7 @@ tap.test('initializes a new instance of rapptor', async t => {
   t.end();
 });
 
-tap.test('initializes a new instance of rapptor', async t => {
+tap.test('be able to load env vars', async t => {
   process.env.HEALTH_TOKEN = 'wood';
   const rapptor = new Rapptor({
     cwd: __dirname,
