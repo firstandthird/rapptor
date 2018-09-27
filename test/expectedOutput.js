@@ -30,8 +30,6 @@ module.exports = {
         sentry: {
           reporter: 'logr-sentry',
           options: {
-            enabled: false,
-            dsn: '',
             environment: 'dev',
             logger: 'rapptor',
             filter: ['error', 'warning', 'user-error', 'server-error', 'sentry']

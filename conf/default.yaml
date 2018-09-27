@@ -21,7 +21,7 @@ plugins:
     endpoint: "{{routePrefix}}/health"
     auth: false
   hapi-prom:
-    _enabled: "{{ truthy(envVars.enableProm)}}"
+    _enabled: "{{ envVars.enableProm }}"
   hapi-logr:
     unhandledRejection: true
     uncaughtException: true
@@ -30,8 +30,6 @@ plugins:
           reporter: 'logr-sentry'
           options:
             release: '{{envVars.gitBranch}}_{{envVars.gitCommit}}'
-            enabled: '{{(envVars.sentryDsn) ? true : false}}'
-            dsn: '{{envVars.sentryDsn}}'
             environment: '{{env}}'
             logger: '{{name}}'
             filter: '{{sentryFilter}}'

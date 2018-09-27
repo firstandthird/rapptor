@@ -4,7 +4,7 @@ envVars:
   port: "{{ getEnv('PORT', 8080) }}"
   routePrefix: "{{ getEnv('ROUTE_PREFIX', getEnv('PATH_PREFIX', '')) }}"
   healthToken: "{{ getEnv('HEALTH_TOKEN', false) }}"
-  enableProm: '{{ getEnv("ENABLE_PROM", false)}}'
+  enableProm: '{{ truthy(ENV.ENABLE_PROM)}}'
   forceHttps: '{{ truthy(getEnv("FORCE_HTTPS", false)) }}'
   logRequests: '{{ truthy(ENV.ACCESS_LOGS) }}'
   sentryDsn: '{{getEnv("SENTRY_DSN", "")}}'
