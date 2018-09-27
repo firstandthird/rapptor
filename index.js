@@ -20,6 +20,7 @@ class Rapptor {
     }
     this.options.configUrl = process.env.RAPPTOR_CONFIG_URL;
     this.isConfigured = false;
+    this.options.verbose = true;
   }
 
   // callback should be an async function
@@ -65,7 +66,26 @@ class Rapptor {
     this.sigtermHandler.bind(this);
     process.on('SIGTERM', this.sigtermHandler);
     await server.start();
-    server.log(['server', 'start', 'notice'], { message: 'Starting Server', uri, gitBranch: config.envVars.gitBranch, gitCommit: config.envVars.gitCommit });
+    const logData = {
+      message: 'Starting Server',
+      uri,
+      rapptorVersion: require('./package.json').version
+    };
+    try {
+      const appVersion = require(`${this.options.cwd}/package.json`).version;
+      if (appVersion) {
+        logData.appVersion = appVersion;
+      }
+    } catch (e) {
+      // not a problem just skip logging appversion
+    }
+    if (config.envVars.gitBranch) {
+      logData.gitBranch = config.envVars.gitBranch;
+    }
+    if (config.envVars.gitCommit) {
+      logData.gitCommit = config.envVars.gitCommit;
+    }
+    server.log(['server', 'start', 'notice'], logData);
     return { server, config };
   }
 

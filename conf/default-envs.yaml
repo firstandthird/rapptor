@@ -1,17 +1,10 @@
 envVars:
-  gitCommit: '{{ getEnv("GIT_COMMIT", "unknown") }}'
-  gitBranch: '{{ getEnv("GIT_BRANCH", "unknown") }}'
-  logType: '{{ getEnv("LOG_TYPE", "logfmt") }}'
+  gitCommit: '{{ getEnv("GIT_COMMIT", "") }}'
+  gitBranch: '{{ getEnv("GIT_BRANCH", "") }}'
   port: "{{ getEnv('PORT', 8080) }}"
   routePrefix: "{{ getEnv('ROUTE_PREFIX', getEnv('PATH_PREFIX', '')) }}"
   healthToken: "{{ getEnv('HEALTH_TOKEN', false) }}"
-  timing: "{{ truthy(ENV.TIMING) }}"
-  threshold: '{{ parseInt(getEnv("SLOW_THRESHOLD", "300")) }}'
-  cacheStatsInterval: '{{ getEnv("CACHE_STATS", false) }}'
-  cacheStatsEnabled: '{{ envExists("CACHE_STATS") }}'
-  cacheStatsVerbose: '{{ truthy(ENV.CACHE_STATS_VERBOSE) }}'
-  opsInterval: '{{ parseInt(getEnv("OPS_INTERVAL", "0")) }}'
-  opsEnabled: '{{ envExists("OPS_INTERVAL") }}'
+  enableProm: '{{ truthy(ENV.ENABLE_PROM)}}'
   forceHttps: '{{ truthy(getEnv("FORCE_HTTPS", false)) }}'
   logRequests: '{{ truthy(ENV.ACCESS_LOGS) }}'
   sentryDsn: '{{getEnv("SENTRY_DSN", "")}}'

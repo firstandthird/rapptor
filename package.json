@@ -24,22 +24,16 @@
   },
   "dependencies": {
     "hapi": "17.5.4",
-    "hapi-cache-stats": "^1.0.2",
     "hapi-confi": "^7.4.1",
     "hapi-health": "^1.2.2",
     "hapi-log-response": "^4.7.0",
-    "hapi-logr": "^5.0.2",
+    "hapi-logr": "^6.0.0",
     "hapi-method-loader": "^2.1.0",
-    "hapi-oppsy": "^2.0.2",
+    "hapi-prom": "^3.0.0",
     "hapi-require-https": "^3.0.0",
     "hapi-route-loader": "^4.0.0",
-    "hapi-timing": "^3.2.0",
     "hapi-trailing-slash": "^3.0.0",
-    "json-stringify-safe": "^5.0.1",
-    "logr-console-color": "^1.4.0",
-    "logr-logfmt": "^1.0.0",
-    "logr-reporter-bell": "0.0.1",
-    "logr-sentry": "^1.1.0"
+    "json-stringify-safe": "^5.0.1"
   },
   "devDependencies": {
     "boom": "^7.2.0",

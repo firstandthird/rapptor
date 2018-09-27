@@ -4,7 +4,6 @@ const tap = require('tap');
 const expected = require('./expectedOutput.js');
 
 tap.test('initializes a new instance of rapptor', async t => {
-  process.env.LOG_TYPE = 'wood';
   const rapptor = new Rapptor({
     cwd: __dirname,
   });
@@ -15,8 +14,24 @@ tap.test('initializes a new instance of rapptor', async t => {
   t.equal(typeof server, 'object');
   t.equal(typeof config, 'object');
   t.match(config, expected, 'loads config');
-  t.equal(config.envVars.logType, 'wood', 'loads env vars correctly');
   await rapptor.stop();
+  t.end();
+});
+
+tap.test('be able to load env vars', async t => {
+  process.env.HEALTH_TOKEN = 'wood';
+  const rapptor = new Rapptor({
+    cwd: __dirname,
+  });
+  t.equal(typeof rapptor, 'object');
+  t.equal(typeof rapptor.start, 'function');
+  t.equal(typeof rapptor.setup, 'function');
+  const { server, config } = await rapptor.start();
+  t.equal(typeof server, 'object');
+  t.equal(typeof config, 'object');
+  t.equal(config.envVars.healthToken, 'wood', 'loads env vars correctly');
+  await rapptor.stop();
+  delete process.env.HEALTH_TOKEN;
   t.end();
 });
 
@@ -31,7 +46,6 @@ tap.test('be able to load a config with setup', async t => {
   t.equal(typeof server, 'object');
   t.equal(typeof config, 'object');
   t.match(config, expected, 'loads config');
-  t.equal(config.envVars.logType, 'wood', 'loads env vars correctly');
   await rapptor.stop();
   t.end();
 });
@@ -69,26 +83,36 @@ tap.test('server stops when SIGTERM event is emitted ', async t => {
   await wait(2000);
 });
 
-tap.test('be able to conditionally load hapi-timing plugin', async t => {
-  process.env.TIMING = true;
+tap.test('be able to conditionally load hapi-prom', async t => {
+  process.env.ENABLE_PROM = true;
   const rapptor = new Rapptor({
     cwd: __dirname,
   });
-  const { server, config } = await rapptor.setup();
-  t.notEqual(config.plugins['hapi-timing']._enabled, false, 'loads hapi-timing');
-  t.equal(server.events._eventListeners.response.handlers.length, 2, 'registers hapi-timing event handler');
+  await rapptor.start();
+  const response = await rapptor.server.inject({
+    method: 'get',
+    url: '/metrics'
+  });
+  t.equal(response.statusCode, 200, 'registers hapi-prom route');
   await rapptor.stop();
   t.end();
 });
 
-tap.test('be able to conditionally load hapi-cache-stats plugin', async t => {
-  process.env.CACHE_STATS = true;
+tap.test('by default hapi-logr will load logr-logfmt reporter', async t => {
   const rapptor = new Rapptor({
     cwd: __dirname,
   });
-  const { server, config } = await rapptor.setup();
-  t.notEqual(config.plugins['hapi-cache-stats']._enabled, false, 'loads hapi-cache-stats');
-  t.equal(server.events._eventListeners.response.handlers.length, 2, 'registers hapi-cache-stats event handler');
+  const { server } = await rapptor.start();
+  const oldLog = console.log;
+  const logs = [];
+  console.log = (data) => {
+    logs.push(data);
+  };
+  server.log(['start'], 'hi there');
+  console.log = oldLog;
+  t.match(logs[0], 'level=INFO');
+  t.match(logs[0], 'msg="hi there"');
+  t.match(logs[0], 'tag="start"');
   await rapptor.stop();
   t.end();
 });
@@ -98,43 +122,8 @@ tap.test('be able to conditionally load hapi-require-https plugin', async t => {
   const rapptor = new Rapptor({
     cwd: __dirname,
   });
-  const { config } = await rapptor.setup();
+  const { config } = await rapptor.start();
   t.notEqual(config.plugins['hapi-require-https']._enabled, false, 'loads hapi-require-https');
-  await rapptor.stop();
-  t.end();
-});
-
-tap.test('be able to conditionally load hapi-oppsy plugin', async t => {
-  process.env.OPS_INTERVAL = 5;
-  const rapptor = new Rapptor({
-    cwd: __dirname,
-  });
-  const { server, config } = await rapptor.setup();
-  t.notEqual(config.plugins['hapi-oppsy']._enabled, false, 'loads hapi-oppsy');
-  t.equal(server.events._eventListeners.stop.handlers.length, 2, 'registers hapi-oppsy event handler');
-  await rapptor.stop();
-  t.end();
-});
-
-tap.test('be able to conditionally load logr-logfmt reporter', async t => {
-  process.env.LOG_TYPE = 'logfmt';
-  const rapptor = new Rapptor({
-    cwd: __dirname,
-  });
-  const { config } = await rapptor.setup();
-  t.ok(config.plugins['hapi-logr'].reporters.logfmt.options.enabled);
-  await rapptor.stop();
-  t.end();
-});
-
-tap.test('be able to conditionally load logr-console-color  and logr-reporter-bell reporters', async t => {
-  process.env.LOG_TYPE = 'cli';
-  const rapptor = new Rapptor({
-    cwd: __dirname,
-  });
-  const { config } = await rapptor.setup();
-  t.ok(config.plugins['hapi-logr'].reporters.bell.options.enabled);
-  t.ok(config.plugins['hapi-logr'].reporters.consoleColor.options.enabled);
   await rapptor.stop();
   t.end();
 });
