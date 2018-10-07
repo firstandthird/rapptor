@@ -26,7 +26,7 @@
     "hapi": "17.5.4",
     "hapi-confi": "^7.4.1",
     "hapi-health": "^1.2.2",
-    "hapi-log-response": "^4.7.0",
+    "hapi-log-response": "^4.7.3",
     "hapi-logr": "^6.0.0",
     "hapi-method-loader": "^2.1.0",
     "hapi-prom": "^3.0.0",
