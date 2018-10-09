@@ -5,6 +5,7 @@ envVars:
   routePrefix: "{{ getEnv('ROUTE_PREFIX', getEnv('PATH_PREFIX', '')) }}"
   healthToken: "{{ getEnv('HEALTH_TOKEN', false) }}"
   enableProm: '{{ truthy(ENV.ENABLE_PROM)}}'
+  promPath: "{{ getEnv('PROM_PATH', '/metrics') }}"
   forceHttps: '{{ truthy(getEnv("FORCE_HTTPS", false)) }}'
   logRequests: '{{ truthy(ENV.ACCESS_LOGS) }}'
   sentryDsn: '{{getEnv("SENTRY_DSN", "")}}'
