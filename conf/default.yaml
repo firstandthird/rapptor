@@ -23,6 +23,7 @@ plugins:
   hapi-prom:
     _enabled: "{{ envVars.enableProm }}"
     metricsPath: "{{ envVars.promPath }}"
+    defaultMetrics: "{{ envVars.promDefaults}}"
   hapi-logr:
     unhandledRejection: true
     uncaughtException: true

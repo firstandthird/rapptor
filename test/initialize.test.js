@@ -85,6 +85,7 @@ tap.test('server stops when SIGTERM event is emitted ', async t => {
 
 tap.test('be able to conditionally load hapi-prom', async t => {
   process.env.ENABLE_PROM = true;
+  process.env.PROM_DEFAULTS = true;
   const rapptor = new Rapptor({
     cwd: __dirname,
   });
@@ -94,6 +95,7 @@ tap.test('be able to conditionally load hapi-prom', async t => {
     url: '/metrics'
   });
   t.equal(response.statusCode, 200, 'registers hapi-prom route');
+  t.match(response.result, 'nodejs_heap_space_size_total_bytes', 'ENV.PROM_DEFAULTS registers default metrics');
   await rapptor.stop();
   t.end();
 });
