@@ -1,1 +1,12 @@
 logType: '{{ENV.LOG_TYPE || "cli" }}'
+plugins:
+  hapi-log-response:
+    requests: '{{ envVars.logRequests }}'
+    includeEventTags: true
+    ignoreUnauthorizedTry: true
+    requestPayload: true
+    requestHeaders: true
+    _dependencies:
+      - 'hapi-trailing-slash'
+    tags:
+      - 'detailed-response'
