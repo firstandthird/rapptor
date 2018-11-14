@@ -2,4 +2,3 @@ logType: '{{ENV.LOG_TYPE || "cli" }}'
 plugins:
   hapi-log-response:
     requestPayload: true
-    requestHeaders: true
