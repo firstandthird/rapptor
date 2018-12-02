@@ -18,6 +18,8 @@ module.exports = {
   },
   routePrefix: '',
   plugins: {
+    'hapi-favicon': {
+    },
     'hapi-health': {
       token: false,
       endpoint: '/health',
