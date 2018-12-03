@@ -16,6 +16,7 @@ sentryFilter:
   - 'server-error'
   - 'sentry'
 plugins:
+  hapi-favicon:
   hapi-health:
     token: "{{ envVars.healthToken }}"
     endpoint: "{{routePrefix}}/health"
