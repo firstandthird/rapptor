@@ -1,6 +1,7 @@
 name: 'rapptor'
 verbose: false
 logType: '{{ envVars.logType }}'
+
 server:
   debug: false
   routes:
@@ -16,6 +17,10 @@ sentryFilter:
   - 'server-error'
   - 'sentry'
 plugins:
+  hapi-config-route:
+    key: "{{ envVars.configRouteKey}}"
+    output: "{{ envVars.configRouteOutput}}"
+    _enabled: "{{ envVars.configRouteKey }}"
   hapi-favicon:
   hapi-health:
     token: "{{ envVars.healthToken }}"
