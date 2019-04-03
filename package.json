@@ -25,6 +25,7 @@
   "dependencies": {
     "hapi": "^18.1.0",
     "hapi-confi": "^7.4.1",
+    "hapi-config-route": "^1.2.0",
     "hapi-favicon": "^2.0.0",
     "hapi-health": "^1.2.2",
     "hapi-log-response": "^4.10.0",
