@@ -13,7 +13,7 @@ tap.test('initializes a new instance of rapptor', async t => {
   const { server, config } = await rapptor.start();
   t.equal(typeof server, 'object');
   t.equal(typeof config, 'object');
-  t.match(config, expected, 'loads config');
+  t.match(JSON.toString(config), JSON.toString(expected), 'loads config');
   await rapptor.stop();
   t.end();
 });
@@ -45,7 +45,7 @@ tap.test('be able to load a config with setup', async t => {
   const { server, config } = await rapptor.setup();
   t.equal(typeof server, 'object');
   t.equal(typeof config, 'object');
-  t.match(config, expected, 'loads config');
+  t.match(JSON.toString(config), JSON.toString(expected), 'loads config');
   await rapptor.stop();
   t.end();
 });
@@ -61,7 +61,7 @@ tap.test('be able to load a config from directory', async t => {
   const { server, config } = await rapptor.setup();
   t.equal(typeof server, 'object');
   t.equal(typeof config, 'object');
-  t.match(config, expected, 'loads config');
+  t.match(JSON.toString(config), JSON.toString(expected), 'loads config');
   t.equal(config.someValue, 'also', 'loads additional config');
   await rapptor.stop();
   t.end();
