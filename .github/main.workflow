@@ -19,10 +19,16 @@ action "test" {
 
 workflow "publish on release" {
   on = "release"
-  resolves = ["publish"]
+  resolves = ["tag-filter", "publish"]
+}
+
+action "tag-filter" {
+  uses = "actions/bin/filter@master"
+  args = "tag"
 }
 
 action "publish" {
+  needs = "tag-filter"
   uses = "actions/npm@master"
   args = "publish"
   secrets = ["NPM_AUTH_TOKEN"]
