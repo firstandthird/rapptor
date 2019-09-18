@@ -1,5 +1,4 @@
 node_modules
 npm-debug.log
 example/db
-package-lock.json
 .nyc_output
