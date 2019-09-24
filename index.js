@@ -20,7 +20,9 @@ class Rapptor {
     }
     this.options.configUrl = process.env.RAPPTOR_CONFIG_URL;
     this.isConfigured = false;
-    this.options.verbose = true;
+    if (typeof this.options.verbose === 'undefined') {
+      this.options.verbose = true;
+    }
   }
 
   // callback should be an async function
