@@ -23,7 +23,7 @@
     "rapptor": "bin/rapptor.js"
   },
   "dependencies": {
-    "hapi": "^18.1.0",
+    "@hapi/hapi": "18.4.0",
     "hapi-confi": "^8.1.0",
     "hapi-config-route": "^1.3.0",
     "hapi-favicon": "^2.1.0",
@@ -38,13 +38,13 @@
     "json-stringify-safe": "^5.0.1"
   },
   "devDependencies": {
-    "boom": "^7.2.0",
+    "@hapi/boom": "^8.0.1",
+    "@hapi/inert": "^5.2.2",
+    "@hapi/vision": "^5.5.4",
     "eslint": "^5.5.0",
     "eslint-config-firstandthird": "^4.3.0",
     "eslint-plugin-import": "^2.14.0",
     "handlebars": "^4.0.12",
-    "inert": "^5.1.0",
-    "tap": "^12.0.1",
-    "vision": "^5.4.0"
+    "tap": "^12.0.1"
   }
 }
