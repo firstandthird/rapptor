@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@hapi/hapi": "19.1.1",
-    "hapi-confi": "^8.1.0",
+    "hapi-confi": "^10.0.0",
     "hapi-config-route": "^1.3.0",
     "hapi-favicon": "^2.1.0",
     "hapi-health": "^1.3.0",
