@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable no-console */
 const Rapptor = require('../');
 const tap = require('tap');
 const expected = require('./expectedOutput.js');

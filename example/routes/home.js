@@ -1,27 +1,21 @@
-'use strict';
 exports.home = {
   method: 'GET',
   path: '/',
-  handler(request, reply) {
+  async handler(request, h) {
     const server = request.server;
-    server.methods.randomNumber((err, number) => {
-      if (err) {
-        return reply(err);
-      }
-
-      reply({
-        config: server.settings.app.someConfigValue,
-        randomNumber: number
-      });
-    });
+    const number = await server.methods.randomNumber();
+    return {
+      config: server.settings.app.someConfigValue,
+      randomNumber: number
+    };
   }
 };
 
 exports.error = {
   method: 'GET',
   path: '/bug',
-  handler(request, reply) {
+  handler(request, h) {
     const a = request.dummy.blah; //this will error
-    reply(a);
+    return a;
   }
 };

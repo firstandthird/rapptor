@@ -7,23 +7,19 @@ server:
   routes:
     state:
       failAction: 'ignore'
-  port: "{{ envVars.port }}"
+  port: '{{ envVars.port }}'
   address: '0.0.0.0'
-routePrefix: "{{ envVars.routePrefix }}"
+routePrefix: '{{ envVars.routePrefix }}'
 plugins:
-  hapi-config-route:
-    key: "{{ envVars.configRouteKey}}"
-    output: "{{ envVars.configRouteOutput}}"
-    _enabled: "{{ envVars.configRouteKey }}"
   hapi-favicon:
   hapi-health:
-    token: "{{ envVars.healthToken }}"
-    endpoint: "{{routePrefix}}/health"
+    token: '{{ envVars.healthToken }}'
+    endpoint: '{{routePrefix}}/health'
     auth: false
   hapi-prom:
-    _enabled: "{{ envVars.enableProm }}"
-    metricsPath: "{{ envVars.promPath }}"
-    defaultMetrics: "{{ envVars.promDefaults}}"
+    _enabled: '{{ envVars.enableProm }}'
+    metricsPath: '{{ envVars.promPath }}'
+    defaultMetrics: '{{ envVars.promDefaults}}'
   hapi-logr:
     unhandledRejection: true
     uncaughtException: true

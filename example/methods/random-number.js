@@ -1,8 +1,11 @@
-'use strict';
+
+
 module.exports = {
-  method: (done) => {
-    setTimeout(() => {
-      done(null, Math.random());
-    }, 500);
+  async method() {
+    await new Promise((resolve, reject) => {
+      setTimeout(resolve, 500);
+    });
+
+    return Math.random();
   }
 };

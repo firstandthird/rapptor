@@ -10,5 +10,3 @@ envVars:
   forceHttps: '{{ truthyEnv("FORCE_HTTPS") }}'
   logRequests: '{{ truthyEnv("ACCESS_LOGS") }}'
   sentryDsn: '{{getEnv("SENTRY_DSN", "")}}'
-  configRouteKey: '{{getEnv("CONFIG_ROUTE_KEY", false)}}'
-  configRouteOutput: '{{getEnv("CONFIG_ROUTE_OUTPUT", "log")}}'

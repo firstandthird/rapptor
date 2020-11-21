@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-'use strict';
+
 const Rapptor = require('../');
 
 const cwd = process.cwd();
