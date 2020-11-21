@@ -1,4 +1,14 @@
-# Rapptor [![Build Status](https://travis-ci.org/firstandthird/rapptor.svg?branch=master)](https://travis-ci.org/firstandthird/rapptor) [![Greenkeeper badge](https://badges.greenkeeper.io/firstandthird/rapptor.svg)](https://greenkeeper.io/)
+<h1 align="center">Rapptor</h1>
+
+<p align="center">
+  <a href="https://github.com/firstandthird/rapptor/actions">
+    <img src="https://img.shields.io/github/workflow/status/firstandthird/rapptor/Test/main?label=Tests&style=for-the-badge" alt="Test Status"/>
+  </a>
+  <a href="https://github.com/firstandthird/rapptor/actions">
+    <img src="https://img.shields.io/github/workflow/status/firstandthird/rapptor/Lint/main?label=Lint&style=for-the-badge" alt="Lint Status"/>
+  </a>
+  <img src="https://img.shields.io/npm/v/rapptor.svg?label=npm&style=for-the-badge" alt="NPM" />
+</p>
 
 Rapptor is a lightweight library that sits on top of [hapi](http://hapijs.com).
 
@@ -9,9 +19,17 @@ Rapptor is a lightweight library that sits on top of [hapi](http://hapijs.com).
 * Automatically add any method in the `methods` directory with [hapi-method-loader](https://github.com/firstandthird/hapi-method-loader).
 * Logging with [hapi-logr](https://github.com/firstandthird/hapi-logr).
 
-## Install
+## Installation
 
-`npm install --save rapptor`
+```sh
+npm install rapptor
+```
+
+_or_
+
+```sh
+yarn add rapptor
+```
 
 ## Usage:
 
@@ -73,3 +91,10 @@ module.exports = {
 Now you can call `server.method.somemethod()` in your code.
 
 See more information on method loading in [hapi-method-loader](https://github.com/firstandthird/hapi-method-loader).
+
+
+---
+
+<a href="https://firstandthird.com"><img src="https://firstandthird.com/_static/ui/images/safari-pinned-tab-62813db097.svg" height="32" width="32" align="right"></a>
+
+_A [First + Third](https://firstandthird.com) Project_
