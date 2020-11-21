@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable no-console */
 const Hapi = require('@hapi/hapi');
 const hapiConfi = require('hapi-confi');
 
